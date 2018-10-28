@@ -1,0 +1,35 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+li {
+  list-style-type: none;
+}
+h2 {
+  font-size: 1.4rem;
+}
+html,
+body {
+  @include size(100%);
+  overflow: hidden;
+}
+body {
+  font-family: $font-family;
+  color: $global-font-color;
+  font-size: $font-size;
+}
+#app {
+  position: relative;
+  margin: 0 auto;
+  @include size(100%);
+  max-width: 500px;
+  background: #ccc;
+}
+
+@import "./class";
