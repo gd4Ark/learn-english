@@ -1,14 +1,13 @@
-module.exports = {
-  baseUrl: './',
+const isEnv = process.env.NODE_ENV == 'development';
+const config = {
+  baseUrl : isEnv ? '/' : './',
   pages: {
     admin: {
       entry: 'src/admin/main.js',
-      template: 'src/common/index.html',
-      filename: 'admin.html',
+      filename: isEnv ? 'index.html' : 'admin.html',
     },
     index: {
       entry: 'src/index/main.js',
-      template: 'src/common/index.html',
       filename: 'index.html',
     },
   },
@@ -21,3 +20,4 @@ module.exports = {
     }
   }
 };
+module.exports = config;

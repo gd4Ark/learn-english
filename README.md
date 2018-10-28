@@ -72,5 +72,40 @@ learn_english
     - 排行榜榜限制人数
     - 拼写部分抽取比例
 
+## 使用
+
+### 初始化
+
+```shell
+// 下载
+git clone https://github.com/gd4Ark/learn_english.git
+// 安装依赖
+npm install
+```
+
+### 进行相关配置：
+
+1. 创建你的mysql数据库，将项目根目录的sql文件导入。
+2. 在`server/config/config.inc.php`中填写你的数据库信息。
+3. 在`src/common/config/config.js`中填写你的地址（如不需局域网访问则填127.0.0.1）。
+
+### 开始运行
+
+```shell
+// 开发模式
+npm run serve
+// 构建模式
+npm run build
+```
+
+**注：**
+
+1. **在开发模式中，只能调试一个页面，需在`vue.config.js`里面注释`pages`其中一项，如你有更好的解决方法欢迎提issue，感谢。**
 
 
+
+如果你有任何疑问或不解，欢迎发送邮件（邮箱地址在我主页）。
+
+
+
+最后，感谢您的观看！
