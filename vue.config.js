@@ -7,7 +7,7 @@ const config = {
       filename: isEnv ? 'index.html' : 'admin.html',
     },
     index: {
-      entry: 'src/index/main.js',
+      entry: 'src/admin/main.js',
       filename: 'index.html',
     },
   },

@@ -31,8 +31,8 @@ function add()
         $_v = explode("=", $v);
         $data = array(
             'word_book_id' => $id,
-            'english' => $_v[0],
-            'chinese' => $_v[1],
+            'english' => trim($_v[0]),
+            'chinese' => trim($_v[1]),
         );
         $result = $db->insert($data, $english_table);
         $count += $result !== false ? 1 : 0;

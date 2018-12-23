@@ -21,7 +21,7 @@
             </div>
             <div class="content">
                 <router-view :currentProblem="currentProblem"
-                             :onNext="onNext">
+                             @next="onNext">
                 </router-view>
             </div>
         </div>

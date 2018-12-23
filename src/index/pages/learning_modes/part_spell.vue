@@ -2,7 +2,7 @@
     <spell :proportion="proportion"
            :list="$store.state.wordBook.list"
            :currentProblem="currentProblem"
-           :onNext="onNext">
+           @next="next">
     </spell>
 </template>
 <script>
@@ -10,10 +10,14 @@ import Spell from '@/index/components/spell'
 export default {
   props: {
     currentProblem: Number,
-    onNext: Function
   },
   components: {
     Spell
+  },
+  methods : {
+    next(){
+      this.$emit('next');
+    },
   },
   computed: {
     proportion(){

@@ -40,7 +40,7 @@ export default {
       if (verify.includes(true)) {
         return alert('请输入正确的姓名！')
       }
-      this.$store.dispatch('submit', this.name).then(() => {
+      this.$store.dispatch('submit', this.name).then((data) => {
         this.$router.push('/')
       })
     }

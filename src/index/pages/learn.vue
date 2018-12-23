@@ -63,7 +63,7 @@ export default {
     },
     start() {
       const count = this.$store.state.wordBook.count;
-      if (parseInt(count) === 0){
+      if (!count){
           return alert('没有单词！');
       }
       this.$router.push('/learning')

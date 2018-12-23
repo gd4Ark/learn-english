@@ -1,54 +1,44 @@
 <template>
     <div class="keyboard"
          @click="keyDown">
-        <div class="row">
-            <button class="key">q</button>
-            <button class="key">w</button>
-            <button class="key">e</button>
-            <button class="key">r</button>
-            <button class="key">t</button>
-            <button class="key">y</button>
-            <button class="key">u</button>
-            <button class="key">i</button>
-            <button class="key">o</button>
-            <button class="key">p</button>
-        </div>
-        <div class="row">
-            <button class="key">a</button>
-            <button class="key">s</button>
-            <button class="key">d</button>
-            <button class="key">f</button>
-            <button class="key">g</button>
-            <button class="key">h</button>
-            <button class="key">j</button>
-            <button class="key">k</button>
-            <button class="key">l</button>
-        </div>
-        <div class="row">
-            <button class="key del">ㄨ</button>
-            <button class="key">z</button>
-            <button class="key">x</button>
-            <button class="key">c</button>
-            <button class="key">v</button>
-            <button class="key">b</button>
-            <button class="key">n</button>
-            <button class="key">m</button>
-            <button class="key del">ㄨ</button>
+        <div class="row" v-for="keys in keyboard">
+          <template  v-for="key in keys">
+            <button class="key" v-if="iskey(key)">{{key}}</button>
+            <button :class="['key',key === '\u21e7' ? 'caseChange' : 'del']" v-else>{{ key }}</button>
+          </template>
         </div>
     </div>
 </template>
 <script>
 export default {
-  props: {
-    callback: Function
+  data(){
+    return {
+      keyboard:[
+        ["q","w","e","r","t","y","u","i","o","p"],
+        ["a","s","d","f","g","h","j","k","l"],
+        ["\u21E7","z","x","c","v","b","n","m","ㄨ"]
+      ],
+      lowerCase: true
+    }
   },
   methods: {
     keyDown(e) {
       const target = e.target
       const list = target.classList
-      const key = list.contains('del') ? 'del' : target.innerHTML
+      const key = list.contains('del') ? 'del' : list.contains('caseChange') ? "caseChange" : target.innerHTML
       if (!list.contains('key')) return
-      this.callback(key)
+      this.$emit('keydown',key);
+    },
+    iskey(key){
+      return /\w$/.test(key);
+    },
+    caseChange(){
+      this.lowerCase = !this.lowerCase;
+      for(var i = 0; i < this.keyboard.length; i++){
+        for(var j = 0; j < this.keyboard[i].length; j++){
+          this.keyboard[i].splice(j,1,this.lowerCase ? this.keyboard[i][j].toLowerCase() : this.keyboard[i][j].toUpperCase());
+        }
+      }
     }
   }
 }
@@ -71,7 +61,7 @@ export default {
       padding: 3% 0%;
     }
   }
-  .key {
+  .key{
     user-select: none;
     cursor: pointer;
     & + .key {
@@ -86,7 +76,7 @@ export default {
     &.transparent {
       visibility: hidden;
     }
-    &.del {
+    &.del,&.caseChange{
       flex: 1;
       background: #c1bbb4;
       color: #716d65;

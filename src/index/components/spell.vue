@@ -2,8 +2,7 @@
     <div class="learning-container"
          v-if="inner_list.length !== 0">
         <div class="problem">
-            <transition-group name="slide"
-                              tag="ul">
+            <transition-group name="slide" tag="ul">
                 <li v-for="(item,index) of inner_list"
                     :key="item.id"
                     class="slide-item"
@@ -24,7 +23,7 @@
                 </li>
             </transition-group>
         </div>
-        <keyboard :callback="input"></keyboard>
+        <keyboard @keydown="input" ref="keyboard"></keyboard>
     </div>
 </template>
 <script>
@@ -45,7 +44,6 @@ export default {
     },
     currentProblem: Number,
     proportion: Number,
-    onNext: Function
   },
   components: {
     Keyboard
@@ -60,7 +58,6 @@ export default {
     }
   },
   mounted() {
-    console.log(1);
     this.updateListed()
     this.adjustEnglish()
   },
@@ -75,7 +72,7 @@ export default {
       while (count) {
         while (true) {
           const num = this.utils.random(0, len)
-          if (!nums.includes(num)) {
+          if (!nums.includes(num) && english[num] !== " ") {
             nums.push(num)
             break
           }
@@ -118,15 +115,19 @@ export default {
         return
       }
       setTimeout(() => {
-        this.onNext()
+        this.$emit('next');
       }, 200)
     },
     del() {
+      if(this.inputedIndex.length === 0)return;
       const index = this.inputedIndex.pop()
       this.currentEnglish.splice(index, 1, '_')
     },
     input(key) {
-      if (key === 'del') {
+      if(key === "caseChange"){
+        this.$refs.keyboard.caseChange();
+        return;
+      }else if (key === 'del') {
         this.del()
         return
       }
@@ -148,6 +149,18 @@ export default {
         return item !== '_' && english !== item
       }
     }
+  },
+  created(){
+    document.onkeydown = e => {
+      if(e.keyCode >= 65 && e.keyCode <= 90){
+        this.input(e.key)
+      }else if(e.keyCode === 8){
+        this.del()
+      }
+    }
+  },
+  destroyed(){
+    document.onkeydown = null
   }
 }
 </script>
