@@ -2,6 +2,8 @@
 
 ![](https://ws1.sinaimg.cn/thumbnail/9892fa7fgy1fwntybdlcij20mp0mpk2i.jpg)
 
+**注：此分支目前尚在开发阶段，部分功能尚不可用。**
+
 ## 前言
 
 此项目是我用来入门Vue的一个练手项目，目前功能尚少，并且存在很多不足，后续会继续进行更新迭代。
