@@ -7,9 +7,9 @@ function submit()
     global $db;
     global $table;
     $data = array(
-        'word_book_id' => $_POST['word_book_id'],
-        'name' => $_POST['name'],
-        'time' => $_POST['time'],
+        'word_book_id' => htmlspecialchars($_POST['word_book_id']),
+        'name' => htmlspecialchars($_POST['name']),
+        'time' => htmlspecialchars($_POST['time']),
     );
     if (!$data['time']) {
         return;

@@ -12,6 +12,7 @@ function get()
 
     foreach ($result as $k => $v) {
         $id = $v['id'];
+        $id = htmlspecialchars($id);
         $query = "word_book_id='$id'";
         $result[$k]['count'] = $db->get_total_rows($english_table,$query);
     }
@@ -26,7 +27,7 @@ function add()
     global $db;
     global $table;
     $data = array(
-        'title' => $_POST['title'],
+        'title' => htmlspecialchars($_POST['title']),
     );
     $result = $db->insert($data, $table);
     $success = $result;
@@ -40,8 +41,8 @@ function delete()
     global $db;
     global $table;
     $id = $_POST['id'];
+    $id = htmlspecialchars($id);
     $query = "id='$id'";
-    $db->delete($english_table, "word_book_id='$id'");
     $result = $db->delete($table, $query);
     $success = $result;
     return json_encode(array(
@@ -54,8 +55,9 @@ function update()
     global $db;
     global $table;
     $id = $_POST['id'];
+    $id = htmlspecialchars($id);
     $data = array(
-        'title' => $_POST['title'],
+        'title' => htmlspecialchars($_POST['title']),
     );
     $query = "id='$id'";
     $result = $db->update($data, $table, $query);

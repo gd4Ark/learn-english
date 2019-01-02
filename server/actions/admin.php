@@ -6,6 +6,7 @@ function login()
     global $table;
     $name = $_POST['user']['name'];
     $pass = $_POST['user']['pass'];
+    $name = htmlspecialchars($name);
     $query = "select * from $table where name='$name'";
     $result = $db->select_one($query);
     $success = false;
