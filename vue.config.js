@@ -1,13 +1,10 @@
-const isEnv = process.env.NODE_ENV == 'development';
+const CompressionPlugin = require("compression-webpack-plugin");
+const isDev = process.env.NODE_ENV == 'development';
 const config = {
-  baseUrl : isEnv ? '/' : './',
+  baseUrl: isDev ? '/' : './',
   pages: {
-    admin: {
-      entry: 'src/admin/main.js',
-      filename: isEnv ? 'index.html' : 'admin.html',
-    },
     index: {
-      entry: 'src/admin/main.js',
+      entry: 'src/pages/user/main.js',
       filename: 'index.html',
     },
   },
@@ -18,6 +15,19 @@ const config = {
         data: `@import "@/common/styles/app.scss";`
       }
     }
-  }
+  },
+  configureWebpack: config => {
+    if (!isDev) {
+      return {
+        plugins: [
+          new CompressionPlugin({
+            test: /\.js$|\.html$|.\css/,
+            threshold: 10240,
+            deleteOriginalAssets: false
+          })
+        ]
+      }
+    }
+  },
 };
 module.exports = config;

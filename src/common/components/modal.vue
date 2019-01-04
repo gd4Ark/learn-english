@@ -1,48 +1,66 @@
 <template>
-    <div :class="['modal',{'show':show}]"
-         v-on:click="closeFn">
-        <div class="modal-content"
-             @click.stop="">
-            <slot></slot>
-        </div>
+  <div class="modal" style="display:inline;">
+    <div @click="visible()" style="display:inline;">
+      <slot name="btn">
+        <el-button
+          size="small"
+          type="primary"
+        >打开{{title}}</el-button>
+      </slot>
     </div>
+    <el-dialog
+      :title="title"
+      :visible.sync="dialogVisible"
+      @open="open"
+      width="90%"
+    >
+
+    <slot name="body">
+        
+    </slot>
+
+      <span
+        slot="footer"
+        class="dialog-footer"
+      >
+        <slot name="footer">
+        </slot>
+        <el-button @click="hidden">取 消</el-button>
+        <el-button
+          type="primary"
+          @click="submit"
+        >确 定</el-button>
+
+      </span>
+    </el-dialog>
+  </div>
 </template>
 <script>
 export default {
+  data() {
+    return {
+      dialogVisible: false
+    };
+  },
   props: {
-    show: Boolean,
-    closeFn: Function
-  }
-}
-</script>
-<style lang="scss" scoped>
-.modal {
-  @include center;
-  @include size(100%);
-  @include flex-column;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.2);
-  transition: all 0.4s 0.2s ease;
-  visibility: hidden;
-  opacity: 0;
-  &.show {
-    visibility: visible;
-    opacity: 1;
-    transition: all 0.4s ease;
-    .modal-content {
-      transform: translateY(0);
-      opacity: 1;
+    title: {
+      type: String,
+      default: "弹窗"
+    }
+  },
+  methods: {
+    visible() {
+      this.dialogVisible = true;
+    },
+    hidden() {
+      this.dialogVisible = false;
+    },
+    open(){
+      this.$emit("open");
+    },
+    submit() {
+      this.$emit("submit");
     }
   }
-  .modal-content {
-    @include size(70%, auto);
-    @include padding-x;
-    border-radius: 5px;
-    background: $secondary-color;
-    transition: all 0.25s ease;
-    transform: translateY(-50vh);
-    opacity: 0;
-  }
-}
-</style>
+};
+</script>

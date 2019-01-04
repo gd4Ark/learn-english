@@ -4,32 +4,58 @@
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
 }
+
 a {
   text-decoration: none;
   color: inherit;
 }
+
+ul {
+  margin-bottom: 0;
+}
+
 li {
   list-style-type: none;
 }
+
 h2 {
   font-size: 1.4rem;
 }
+
+html {
+  background: #ccc;
+}
+
 html,
 body {
   @include size(100%);
   overflow: hidden;
+  touch-action: none;
 }
+
 body {
+  position: relative;
+  margin: 0 auto;
+  max-width: 500px;
   font-family: $font-family;
   color: $global-font-color;
   font-size: $font-size;
 }
+
 #app {
   position: relative;
-  margin: 0 auto;
   @include size(100%);
-  max-width: 500px;
   background: #ccc;
+}
+
+// ali icon
+[class^="el-icon-ali"],
+[class*="el-icon-ali"] {
+  font-family: "iconfont" !important;
+  font-size: 12px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 @import "./class";

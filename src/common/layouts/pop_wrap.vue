@@ -6,7 +6,7 @@
     </div>
 </template>
 <script>
-import AppearAnimate from '@/common/components/appear_animate'
+import AppearAnimate from '@/common/layouts/appear_animate'
 export default {
   components: {
     AppearAnimate
@@ -16,17 +16,11 @@ export default {
 
 <style lang="scss" scoped>
 #pop-wrap {
-  position: absolute;
-  top: 0;
-  left: 0;
+  @include po-abs;
   @include size(100%);
-  background: $secondary-color;
+  background: $principal-color;
   > * {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    @include center;
     @include size(100%);
   }
 }
