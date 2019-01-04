@@ -14,7 +14,10 @@
               v-if="$util.isEmptyObj($store.state.book.current)"
               class="message"
             >
-              <i style="font-size:1.5rem;margin-bottom:1vh;" class="el-icon-ali-sad1"></i>
+              <i
+                style="font-size:1.5rem;margin-bottom:1vh;"
+                class="el-icon-ali-sad1"
+              ></i>
               没有选择单词本
             </div>
             <div v-else>
@@ -40,18 +43,14 @@
 </template>
 
 <script>
-import wrap from "@/common/layouts/user_wrap.vue";
 import { mapActions } from "vuex";
 import selectBook from "@/pages/user/components/selectBook";
 export default {
   components: {
-    wrap,
-    selectBook,
+    selectBook
   },
   mounted() {
-    this.getData().then(()=>{
-      console.log(this.$store.state.book.current);
-    });
+    this.getData();
   },
   methods: {
     ...mapActions({

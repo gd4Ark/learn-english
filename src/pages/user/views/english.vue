@@ -1,5 +1,5 @@
 <template>
-  <wrap>
+  <pop-wrap>
     <div class="index-container">
       <div class="app-header">
         <back />
@@ -7,18 +7,14 @@
       </div>
       <english-table @get-data="getData" />
     </div>
-  </wrap>
+  </pop-wrap>
 </template>
 
 <script>
-import back from "@/common/components/back";
-import wrap from "@/common/layouts/pop_wrap.vue";
 import englishTable from "@/pages/user/components/englishTable.vue";
 import { mapActions, mapMutations } from "vuex";
 export default {
   components: {
-    back,
-    wrap,
     englishTable
   },
   methods: {

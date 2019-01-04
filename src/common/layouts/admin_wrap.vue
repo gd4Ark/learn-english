@@ -18,7 +18,8 @@ export default {
     this.navList = [
       {
         title: "单词本管理",
-        href: "/book"
+        href: "/book",
+        icon : "el-icon-tickets",
       },
     ];
   },

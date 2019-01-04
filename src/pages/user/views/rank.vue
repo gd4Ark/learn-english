@@ -20,15 +20,12 @@
 </template>
 
 <script>
-import wrap from "@/common/layouts/user_wrap.vue";
 import { mapActions } from "vuex";
 import dayRank from "@/pages/user/components/dayRank";
 export default {
   components: {
-    wrap,
     dayRank
   },
-  mounted() {},
   methods: {
     ...mapActions({
       getData: "getBook"

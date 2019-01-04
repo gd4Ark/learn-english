@@ -11,14 +11,10 @@
 </template>
 
 <script>
-import back from "@/common/components/back";
-import wrap from "@/common/layouts/admin_wrap.vue";
 import englishTable from "@/pages/admin/components/englishTable.vue";
 import { mapActions,mapMutations } from "vuex";
 export default {
   components: {
-    back,
-    wrap,
     englishTable,
   },
   mounted(){
