@@ -1,19 +1,18 @@
 <template>
-    <div id="wrap">
-        <div id="content">
-            <appear-animate>
-                <slot></slot>
-            </appear-animate>
-
-        </div>
-        <div id="nav">
-            <app-nav :list="navList"></app-nav>
-        </div>
+  <div id="wrap">
+    <div id="content">
+      <appear-animate>
+        <slot></slot>
+      </appear-animate>
     </div>
+    <div id="nav">
+      <app-nav :list="navList"></app-nav>
+    </div>
+  </div>
 </template>
 <script>
-import AppearAnimate from '@/common/components/appear_animate'
-import AppNav from '@/common/components/nav'
+import AppearAnimate from "@/common/layouts/appear_animate";
+import AppNav from "@/common/layouts/nav";
 export default {
   props: {
     navList: Array
@@ -22,7 +21,7 @@ export default {
     AppNav,
     AppearAnimate
   }
-}
+};
 </script>
 <style lang="scss">
 #wrap {
@@ -30,11 +29,9 @@ export default {
   flex-direction: column;
   @include size(100%);
 }
-#nav ul {
-  border-top: 1px solid $line-color;
-}
 #content {
   flex: 1;
+  overflow-x: hidden;
   background: $principal-color;
 }
 </style>

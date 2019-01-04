@@ -7,6 +7,27 @@
   flex-direction: column;
 }
 
+@mixin sub-center {
+  @include flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin center {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+@mixin po-abs {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 @mixin padding {
   @include padding-x;
   @include padding-y;
@@ -42,49 +63,6 @@
   }
 }
 
-@mixin btn {
-  border: none;
-  outline: none;
-  white-space: nowrap;
-  transition: opacity 0.5s ease;
-  &[disabled] {
-    opacity: 0.5;
-  }
-}
-
-@mixin btn-3d(
-  $bg-color: $secondary-color,
-  $shadow-height: 2px,
-  $active-down: 0.1rem
-) {
-  @include btn;
-  position: relative;
-  display: block;
-  border-radius: 5px;
-  background: $bg-color;
-  text-align: center;
-  transition: top 0.1s;
-  padding-bottom: $shadow-height;
-  box-shadow: inset 0px 0px -$shadow-height 0px rgba(0, 0, 0, 0.2);
-  &:active {
-    box-shadow: inset 0px 0px - ($shadow-height - 1) 0px rgba(0, 0, 0, 0.2);
-    top: $active-down;
-  }
-}
-@mixin big-btn {
-  display: block;
-  color: $highlight-color;
-  background: $secondary-color;
-  padding: 0.7rem 20%;
-  font-size: 1rem;
-  border-radius: 8px;
-  transition: background 0.5s ease;
-  // border : 1px solid $line-color;
-  &:active {
-    // background : $line-color;
-    opacity: 0.5;
-  }
-}
 @mixin center {
   position: absolute;
   top: 0;
@@ -95,83 +73,49 @@
 }
 @mixin app-header {
   @include padding-x;
+  @include size(100%, 50px);
   @include flex;
   align-items: center;
   justify-content: space-between;
   background: #eeece8;
-  height: 50px;
   border-bottom: 1px solid $line-color;
   .title {
-    font-size: 1rem;
-    font-weight: normal;
+    font-size: 1.2rem;
+    font-weight: 600;
   }
 }
-@mixin submit-container {
-  @include size(100%);
-  @include padding-x;
-  font-size: 1.2rem;
-  background: #eeece8;
-  text-align: center;
+
+@mixin no-scrollbar {
+  &::-webkit-scrollbar{
+    width: 0;
+    height: 0;
+  }
+}
+
+@mixin product-info {
+  flex: 1;
+  margin: 0 auto;
+  width: 95%;
+  height: 25%;
   overflow: hidden;
-  .title {
-    margin-top: 5%;
-    font-weight: bold;
-    line-height: 2;
-  }
-  p {
-    font-size: 0.9rem;
-    margin-top: 15px;
-  }
-  button {
-    margin: 2rem 0;
-    width: 100%;
-  }
-  textarea {
-    height: 50vh;
-  }
-}
-@mixin edit-modal-container {
-  @include size(100%);
-  @include flex-column;
-  justify-content: space-around;
-  > * {
-    margin-top: 15px;
-  }
-  .form-group {
-    width: 100%;
-    overflow: hidden;
-  }
-  .form-input {
-    width: 40%;
-    border-radius: 0;
-    border-bottom: 1px solid $line-color;
-  }
-}
-@mixin scroll-table {
-  @include size(100%);
-  overflow: hidden;
-  text-align: center;
-  td,
-  th {
-    height: 50px;
-  }
-  tbody {
-    display: block;
-    height: 90%;
-    overflow-y: scroll;
-    padding-bottom: 8px;
-  }
-  thead,
-  tbody tr {
-    display: table;
-    width: 100%;
-    table-layout: fixed;
-  }
-  thead {
-    width: calc(100% - 2px);
-  }
-  .text {
-    word-wrap: break-word;
-    word-break: break-all;
+  .info {
+    @include size(100%);
+    margin: 0 auto;
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: space-between;
+    div {
+      width: 50%;
+      @include flex;
+      flex-wrap:wrap;
+      align-items: center;
+      p{
+        text-align:center;
+        width:100%;
+        span{
+          text-align: left;
+        }
+      }
+    }
   }
 }

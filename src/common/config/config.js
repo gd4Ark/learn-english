@@ -1,3 +1,5 @@
-export default {
-    url : 'http://127.0.0.1/learn_english/server/',
-}
+const config = {};
+
+config.server_url = 'http://10.10.34.199/vue_english/server/public/';
+
+export default config;
