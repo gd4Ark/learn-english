@@ -1,13 +1,13 @@
 <template>
-  <wrap
+  <AppWrap
     v-if="navList.length"
     :navList="navList"
   >
     <slot></slot>
-  </wrap>
+  </AppWrap>
 </template>
 <script>
-import Wrap from "@/common/layouts/wrap";
+import AppWrap from "@/common/layouts/app_wrap";
 export default {
   data() {
     return {
@@ -19,12 +19,12 @@ export default {
       {
         title: "单词本管理",
         href: "/book",
-        icon : "el-icon-tickets",
-      },
+        icon: "el-icon-tickets"
+      }
     ];
   },
   components: {
-    Wrap
+    AppWrap
   }
 };
 </script>

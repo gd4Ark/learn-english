@@ -1,10 +1,13 @@
 <template>
-  <wrap :navList="navList">
+  <AppWrap
+    v-if="navList.length"
+    :navList="navList"
+  >
     <slot></slot>
-  </wrap>
+  </AppWrap>
 </template>
 <script>
-import Wrap from "@/common/layouts/wrap";
+import AppWrap from "@/common/layouts/app_wrap";
 export default {
   data() {
     return {
@@ -12,23 +15,23 @@ export default {
         {
           title: "首页",
           href: "/index",
-          icon : "el-icon-ali-homefill",
+          icon: "el-icon-ali-homefill"
         },
         {
           title: "练习",
           href: "learn",
-          icon : "el-icon-ali-learning_fill",
+          icon: "el-icon-ali-learning_fill"
         },
         {
           title: "排行榜",
           href: "/rank",
-          icon : "el-icon-ali-rankfill",
+          icon: "el-icon-ali-rankfill"
         }
       ]
     };
   },
   components: {
-    Wrap
+    AppWrap
   }
 };
 </script>
