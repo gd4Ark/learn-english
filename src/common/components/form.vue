@@ -16,10 +16,11 @@
         <template v-for="(it,index) in item.items">
           <el-col
             v-if="index>0"
+            :key="index"
             class="line"
             :span="2"
           >-</el-col>
-          <el-col :span="11">
+          <el-col :span="11" :key="index">
             <form-item
               :item="item"
               :key="index"
