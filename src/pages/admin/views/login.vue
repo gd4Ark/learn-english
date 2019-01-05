@@ -1,5 +1,5 @@
 <template>
-  <wrap>
+  <pop-wrap>
     <div id="login">
       <div class="app-header">
         <h1 class="title">{{ $route.meta.title }}</h1>
@@ -18,10 +18,9 @@
         </c-form>
       </div>
     </div>
-  </wrap>
+  </pop-wrap>
 </template>
 <script>
-import wrap from "@/common/layouts/pop_wrap";
 import cForm from "@/common/components/form";
 import { async } from "q";
 import { mapActions } from "vuex";
@@ -36,7 +35,6 @@ export default {
     };
   },
   components: {
-    wrap,
     cForm
   },
   methods: {

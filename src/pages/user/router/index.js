@@ -6,6 +6,8 @@ import learn from '@/pages/user/views/learn';
 import rank from '@/pages/user/views/rank';
 import english from '@/pages/user/views/english';
 
+import partial_spell from '@/pages/user/views/learning/partial_spell';
+
 const routerConfig = {
     mode: process.env.NODE_ENV == 'development' ? 'history' : 'hash',
     routes: [{
@@ -35,7 +37,13 @@ const routerConfig = {
         meta: {
             title: '单词列表',
         }
-    }, ]
+    }, {
+        path: "/partial_spell",
+        component: partial_spell,
+        meta: {
+            title: "英文部分拼写",
+        }
+    }]
 }
 
 Vue.use(VueRouter);

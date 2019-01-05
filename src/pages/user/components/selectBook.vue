@@ -12,7 +12,7 @@
       <el-select
         v-model="value"
         value-key="id"
-        placeholder="请选择"
+        placeholder="请选择单词本"
       >
         <el-option
           v-for="item in $store.state.book.list"

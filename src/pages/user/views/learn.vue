@@ -7,11 +7,12 @@
       <div class="content">
         <div class="learn-modules">
           <div
-            class="box"
+            class="module"
             v-for="(item,index) in modules"
             :key="index"
+            @click="toLearnModule(item.module)"
           >
-            <h2 class="title">英文部分拼写</h2>
+            <h2 class="title">{{item.title}}</h2>
           </div>
         </div>
       </div>
@@ -20,22 +21,22 @@
 </template>
 
 <script>
-import wrap from "@/common/layouts/user_wrap.vue";
 import { mapActions } from "vuex";
 export default {
-  components: {
-    wrap
-  },
   data() {
     return {
-      modules: [1,2,3,4]
+      modules: [
+        {
+          title: "英文部分拼写",
+          module: "/partial_spell"
+        }
+      ]
     };
   },
-  mounted() {},
   methods: {
-    ...mapActions({
-      getData: "getBook"
-    })
+    toLearnModule(route) {
+      this.$router.push(route);
+    }
   }
 };
 </script>
@@ -51,7 +52,7 @@ export default {
       @include flex;
       flex-wrap: wrap;
       justify-content: space-between;
-      .box {
+      .module {
         @include sub-center;
         margin: 1vh 0;
         width: 45%;

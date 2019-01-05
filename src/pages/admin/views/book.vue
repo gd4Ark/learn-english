@@ -10,12 +10,10 @@
 </template>
 
 <script>
-import wrap from "@/common/layouts/admin_wrap.vue";
 import bookTable from "@/pages/admin/components/bookTable.vue";
 import { mapActions } from "vuex";
 export default {
   components: {
-    wrap,
     bookTable,
   },
   mounted(){

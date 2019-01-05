@@ -33,6 +33,15 @@ Vue.use(axios, {
   useToekn: true,
 });
 
+import back from "@/common/components/back";
+Vue.component('back',back);
+
+import wrap from "@/common/layouts/admin_wrap.vue";
+Vue.component('wrap',wrap);
+
+import popWrap from "@/common/layouts/pop_wrap.vue";
+Vue.component('popWrap',popWrap);
+
 Vue.config.productionTip = false
 
 new Vue({
