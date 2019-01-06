@@ -4,7 +4,7 @@ const config = {
   baseUrl: isDev ? '/' : './',
   pages: {
     index: {
-      entry: 'src/pages/admin/main.js',
+      entry: 'src/pages/user/main.js',
       filename: 'index.html',
     },
   },
@@ -16,7 +16,7 @@ const config = {
       }
     }
   },
-  configureWebpack: config => {
+  configureWebpack: () => {
     if (!isDev) {
       return {
         plugins: [

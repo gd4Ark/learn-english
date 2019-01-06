@@ -92,30 +92,32 @@
   }
 }
 
-@mixin product-info {
-  flex: 1;
-  margin: 0 auto;
-  width: 95%;
-  height: 25%;
-  overflow: hidden;
-  .info {
-    @include size(100%);
-    margin: 0 auto;
-    display: flex;
-    flex-wrap:wrap;
-    justify-content: space-between;
-    div {
-      width: 50%;
-      @include flex;
-      flex-wrap:wrap;
-      align-items: center;
-      p{
-        text-align:center;
-        width:100%;
-        span{
-          text-align: left;
-        }
-      }
-    }
+@mixin btn {
+  border: none;
+  outline: none;
+  white-space: nowrap;
+  transition: opacity 0.5s ease;
+  &[disabled] {
+    opacity: 0.5;
+  }
+}
+
+ @mixin btn-3d(
+  $bg-color: $secondary-color,
+  $shadow-height: 2px,
+  $active-down: 0.1rem
+) {
+  @include btn;
+  position: relative;
+  display: block;
+  border-radius: 5px;
+  background: $bg-color;
+  text-align: center;
+  transition: top 0.1s;
+  padding-bottom: $shadow-height;
+  box-shadow: inset 0px 0px -$shadow-height 0px rgba(0, 0, 0, 0.2);
+  &:active {
+    box-shadow: inset 0px 0px - ($shadow-height - 1) 0px rgba(0, 0, 0, 0.2);
+    top: $active-down;
   }
 }
