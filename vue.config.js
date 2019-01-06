@@ -4,7 +4,7 @@ const config = {
   baseUrl: isDev ? '/' : './',
   pages: {
     index: {
-      entry: 'src/pages/user/main.js',
+      entry: 'src/pages/admin/main.js',
       filename: 'index.html',
     },
   },

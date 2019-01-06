@@ -22,6 +22,8 @@ const routerConfig = {
             component: Book,
             meta : {
                 title : '单词本管理',
+                icon: "el-icon-tickets",
+                inNav : true,
             }
         },
         {

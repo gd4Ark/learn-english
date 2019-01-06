@@ -5,9 +5,9 @@
       v-for="(item,key) of list"
       :key="key"
     >
-      <router-link :to="item.href">
-        <i v-if="item.icon" :class="item.icon"></i>
-        {{ item.title }}
+      <router-link :to="item.path">
+        <i v-if="item.meta.icon" :class="item.meta.icon"></i>
+        {{ item.meta.title }}
       </router-link>
     </li>
   </ul>

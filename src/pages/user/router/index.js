@@ -2,11 +2,11 @@ import Vue from 'vue'
 import VueRouter from 'vue-router';
 
 import index from '@/pages/user/views/index';
-import learn from '@/pages/user/views/learn';
+import review from '@/pages/user/views/review';
 import rank from '@/pages/user/views/rank';
 import english from '@/pages/user/views/english';
 
-import partial_spell from '@/pages/user/views/learning/partial_spell';
+import partial_spell from '@/pages/user/views/review/partial_spell';
 
 const routerConfig = {
     mode: process.env.NODE_ENV == 'development' ? 'history' : 'hash',
@@ -18,18 +18,24 @@ const routerConfig = {
         component: index,
         meta: {
             title: '首页',
+            icon: "el-icon-ali-homefill",
+            inNav : true,
         }
     }, {
-        path: "/learn",
-        component: learn,
+        path: "/review",
+        component: review,
         meta: {
-            title: '练习',
+            title: '复习',
+            icon: "el-icon-ali-learning_fill",
+            inNav : true,
         }
     }, {
         path: "/rank",
         component: rank,
         meta: {
             title: '排行榜',
+            icon: "el-icon-ali-rankfill",
+            inNav : true,
         }
     }, {
         path: "/english",
