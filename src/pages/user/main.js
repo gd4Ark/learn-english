@@ -32,7 +32,7 @@ Vue.use(axios, {
 import back from "@/common/components/back";
 Vue.component('back',back);
 
-import wrap from "@/common/layouts/user_wrap.vue";
+import wrap from "@/common/layouts/wrap.vue";
 Vue.component('wrap',wrap);
 
 import popWrap from "@/common/layouts/pop_wrap.vue";

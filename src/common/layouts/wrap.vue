@@ -14,8 +14,15 @@
 import AppearAnimate from "@/common/layouts/appear_animate";
 import AppNav from "@/common/layouts/nav";
 export default {
-  props: {
-    navList: Array
+  data() {
+    return {
+      navList: []
+    };
+  },
+  mounted() {
+    this.navList = this.$router.options.routes.filter(
+      el => el.meta && el.meta.inNav
+    );
   },
   components: {
     AppNav,

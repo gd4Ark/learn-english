@@ -16,7 +16,7 @@ const config = {
       }
     }
   },
-  configureWebpack: config => {
+  configureWebpack: () => {
     if (!isDev) {
       return {
         plugins: [

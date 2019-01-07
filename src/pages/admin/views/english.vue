@@ -5,7 +5,7 @@
         <back />
         <h1 class="title">{{ $route.meta.title }}</h1>
       </div>
-      <english-table @get-data="getData" />
+      <english-table v-if="done" @get-data="getData" />
     </div>
   </wrap>
 </template>
@@ -17,11 +17,19 @@ export default {
   components: {
     englishTable,
   },
+  data(){
+    return {
+      done : false,
+    }
+  },
   mounted(){
     this.updateBookId({
       book_id : this.id,
     });
-    this.getData();
+    // Update the book ID first and then get
+    setTimeout(()=>{
+      this.done = true;
+    },0);
   },
   methods: {
     ...mapActions({

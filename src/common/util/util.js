@@ -15,6 +15,10 @@ export default {
             return typeof (str) === "string";
         }
 
+        o.isUpper = (str)=>{
+            return /[A-Z]/.test(str);
+        };
+
         o.isEmptyObj = (obj) => {
             return JSON.stringify(obj) === "{}";
         }
