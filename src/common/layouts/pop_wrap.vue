@@ -1,8 +1,16 @@
 <template>
   <div id="pop-wrap">
-    <appear-animate>
-      <slot></slot>
-    </appear-animate>
+    <slot name="header">
+      <div class="app-header">
+        <back v-if="useBack" />
+        <h1 class="title">{{$config.title}} - {{$route.meta.title}}</h1>
+      </div>
+    </slot>
+    <div id="content" :style="contentStyle">
+      <appear-animate>
+        <slot></slot>
+      </appear-animate>
+    </div>
   </div>
 </template>
 <script>
@@ -10,6 +18,23 @@ import AppearAnimate from "@/common/layouts/appear_animate";
 export default {
   components: {
     AppearAnimate
+  },
+  props: {
+    useBack: {
+      type: Boolean,
+      default: true
+    },
+    padding : {
+      type : String,
+      default : "2%",
+    }
+  },
+  computed : {
+    contentStyle(){
+      return {
+        padding : this.padding,
+      }
+    }
   }
 };
 </script>
@@ -18,10 +43,10 @@ export default {
 #pop-wrap {
   @include po-abs;
   @include size(100%);
+  @include flex-column;
   background: $principal-color;
-  > * {
-    @include center;
-    @include size(100%);
+  #content {
+    flex: 1;
   }
 }
 </style>

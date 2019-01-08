@@ -20,24 +20,24 @@ const routerConfig = {
         {
             path: "/book",
             component: Book,
-            meta : {
-                title : '单词本管理',
+            meta: {
+                title: '单词本管理',
                 icon: "el-icon-tickets",
-                inNav : true,
+                inNav: true,
             }
         },
         {
             path: "/book/english",
             component: English,
-            meta : {
-                title : '单词管理',
+            meta: {
+                title: '单词管理',
             }
         },
         {
             path: "/login",
             component: Login,
-            meta : {
-                title : '清技背单词后台 - 登录',
+            meta: {
+                title: '登录',
             }
         },
     ]
@@ -50,7 +50,7 @@ const router = new VueRouter(
 );
 
 router.beforeEach((to, from, next) => {
-    if (to.meta.title){
+    if (to.meta.title) {
         document.title = to.meta.title;
     }
     if (to.path === '/login') {
@@ -61,7 +61,7 @@ router.beforeEach((to, from, next) => {
     const localStore = router.app.$localStore;
     const user = localStore.get('user');
     if (user && user.token) {
-        store.dispatch('checkLogin').then(()=>{
+        store.dispatch('checkLogin').then(() => {
             next();
         })
     } else {
