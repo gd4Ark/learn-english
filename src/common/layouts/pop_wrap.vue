@@ -3,7 +3,7 @@
     <slot name="header">
       <div class="app-header">
         <back v-if="useBack" />
-        <h1 class="title">清技背单词 - {{$route.meta.title}}</h1>
+        <h1 class="title">{{$config.title}} - {{$route.meta.title}}</h1>
       </div>
     </slot>
     <div id="content" :style="contentStyle">
