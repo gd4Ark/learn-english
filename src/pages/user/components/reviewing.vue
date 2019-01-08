@@ -1,6 +1,6 @@
 <template>
-  <pop-wrap>
-    <div class="container">
+  <pop-wrap padding="0">
+    <template slot="header">
       <div class="app-header">
         <div class="left">
           <back />
@@ -13,18 +13,14 @@
           00:44
         </time>
       </div>
-      <div class="content">
-        <slot></slot>
-      </div>
+    </template>
+    <div class="app-content">
+      <slot></slot>
     </div>
   </pop-wrap>
 </template>
 <style lang="scss" scoped>
-.container {
-  @include size(100%);
-  @include flex-column;
-}
-.content {
+.app-content {
   @include flex-column;
   justify-content: space-between;
   flex: 1;

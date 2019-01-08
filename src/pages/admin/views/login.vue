@@ -1,22 +1,17 @@
 <template>
-  <pop-wrap>
-    <div id="login">
-      <div class="app-header">
-        <h1 class="title">{{ $route.meta.title }}</h1>
-      </div>
-      <div class="container">
-        <c-form
-          :formItem="$runtime_data.adminLogin.formItem"
-          :formData="formData"
-        >
-          <el-col :offset="9">
-            <el-button
-              type="primary"
-              @click="submit"
-            >登 录</el-button>
-          </el-col>
-        </c-form>
-      </div>
+  <pop-wrap :useBack="false">
+    <div class="app-content">
+      <c-form
+        :formItem="$runtime_data.adminLogin.formItem"
+        :formData="formData"
+      >
+        <el-col :offset="9">
+          <el-button
+            type="primary"
+            @click="submit"
+          >登 录</el-button>
+        </el-col>
+      </c-form>
     </div>
   </pop-wrap>
 </template>
@@ -48,21 +43,12 @@ export default {
       const response = await this.login(this.formData);
       this.$router.push("/index");
     }
-  },
+  }
 };
 </script>
 <style lang="scss" scoped>
-#login {
-  background: $principal-color;
-  @include size(100%);
+.app-content {
   @include flex-column;
-  align-items: center;
-}
-.container {
-  @include padding;
-  @include size(100%);
-  @include flex-column;
-  flex: 1;
   justify-content: center;
 }
 </style>

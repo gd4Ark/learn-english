@@ -35,6 +35,15 @@ label {
   @include app-header;
 }
 
+.app-content{
+  @include size(100%);
+}
+
+.table-content{
+  @include size(100%);
+  @include flex-column;
+}
+
 .table {
   width: 100%;
   margin: 2% auto;

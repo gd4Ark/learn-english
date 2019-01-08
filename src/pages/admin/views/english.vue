@@ -1,13 +1,9 @@
 <template>
-  <wrap>
-    <div class="index-container">
-      <div class="app-header">
-        <back />
-        <h1 class="title">{{ $route.meta.title }}</h1>
-      </div>
+  <pop-wrap>
+    <div class="app-content">
       <english-table v-if="done" @get-data="getData" />
     </div>
-  </wrap>
+  </pop-wrap>
 </template>
 
 <script>
@@ -46,17 +42,3 @@ export default {
   }
 };
 </script>
-<style lang="scss" scoped>
-.index-container {
-  @include size(100%);
-  @include flex-column;
-  .table-content {
-    flex: 1;
-    overflow: hidden;
-    @include flex-column;
-  }
-}
-.table-content {
-  @include padding;
-}
-</style>

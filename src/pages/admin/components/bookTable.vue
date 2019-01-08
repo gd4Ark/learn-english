@@ -1,6 +1,5 @@
 <template>
   <div class="table-content">
-
     <div class="toolbar">
       <div>
         <add-book @get-data="getData" />
