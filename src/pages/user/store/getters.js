@@ -16,4 +16,14 @@ export default {
         }
         return data;
     },
+    requestReivewListData(state) {
+        const {
+            book_id,
+        } = state.english;
+        const data = {
+            book_id,
+            review : true,
+        };
+        return data;
+    },
 }

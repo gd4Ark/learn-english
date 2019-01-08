@@ -5,6 +5,9 @@ export default {
     async getEnglish(context) {
         context.commit('updateEnglish', await this._vm.$axios.get('/english', context.getters.requestEnglishListData));
     },
+    async getReview(context) {
+        context.commit('updateReview', await this._vm.$axios.get('/english', context.getters.requestReivewListData));
+    },
     async englishKeyword(context, keyword = []) {
         await context.commit('updateEnglish', {
             keyword,

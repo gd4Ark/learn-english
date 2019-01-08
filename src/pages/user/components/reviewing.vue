@@ -19,6 +19,20 @@
     </div>
   </pop-wrap>
 </template>
+<script>
+import { mapActions } from "vuex";
+export default {
+  mounted() {
+    this.getData();
+  },
+  methods: {
+    ...mapActions({
+      getData: "getReview"
+    })
+  }
+};
+</script>
+
 <style lang="scss" scoped>
 .app-content {
   @include flex-column;

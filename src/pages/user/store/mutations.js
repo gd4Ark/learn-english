@@ -11,4 +11,10 @@ export default {
             ...data,
         }
     },
+    updateReview(state, data) {
+        state.review = {
+            ...state.review,
+            ...data,
+        }
+    },
 }
