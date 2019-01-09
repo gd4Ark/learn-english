@@ -26,6 +26,14 @@ class UserController extends Controller{
         }
         $book_id = $request->input('book_id');
         $list = English::where('book_id',$book_id);
+        // 复习拿全部
+        if ($request->has('review')){
+            return [
+                'list' => $list->get(['chinese','english']),
+                'total' => $list->count(),
+            ];
+        };
+        // 正常搜索分页
         $list = $this->search($request,$list);
         return $this->pagination($request,$list);
     }

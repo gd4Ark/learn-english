@@ -1,5 +1,5 @@
 <template>
-  <wrap padding="0 0 2% 0">
+  <wrap padding="0 2% 2%">
     <div class="app-content">
       <el-tabs
         :stretch="true"

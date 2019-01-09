@@ -1,15 +1,15 @@
 <template>
   <div id="wrap">
     <div class="app-header">
-        <h1 class="title">{{$config.title}} - {{$route.meta.title}}</h1>
+      <h1 class="title">{{$config.title}} - {{$route.meta.title}}</h1>
     </div>
     <div
       id="content"
       :style="contentStyle"
     >
-      <appear-animate>
-        <slot></slot>
-      </appear-animate>
+      <transition name="el-fade-in">
+        <slot v-if="load"></slot>
+      </transition>
     </div>
     <div id="nav">
       <app-nav :list="navList"></app-nav>
@@ -17,14 +17,15 @@
   </div>
 </template>
 <script>
-import AppearAnimate from "@/common/layouts/appear_animate";
 import AppNav from "@/common/layouts/nav";
 export default {
-  data() {
-    return {
-      navList: []
-    };
+  components: {
+    AppNav,
   },
+  data: () => ({
+    load: false,
+    navList: []
+  }),
   props: {
     padding: {
       type: String,
@@ -32,13 +33,12 @@ export default {
     }
   },
   mounted() {
+    setTimeout(() => {
+      this.load = true;
+    }, 0);
     this.navList = this.$router.options.routes.filter(
       el => el.meta && el.meta.inNav
     );
-  },
-  components: {
-    AppNav,
-    AppearAnimate
   },
   computed: {
     contentStyle() {
