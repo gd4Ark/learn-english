@@ -7,6 +7,10 @@ export default {
 
         const o = {};
 
+        o.on = (elem,type,handle)=>{
+            elem.addEventListener(type,handle);
+        }
+
         o.random = (start,end)=>{
             return Math.floor(Math.random() * (end - start) + start);
         }

@@ -2,7 +2,6 @@
   <modal
     ref="modal"
     :title="title"
-    @submit="submit"
   >
     <template slot="btn">
       <el-button
@@ -20,6 +19,8 @@
     </template>
     <template slot="footer">
       <el-button @click="resetFormData">重 置</el-button>
+      <el-button type="primary"  @click="submit">确 定</el-button>
+      
     </template>
   </modal>
 </template>

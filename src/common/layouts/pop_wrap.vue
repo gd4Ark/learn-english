@@ -6,34 +6,43 @@
         <h1 class="title">{{$config.title}} - {{$route.meta.title}}</h1>
       </div>
     </slot>
-    <div id="content" :style="contentStyle">
-      <appear-animate>
-        <slot></slot>
-      </appear-animate>
+    <div
+      id="content"
+      :style="contentStyle"
+    >
+      <transition name="el-fade-in">
+        <template>
+          <slot v-if="load"></slot>
+        </template>
+      </transition>
     </div>
   </div>
 </template>
 <script>
-import AppearAnimate from "@/common/layouts/appear_animate";
 export default {
-  components: {
-    AppearAnimate
-  },
+  data: () => ({
+    load: false
+  }),
   props: {
     useBack: {
       type: Boolean,
       default: true
     },
-    padding : {
-      type : String,
-      default : "2%",
+    padding: {
+      type: String,
+      default: "2%"
     }
   },
-  computed : {
-    contentStyle(){
+  mounted() {
+    setTimeout(() => {
+      this.load = true;
+    }, 0);
+  },
+  computed: {
+    contentStyle() {
       return {
-        padding : this.padding,
-      }
+        padding: this.padding
+      };
     }
   }
 };

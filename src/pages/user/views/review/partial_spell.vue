@@ -2,7 +2,10 @@
   <reviewing ref="reviewing">
     <div class="problem">
       <p class="chinese">{{problem.chinese}}</p>
-      <p class="english">
+      <p
+        :class="['english',{'error' : errorStatus}]"
+        ref="english_tag"
+      >
         <span
           v-for="(item,index) in problem.english"
           :key="index"
@@ -32,7 +35,8 @@ export default {
         chinese: "",
         english: []
       },
-      origin: {}
+      origin: {},
+      errorStatus: false
     };
   },
   watch: {
@@ -100,17 +104,20 @@ export default {
       if (index === -1) return;
       this.setKey(index, key);
       this.enteredIndexes.push(index);
-      setTimeout(() => {
-        if (this.currentEnterIndex === -1) {
-          this.verify();
-        }
-      }, 300);
+      if (this.currentEnterIndex === -1) {
+        this.verify();
+      }
     },
     verify() {
       if (this.problem.english.join("") === this.origin.english) {
         this.next();
       } else {
-        this.initEnglish();
+        const tag = this.$refs.english_tag;
+        this.errorStatus = true;
+        this.$util.on(tag, "animationend", () => {
+          this.errorStatus = false;
+          this.initEnglish();
+        });
       }
     },
     hasError(index) {
@@ -148,9 +155,31 @@ export default {
   }
   .english {
     font-size: 1.5rem;
+    &.error {
+      animation: shake 0.3s ease;
+    }
     span.error {
       color: $warning-color;
     }
+  }
+}
+@keyframes shake {
+  0%,
+  100% {
+    -webkit-transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    -webkit-transform: translateX(-10px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    -webkit-transform: translateX(10px);
   }
 }
 </style>

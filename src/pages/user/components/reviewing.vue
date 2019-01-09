@@ -1,27 +1,25 @@
 <template>
   <pop-wrap padding="0">
-    <template v-if="load">
-      <template slot="header">
-        <div class="app-header">
-          <div class="left">
-            <back />
-            <div class="info">
-              <span>完成：{{completed}}</span>
-              <span>剩余：{{remaining}}</span>
-            </div>
+    <template slot="header">
+      <div class="app-header">
+        <div class="left">
+          <back />
+          <div class="info">
+            <span>完成：{{completed}}</span>
+            <span>剩余：{{remaining}}</span>
           </div>
-          <time>
-            00:44
-          </time>
         </div>
-      </template>
-      <div class="app-content">
-        <slot @success="success"></slot>
+        <time>
+          00:44
+        </time>
       </div>
     </template>
-    <template v-else>
-      <div class="load-message">
-        加载中...
+    <template>
+      <div
+        v-if="load"
+        class="app-content"
+      >
+        <slot @success="success"></slot>
       </div>
     </template>
   </pop-wrap>
@@ -29,17 +27,17 @@
 <script>
 import { mapActions } from "vuex";
 export default {
-  data() {
-    return {
-      load: false,
-      completed: 0,
-      remaining: 0,
-      time: 0
-    };
-  },
+  data: () => ({
+    load: false,
+    completed: 0,
+    remaining: 0,
+    time: 0
+  }),
   mounted() {
     this.getData().then(() => {
-      this.load = true;
+      setTimeout(() => {
+        this.load = true;
+      }, 200);
       this.remaining = this.$store.state.review.total;
     });
   },
@@ -75,7 +73,7 @@ export default {
   @include flex-column;
   font-size: 0.8rem;
 }
-.load-message{
+.load-message {
   @include size(100%);
   @include sub-center;
 }
