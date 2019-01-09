@@ -1,6 +1,6 @@
 <template>
   <div class="modal" style="display:inline;">
-    <div @click="visible()" style="display:inline;">
+    <div v-if="useBtn" @click="visible()" style="display:inline;">
       <slot name="btn">
         <el-button
           size="small"
@@ -43,6 +43,10 @@ export default {
     };
   },
   props: {
+    useBtn : {
+      type : Boolean,
+      default : true,
+    },
     title: {
       type: String,
       default: "弹窗"

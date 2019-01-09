@@ -5,8 +5,8 @@
         <div class="left">
           <back />
           <div class="info">
-            <span>完成：80</span>
-            <span>剩余：8</span>
+            <span>完成：{{completed}}</span>
+            <span>剩余：{{remaining}}</span>
           </div>
         </div>
         <time>
@@ -15,20 +15,41 @@
       </div>
     </template>
     <div class="app-content">
-      <slot></slot>
+      <slot @success="success"></slot>
     </div>
   </pop-wrap>
 </template>
 <script>
 import { mapActions } from "vuex";
 export default {
+  data() {
+    return {
+      load: false,
+      completed: 0,
+      remaining: 0,
+      time: 0
+    };
+  },
   mounted() {
-    this.getData();
+    this.getData().then(() => {
+      this.load = true;
+      this.remaining = this.$store.state.review.total;
+    });
   },
   methods: {
     ...mapActions({
       getData: "getReview"
-    })
+    }),
+    success() {
+      console.log("success");
+    },
+    next() {
+      this.completed++;
+      this.remaining--;
+      if (!this.remaining){
+        this.success();
+      }
+    }
   }
 };
 </script>

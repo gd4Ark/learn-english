@@ -7,6 +7,10 @@ export default {
 
         const o = {};
 
+        o.random = (start,end)=>{
+            return Math.floor(Math.random() * (end - start) + start);
+        }
+
         o.getImgUrl = (url) => {
             return config.server_url + url;
         }
