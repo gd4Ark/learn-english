@@ -6,6 +6,7 @@
         <span
           v-for="(item,index) in problem.english"
           :key="index"
+          :class="hasError(index)"
         >{{item}}</span>
       </p>
     </div>
@@ -23,7 +24,10 @@ export default {
   },
   data() {
     return {
+      blank: "_",
       index: 0,
+      blankIndexes: [],
+      enteredIndexes: [],
       problem: {
         chinese: "",
         english: []
@@ -32,8 +36,10 @@ export default {
     };
   },
   watch: {
-    index() {
-      this.initProblem();
+    index(val) {
+      if (val < this.list.length) {
+        this.initProblem();
+      }
     }
   },
   mounted() {
@@ -42,33 +48,78 @@ export default {
   methods: {
     initProblem() {
       const index = this.index;
-      this.origin = this.$store.state.review.list[index];
+      this.origin = this.list[index];
       this.problem = {
         ...this.origin,
-        english: this.initEnglish()
+        english: this.origin.english.split("")
       };
+      this.setBlankindex();
+      this.initEnglish();
     },
-    initEnglish() {
-      const english = this.origin.english.split("");
-      const len = english.length;
-      let n = Math.floor(len / 2);
+    setBlankindex() {
+      this.blankIndexes = [];
+      const len = this.problem.english.length;
+      let n = Math.floor(len / 1.2);
       while (n--) {
         while (true) {
           const index = this.$util.random(0, len);
-          const current = english[index];
-          const notEq = ["_", " "];
-          if (!notEq.includes(current)) {
-            english[index] = "_";
+          if (!this.blankIndexes.includes(index)) {
+            this.blankIndexes.push(index);
             break;
           }
         }
       }
-      return english;
     },
-    keyboard(){
-      this.next();
+    initEnglish() {
+      this.enteredIndexes = [];
+      this.blankIndexes.forEach(index => this.setBlank(index));
     },
-    next(){
+    setBlank(index) {
+      this.setKey(index, this.blank);
+    },
+    setKey(index, key) {
+      this.problem.english.splice(index, 1, key);
+    },
+    keyboard(key) {
+      switch (key) {
+        case "delete":
+          this.delete();
+          break;
+        default:
+          this.enter(key);
+          break;
+      }
+    },
+    delete() {
+      if (!this.enteredIndexes.length) return;
+      const index = this.enteredIndexes.pop();
+      this.setBlank(index);
+    },
+    enter(key) {
+      const index = this.currentEnterIndex;
+      if (index === -1) return;
+      this.setKey(index, key);
+      this.enteredIndexes.push(index);
+      setTimeout(() => {
+        if (this.currentEnterIndex === -1) {
+          this.verify();
+        }
+      }, 300);
+    },
+    verify() {
+      if (this.problem.english.join("") === this.origin.english) {
+        this.next();
+      } else {
+        this.initEnglish();
+      }
+    },
+    hasError(index) {
+      const item = this.problem.english[index];
+      const origin = this.origin.english[index];
+      if (item === this.blank) return;
+      if (item !== origin) return "error";
+    },
+    next() {
       this.index++;
       this.reviewing.next();
     }
@@ -76,6 +127,12 @@ export default {
   computed: {
     reviewing() {
       return this.$refs.reviewing;
+    },
+    list() {
+      return this.$store.state.review.list;
+    },
+    currentEnterIndex() {
+      return this.problem.english.indexOf(this.blank);
     }
   }
 };
@@ -91,6 +148,9 @@ export default {
   }
   .english {
     font-size: 1.5rem;
+    span.error {
+      color: $warning-color;
+    }
   }
 }
 </style>

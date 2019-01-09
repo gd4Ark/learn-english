@@ -1,22 +1,29 @@
 <template>
   <pop-wrap padding="0">
-    <template slot="header">
-      <div class="app-header">
-        <div class="left">
-          <back />
-          <div class="info">
-            <span>完成：{{completed}}</span>
-            <span>剩余：{{remaining}}</span>
+    <template v-if="load">
+      <template slot="header">
+        <div class="app-header">
+          <div class="left">
+            <back />
+            <div class="info">
+              <span>完成：{{completed}}</span>
+              <span>剩余：{{remaining}}</span>
+            </div>
           </div>
+          <time>
+            00:44
+          </time>
         </div>
-        <time>
-          00:44
-        </time>
+      </template>
+      <div class="app-content">
+        <slot @success="success"></slot>
       </div>
     </template>
-    <div class="app-content">
-      <slot @success="success"></slot>
-    </div>
+    <template v-else>
+      <div class="load-message">
+        加载中...
+      </div>
+    </template>
   </pop-wrap>
 </template>
 <script>
@@ -41,12 +48,12 @@ export default {
       getData: "getReview"
     }),
     success() {
-      console.log("success");
+      alert("success");
     },
     next() {
       this.completed++;
       this.remaining--;
-      if (!this.remaining){
+      if (!this.remaining) {
         this.success();
       }
     }
@@ -67,5 +74,9 @@ export default {
   margin-left: 5vw;
   @include flex-column;
   font-size: 0.8rem;
+}
+.load-message{
+  @include size(100%);
+  @include sub-center;
 }
 </style>

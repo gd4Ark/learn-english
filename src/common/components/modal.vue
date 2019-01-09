@@ -1,6 +1,12 @@
 <template>
-  <div class="modal" style="display:inline;">
-    <div v-if="useBtn" @click="visible()" style="display:inline;">
+  <div
+    class="modal"
+    style="display:inline;"
+  >
+    <div
+      @click="visible()"
+      style="display:inline;"
+    >
       <slot name="btn">
         <el-button
           size="small"
@@ -15,22 +21,21 @@
       width="90%"
     >
 
-    <slot name="body">
-        
-    </slot>
+      <slot name="body">
+
+      </slot>
 
       <span
         slot="footer"
         class="dialog-footer"
       >
         <slot name="footer">
+          <el-button @click="hidden">取 消</el-button>
+          <el-button
+            type="primary"
+            @click="submit"
+          >确 定</el-button>
         </slot>
-        <el-button @click="hidden">取 消</el-button>
-        <el-button
-          type="primary"
-          @click="submit"
-        >确 定</el-button>
-
       </span>
     </el-dialog>
   </div>
@@ -43,10 +48,6 @@ export default {
     };
   },
   props: {
-    useBtn : {
-      type : Boolean,
-      default : true,
-    },
     title: {
       type: String,
       default: "弹窗"
@@ -59,7 +60,7 @@ export default {
     hidden() {
       this.dialogVisible = false;
     },
-    open(){
+    open() {
       this.$emit("open");
     },
     submit() {
