@@ -46,7 +46,7 @@ export default {
       getData: "getReview"
     }),
     success() {
-      alert("success");
+      this.$router.push('/submit');
     },
     next() {
       this.completed++;
