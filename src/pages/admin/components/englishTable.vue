@@ -27,17 +27,12 @@
       >
       </el-table-column>
       <el-table-column
-        prop="english"
-        label="英文"
+        v-for="(item,index) in tableColumns"
+        :prop="item.prop"
+        :label="item.label"
+        :key="index"
         align="center"
-      >
-      </el-table-column>
-      <el-table-column
-        prop="chinese"
-        label="中文"
-        align="center"
-      >
-      </el-table-column>
+      />
       <el-table-column
         label="操作"
         width="110"
@@ -58,77 +53,47 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination
-      background
-      small
-      layout="total,sizes,prev,next,jumper"
-      :total="$store.state.english.total"
-      :current-page.sync="$store.state.english.pageIndex"
-      :page-sizes="$store.state.english.pageSizes"
-      :page-size.sync="$store.state.english.pageSize"
-      @current-change="handleCurrentChange"
-      @size-change="handleSizeChange"
-    >
-    </el-pagination>
+    <pagination
+      :module="$store.state.english"
+      @get-data="getData"
+    />
   </div>
 </template>
 <script>
 import searchEnglish from "@/pages/admin/components/searchEnglish.vue";
 import addEnglish from "@/pages/admin/components/addEnglish.vue";
 import editEnglish from "@/pages/admin/components/editEnglish.vue";
+import pagination from "@/common/components/pagination.vue";
+import manageTable from "@/common/mixins/manageTable";
 import { mapActions } from "vuex";
 export default {
-  data() {
-    return {
-      multipleSelection: []
-    };
-  },
+  mixins: [manageTable],
   components: {
     searchEnglish,
     addEnglish,
-    editEnglish
+    editEnglish,
+    pagination
   },
+  data: () => ({
+    tableColumns: [
+      {
+        label: "中文",
+        prop: "chinese"
+      },
+      {
+        label: "英文",
+        prop: "english"
+      }
+    ],
+    multipleSelection: []
+  }),
   mounted() {
     this.getData();
   },
   methods: {
     ...mapActions({
       delData: "delEnglish"
-    }),
-    getData() {
-      this.$emit("get-data");
-    },
-    handleDelete(ids) {
-      if (ids.length === 0) {
-        return this.$util.msg_error("没有选中项！");
-      }
-      this.$util
-        .confirm({
-          content: "确认删除？"
-        })
-        .then(() => {
-          this.delete(ids);
-        })
-        .catch(() => {
-          this.$util.msg_info("已取消删除");
-        });
-    },
-    async delete(ids) {
-      await this.delData({
-        ids
-      });
-      this.getData();
-      this.$util.msg_success("删除成功!");
-    },
-    handleSelectionChange(val) {
-      this.multipleSelection = val.map(el => el.id);
-    },
-    handleCurrentChange() {
-      this.getData();
-    },
-    handleSizeChange(val) {
-      this.getData();
-    }
+    })
   }
 };
 </script>

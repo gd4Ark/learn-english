@@ -24,27 +24,25 @@ import modal from "@/common/components/modal";
 import cForm from "@/common/components/form";
 import { mapActions } from "vuex";
 export default {
-  data() {
-    return {
-      formData: null
-    };
-  },
-  props : {
-      current : Object,
-  },
   components: {
     modal,
     cForm
+  },
+  data: () => ({
+    formData: null
+  }),
+  props: {
+    current: Object
   },
   methods: {
     ...mapActions(["updateEnglish"]),
     resetData() {
       this.formData = {
-          ...this.current,
+        ...this.current
       };
     },
     async submit() {
-            if (!this.$util.verifForm(this.formData)){
+      if (!this.$util.verifForm(this.formData)) {
         return this.$util.msg_error("请填写正确！");
       }
       const id = await this.updateEnglish(this.formData);

@@ -13,44 +13,40 @@
       height="100%"
     >
       <el-table-column
-        prop="english"
-        label="英文"
+        v-for="(item,index) in tableColumns"
+        :prop="item.prop"
+        :label="item.label"
+        :key="index"
         align="center"
-      >
-      </el-table-column>
-      <el-table-column
-        prop="chinese"
-        label="中文"
-        align="center"
-      >
-      </el-table-column>
+      />
     </el-table>
-    <el-pagination
-      background
-      small
-      layout="total,sizes,prev,next,jumper"
-      :total="$store.state.english.total"
-      :current-page.sync="$store.state.english.pageIndex"
-      :page-sizes="$store.state.english.pageSizes"
-      :page-size.sync="$store.state.english.pageSize"
-      @current-change="handleCurrentChange"
-      @size-change="handleSizeChange"
-    >
-    </el-pagination>
+    <pagination
+      :module="$store.state.english"
+      @get-data="getData"
+    />
   </div>
 </template>
 <script>
 import searchEnglish from "@/pages/admin/components/searchEnglish.vue";
+import pagination from "@/common/components/pagination.vue";
 import { mapActions } from "vuex";
 export default {
-  data() {
-    return {
-      multipleSelection: []
-    };
-  },
   components: {
-    searchEnglish
+    searchEnglish,
+    pagination
   },
+  data: () => ({
+    tableColumns: [
+      {
+        label: "英文",
+        prop: "english"
+      },
+      {
+        label: "中文",
+        prop: "chinese"
+      }
+    ]
+  }),
   mounted() {
     this.getData();
   },

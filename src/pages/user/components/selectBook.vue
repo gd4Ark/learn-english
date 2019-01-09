@@ -32,22 +32,20 @@ export default {
   components: {
     modal
   },
-  data() {
-    return {
-      value: ""
-    };
-  },
+  data: () => ({
+    value: ""
+  }),
   methods: {
     ...mapMutations({
       updateCurrent: "updateBook",
-      updateBookId : "updateEnglish",
+      updateBookId: "updateEnglish"
     }),
     open() {
       this.value = this.$store.state.book.current;
     },
     async submit() {
       this.updateBookId({
-        book_id: this.value.id,
+        book_id: this.value.id
       });
       this.updateCurrent({
         current: this.value
