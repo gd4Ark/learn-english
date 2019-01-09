@@ -64,8 +64,10 @@ import searchEnglish from "@/pages/admin/components/searchEnglish.vue";
 import addEnglish from "@/pages/admin/components/addEnglish.vue";
 import editEnglish from "@/pages/admin/components/editEnglish.vue";
 import pagination from "@/common/components/pagination.vue";
+import manageTable from "@/common/mixins/manageTable";
 import { mapActions } from "vuex";
 export default {
+  mixins: [manageTable],
   components: {
     searchEnglish,
     addEnglish,
@@ -91,35 +93,7 @@ export default {
   methods: {
     ...mapActions({
       delData: "delEnglish"
-    }),
-    getData() {
-      this.$emit("get-data");
-    },
-    handleDelete(ids) {
-      if (ids.length === 0) {
-        return this.$util.msg_error("没有选中项！");
-      }
-      this.$util
-        .confirm({
-          content: "确认删除？"
-        })
-        .then(() => {
-          this.delete(ids);
-        })
-        .catch(() => {
-          this.$util.msg_info("已取消删除");
-        });
-    },
-    async delete(ids) {
-      await this.delData({
-        ids
-      });
-      this.getData();
-      this.$util.msg_success("删除成功!");
-    },
-    handleSelectionChange(val) {
-      this.multipleSelection = val.map(el => el.id);
-    }
+    })
   }
 };
 </script>

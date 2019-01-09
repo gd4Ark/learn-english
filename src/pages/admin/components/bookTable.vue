@@ -67,8 +67,10 @@ import searchBook from "@/pages/admin/components/searchBook.vue";
 import addBook from "@/pages/admin/components/addBook.vue";
 import editBook from "@/pages/admin/components/editBook.vue";
 import pagination from "@/common/components/pagination.vue";
+import manageTable from "@/common/mixins/manageTable";
 import { mapActions } from "vuex";
 export default {
+  mixins: [manageTable],
   components: {
     searchBook,
     addBook,
@@ -95,31 +97,6 @@ export default {
     ...mapActions({
       delData: "delBook"
     }),
-    getData() {
-      this.$emit("get-data");
-    },
-    handleDelete(ids) {
-      if (ids.length === 0) {
-        return this.$util.msg_error("没有选中项！");
-      }
-      this.$util
-        .confirm({
-          content: "确认删除？"
-        })
-        .then(() => {
-          this.delete(ids);
-        })
-        .catch(() => {
-          this.$util.msg_info("已取消删除");
-        });
-    },
-    async delete(ids) {
-      await this.delData({
-        ids
-      });
-      this.getData();
-      this.$util.msg_success("删除成功!");
-    },
     handleManage(id) {
       this.$router.push({
         path: "/book/english",
@@ -127,9 +104,6 @@ export default {
           book_id: id
         }
       });
-    },
-    handleSelectionChange(val) {
-      this.multipleSelection = val.map(el => el.id);
     }
   }
 };
