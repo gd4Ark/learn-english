@@ -105,7 +105,9 @@ export default {
       this.setKey(index, key);
       this.enteredIndexes.push(index);
       if (this.currentEnterIndex === -1) {
-        this.verify();
+        setTimeout(() => {
+          this.verify();
+        }, 200);
       }
     },
     verify() {

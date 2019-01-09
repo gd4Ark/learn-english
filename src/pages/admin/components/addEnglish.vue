@@ -24,15 +24,13 @@ import modal from "@/common/components/modal";
 import cForm from "@/common/components/form";
 import { mapActions } from "vuex";
 export default {
-  data() {
-    return {
-      formData: null
-    };
-  },
   components: {
     modal,
     cForm
   },
+  data: () => ({
+    formData: null
+  }),
   mounted() {
     this.resetData();
   },
@@ -42,12 +40,12 @@ export default {
       this.formData = this.$runtime_data.english.formData();
     },
     async submit() {
-      if (!this.$util.verifForm(this.formData)){
+      if (!this.$util.verifForm(this.formData)) {
         return this.$util.msg_error("请填写正确！");
       }
       const id = await this.addEnglish({
         ...this.formData,
-        book_id : this.$store.state.english.book_id,
+        book_id: this.$store.state.english.book_id
       });
       if (id) {
         this.$util.msg_success("添加成功！");

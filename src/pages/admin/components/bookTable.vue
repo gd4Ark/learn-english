@@ -24,21 +24,14 @@
         type="selection"
         width="40"
         align="center"
-      >
-      </el-table-column>
+      />
       <el-table-column
-        prop="name"
-        label="名字"
+        v-for="(item,index) in tableColumns"
+        :prop="item.prop"
+        :label="item.label"
+        :key="index"
         align="center"
-      >
-      </el-table-column>
-      <el-table-column
-        prop="english_count"
-        label="单词"
-        width="70"
-        align="center"
-      >
-      </el-table-column>
+      />
       <el-table-column
         label="操作"
         width="145"
@@ -83,16 +76,24 @@ import addBook from "@/pages/admin/components/addBook.vue";
 import editBook from "@/pages/admin/components/editBook.vue";
 import { mapActions } from "vuex";
 export default {
-  data() {
-    return {
-      multipleSelection: []
-    };
-  },
   components: {
     searchBook,
     addBook,
     editBook
   },
+  data: () => ({
+    tableColumns: [
+      {
+        label: "名字",
+        prop: "name"
+      },
+      {
+        label: "单词数",
+        prop: "english_count"
+      }
+    ],
+    multipleSelection: []
+  }),
   mounted() {
     this.getData();
   },

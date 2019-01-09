@@ -26,20 +26,18 @@
 </template>
 <script>
 export default {
-  data() {
-    return {
-      isUpper: false,
-      fn_list: {
-        close2: "delete",
-        capslock: "capslock"
-      },
-      keyList: [
-        ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
-        ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
-        ["capslock", "z", "x", "c", "v", "b", "n", "m", "close2"]
-      ]
-    };
-  },
+  data: () => ({
+    isUpper: false,
+    fn_list: {
+      close2: "delete",
+      capslock: "capslock"
+    },
+    keyList: [
+      ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
+      ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
+      ["capslock", "z", "x", "c", "v", "b", "n", "m", "close2"]
+    ]
+  }),
   methods: {
     isFn(key) {
       return this.fn_list[key];
@@ -116,8 +114,8 @@ export default {
     i {
       pointer-events: none;
       font-size: 1.25rem;
-      &.capslock.isUpper{
-          color: $global-font-color;
+      &.capslock.isUpper {
+        color: $global-font-color;
       }
     }
   }

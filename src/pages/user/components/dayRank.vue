@@ -1,141 +1,42 @@
 <template>
   <el-table
-    :data="tableData"
+    :data="data"
     height="100%"
   >
     <el-table-column
-      prop="position"
-      label="名次"
+      v-for="(item,index) in tableColumns"
+      :prop="item.prop"
+      :label="item.label"
+      :key="index"
       align="center"
-    >
-    </el-table-column>
-    <el-table-column
-      prop="name"
-      label="姓名"
-      align="center"
-    >
-    </el-table-column>
-    <el-table-column
-      prop="time"
-      label="时间"
-      align="center"
-    >
-    </el-table-column>
+    />
   </el-table>
 </template>
 
   <script>
 export default {
-  data() {
-    return {
-      tableData: [
-        {
-          position: "01",
-          name: "王小虎",
-          time: "22"
-        },
-        {
-          position: "01",
-          name: "王小虎",
-          time: "22"
-        },
-        {
-          position: "01",
-          name: "王小虎",
-          time: "22"
-        },
-        {
-          position: "01",
-          name: "王小虎",
-          time: "22"
-        },
-        {
-          position: "01",
-          name: "王小虎",
-          time: "22"
-        },
-        {
-          position: "01",
-          name: "王小虎",
-          time: "22"
-        },
-        {
-          position: "01",
-          name: "王小虎",
-          time: "22"
-        },
-        {
-          position: "01",
-          name: "王小虎",
-          time: "22"
-        },
-        {
-          position: "01",
-          name: "王小虎",
-          time: "22"
-        },
-        {
-          position: "01",
-          name: "王小虎王小虎王小虎",
-          time: "22"
-        },
-        {
-          position: "01",
-          name: "王小虎",
-          time: "22"
-        },
-        {
-          position: "01",
-          name: "王小虎",
-          time: "22"
-        },
-        {
-          position: "01",
-          name: "王小虎",
-          time: "22"
-        },
-        {
-          position: "01",
-          name: "王小虎",
-          time: "22"
-        },
-        {
-          position: "01",
-          name: "王小虎",
-          time: "22"
-        },
-        {
-          position: "01",
-          name: "王小虎",
-          time: "22"
-        },
-                {
-          position: "01",
-          name: "王小虎",
-          time: "22"
-        },
-        {
-          position: "01",
-          name: "王小虎",
-          time: "22"
-        },
-        {
-          position: "01",
-          name: "王小虎",
-          time: "22"
-        },
-        {
-          position: "01",
-          name: "王小虎",
-          time: "22"
-        },
-        {
-          position: "01",
-          name: "王小虎",
-          time: "22"
-        }
-      ]
-    };
-  }
+  data: () => ({
+    tableColumns: [
+      {
+        label: "名次",
+        prop: "position"
+      },
+      {
+        label: "名字",
+        prop: "name"
+      },
+      {
+        label: "时间",
+        prop: "time"
+      }
+    ],
+    data: [
+      {
+        position: "01",
+        name: "王小虎",
+        time: "22"
+      }
+    ]
+  })
 };
 </script>

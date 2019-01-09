@@ -27,17 +27,12 @@
       >
       </el-table-column>
       <el-table-column
-        prop="english"
-        label="英文"
+        v-for="(item,index) in tableColumns"
+        :prop="item.prop"
+        :label="item.label"
+        :key="index"
         align="center"
-      >
-      </el-table-column>
-      <el-table-column
-        prop="chinese"
-        label="中文"
-        align="center"
-      >
-      </el-table-column>
+      />
       <el-table-column
         label="操作"
         width="110"
@@ -78,16 +73,24 @@ import addEnglish from "@/pages/admin/components/addEnglish.vue";
 import editEnglish from "@/pages/admin/components/editEnglish.vue";
 import { mapActions } from "vuex";
 export default {
-  data() {
-    return {
-      multipleSelection: []
-    };
-  },
   components: {
     searchEnglish,
     addEnglish,
     editEnglish
   },
+  data: () => ({
+    tableColumns: [
+      {
+        label: "中文",
+        prop: "chinese"
+      },
+      {
+        label: "英文",
+        prop: "english"
+      }
+    ],
+    multipleSelection: []
+  }),
   mounted() {
     this.getData();
   },

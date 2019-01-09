@@ -18,32 +18,14 @@
 <script>
 import { mapActions } from "vuex";
 export default {
-  data() {
-    return {
-      modules: [
-        {
-          title: "英文部分拼写",
-          module: "/partial_spell"
-        },
-        {
-          title: "英文部分拼写",
-          module: "/partial_spell"
-        },
-        {
-          title: "英文部分拼写",
-          module: "/partial_spell"
-        },
-        {
-          title: "英文部分拼写",
-          module: "/partial_spell"
-        },
-        {
-          title: "英文部分拼写",
-          module: "/partial_spell"
-        }
-      ]
-    };
-  },
+  data: () => ({
+    modules: [
+      {
+        title: "英文部分拼写",
+        module: "/partial_spell"
+      }
+    ]
+  }),
   methods: {
     toLearnModule(route) {
       this.$router.push(route);

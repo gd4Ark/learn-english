@@ -24,15 +24,13 @@ import modal from "@/common/components/modal";
 import cForm from "@/common/components/form";
 import { mapActions } from "vuex";
 export default {
-  data() {
-    return {
-      formData: null
-    };
-  },
   components: {
     modal,
     cForm
   },
+  data: () => ({
+    formData: null
+  }),
   mounted() {
     this.resetData();
   },

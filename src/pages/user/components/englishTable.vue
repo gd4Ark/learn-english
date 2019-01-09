@@ -13,17 +13,12 @@
       height="100%"
     >
       <el-table-column
-        prop="english"
-        label="英文"
+        v-for="(item,index) in tableColumns"
+        :prop="item.prop"
+        :label="item.label"
+        :key="index"
         align="center"
-      >
-      </el-table-column>
-      <el-table-column
-        prop="chinese"
-        label="中文"
-        align="center"
-      >
-      </el-table-column>
+      />
     </el-table>
     <el-pagination
       background
@@ -43,11 +38,18 @@
 import searchEnglish from "@/pages/admin/components/searchEnglish.vue";
 import { mapActions } from "vuex";
 export default {
-  data() {
-    return {
-      multipleSelection: []
-    };
-  },
+  data: () => ({
+    tableColumns: [
+      {
+        label: "英文",
+        prop: "english"
+      },
+      {
+        label: "中文",
+        prop: "chinese"
+      }
+    ]
+  }),
   components: {
     searchEnglish
   },
