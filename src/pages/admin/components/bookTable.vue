@@ -56,30 +56,24 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination
-      background
-      small
-      layout="total,sizes,prev,next,jumper"
-      :total="$store.state.book.total"
-      :current-page.sync="$store.state.book.pageIndex"
-      :page-sizes="$store.state.book.pageSizes"
-      :page-size.sync="$store.state.book.pageSize"
-      @current-change="handleCurrentChange"
-      @size-change="handleSizeChange"
-    >
-    </el-pagination>
+    <pagination
+      :module="$store.state.book"
+      @get-data="getData"
+    />
   </div>
 </template>
 <script>
 import searchBook from "@/pages/admin/components/searchBook.vue";
 import addBook from "@/pages/admin/components/addBook.vue";
 import editBook from "@/pages/admin/components/editBook.vue";
+import pagination from "@/common/components/pagination.vue";
 import { mapActions } from "vuex";
 export default {
   components: {
     searchBook,
     addBook,
-    editBook
+    editBook,
+    pagination
   },
   data: () => ({
     tableColumns: [
@@ -136,12 +130,6 @@ export default {
     },
     handleSelectionChange(val) {
       this.multipleSelection = val.map(el => el.id);
-    },
-    handleCurrentChange() {
-      this.getData();
-    },
-    handleSizeChange(val) {
-      this.getData();
     }
   }
 };

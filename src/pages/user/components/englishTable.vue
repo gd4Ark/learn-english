@@ -20,24 +20,21 @@
         align="center"
       />
     </el-table>
-    <el-pagination
-      background
-      small
-      layout="total,sizes,prev,next,jumper"
-      :total="$store.state.english.total"
-      :current-page.sync="$store.state.english.pageIndex"
-      :page-sizes="$store.state.english.pageSizes"
-      :page-size.sync="$store.state.english.pageSize"
-      @current-change="handleCurrentChange"
-      @size-change="handleSizeChange"
-    >
-    </el-pagination>
+    <pagination
+      :module="$store.state.english"
+      @get-data="getData"
+    />
   </div>
 </template>
 <script>
 import searchEnglish from "@/pages/admin/components/searchEnglish.vue";
+import pagination from "@/common/components/pagination.vue";
 import { mapActions } from "vuex";
 export default {
+  components: {
+    searchEnglish,
+    pagination
+  },
   data: () => ({
     tableColumns: [
       {
@@ -50,9 +47,6 @@ export default {
       }
     ]
   }),
-  components: {
-    searchEnglish
-  },
   mounted() {
     this.getData();
   },
