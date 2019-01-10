@@ -11,14 +11,13 @@
     <template slot="body">
       <el-select
         v-model="value"
-        value-key="id"
         placeholder="请选择单词本"
       >
         <el-option
           v-for="item in $store.state.book.list"
           :key="item.id"
           :label="item.name"
-          :value="item"
+          :value="item.id"
         >
         </el-option>
       </el-select>
@@ -41,14 +40,14 @@ export default {
       updateBookId: "updateEnglish"
     }),
     open() {
-      this.value = this.$store.state.book.current;
+      this.value = this.$store.state.book.current_id;
     },
     async submit() {
       this.updateBookId({
-        book_id: this.value.id
+        book_id: this.value
       });
       this.updateCurrent({
-        current: this.value
+        current_id: this.value
       });
       this.$refs.modal.hidden();
     }

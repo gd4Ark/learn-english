@@ -20,11 +20,6 @@ export default {
     ...mapMutations({
       updateEnglish: "updateEnglish"
     })
-  },
-  computed: {
-    id() {
-      return this.$store.state.book.current.id;
-    }
   }
 };
 </script>

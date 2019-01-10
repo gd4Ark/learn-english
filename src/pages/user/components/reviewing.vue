@@ -10,7 +10,7 @@
           </div>
         </div>
         <time>
-          00:44
+          {{ $util.timeFormat(time) }}
         </time>
       </div>
     </template>
@@ -25,7 +25,7 @@
   </pop-wrap>
 </template>
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapMutations } from "vuex";
 export default {
   data: () => ({
     load: false,
@@ -36,17 +36,26 @@ export default {
   mounted() {
     this.getData().then(() => {
       setTimeout(() => {
-        this.load = true;
+        this.start();
       }, 200);
       this.remaining = this.$store.state.review.total;
     });
+  },
+  destroyed() {
+    this.$util.timer.remove("reviewing_timer");
   },
   methods: {
     ...mapActions({
       getData: "getReview"
     }),
-    success() {
-      this.$router.push('/submit');
+    ...mapMutations([
+      'updateSubmit',
+    ]),
+    start() {
+      this.load = true;
+      this.$util.timer.add("reviewing_timer", 60).update(() => {
+        this.time++;
+      });
     },
     next() {
       this.completed++;
@@ -54,6 +63,12 @@ export default {
       if (!this.remaining) {
         this.success();
       }
+    },
+    success() {
+      this.updateSubmit({
+        time: this.time
+      });
+      // this.$router.push("/submit");
     }
   }
 };

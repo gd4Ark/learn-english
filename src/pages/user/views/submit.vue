@@ -40,6 +40,9 @@ import { async } from "q";
 import { mapActions } from "vuex";
 
 export default {
+  components: {
+    cForm
+  },
   data() {
     return {
       formData: {
@@ -48,8 +51,8 @@ export default {
       }
     };
   },
-  components: {
-    cForm
+  mounted(){
+    console.log(this.$store.state.submit);
   },
   methods: {
     ...mapActions(["login"]),

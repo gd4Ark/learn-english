@@ -2,7 +2,7 @@
   <div class="table-content">
     <div class="toolbar">
       <div>
-        {{$store.state.book.current.name}}
+        {{currentBook.name}}
       </div>
       <search-english @get-data="getData" />
     </div>
@@ -29,8 +29,9 @@
 <script>
 import searchEnglish from "@/pages/admin/components/searchEnglish.vue";
 import pagination from "@/common/components/pagination.vue";
-import { mapActions } from "vuex";
+import currentBook from "@/common/mixins/currentBook";
 export default {
+  mixins : [currentBook],
   components: {
     searchEnglish,
     pagination
@@ -53,12 +54,6 @@ export default {
   methods: {
     getData() {
       this.$emit("get-data");
-    },
-    handleCurrentChange() {
-      this.getData();
-    },
-    handleSizeChange(val) {
-      this.getData();
     }
   }
 };
