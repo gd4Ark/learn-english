@@ -2,8 +2,8 @@
   <search
     :title="title"
     :formItem="$runtime_data.book.searchformItem"
-    :formData="$store.state.book.searchData"
-    :searchState="$store.state.book.keyword.length"
+    :formData="book.searchData"
+    :searchState="book.keyword.length"
     @submit="submit"
     @reset="reset"
   >
@@ -11,12 +11,15 @@
 </template>
 <script>
 import Search from "@/common/components/search";
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 export default {
   components: {
     Search
   },
-  mounted(){
+  data: () => ({
+    title: "单词筛选框"
+  }),
+  mounted() {
     this.reset();
   },
   methods: {
@@ -29,10 +32,8 @@ export default {
       this.resetBookSearchData();
     }
   },
-  computed : {
-    title(){
-      return  '单词本筛选框';
-    }
+  computed: {
+    ...mapState(["book"])
   }
 };
 </script>

@@ -15,7 +15,7 @@
     </div>
 
     <el-table
-      :data="$store.state.english.list"
+      :data="english.list"
       class="table"
       height="100%"
       @selection-change="handleSelectionChange"
@@ -54,7 +54,7 @@
       </el-table-column>
     </el-table>
     <pagination
-      :module="$store.state.english"
+      :module="english"
       @get-data="getData"
     />
   </div>
@@ -65,7 +65,7 @@ import addEnglish from "@/pages/admin/components/addEnglish.vue";
 import editEnglish from "@/pages/admin/components/editEnglish.vue";
 import pagination from "@/common/components/pagination.vue";
 import manageTable from "@/common/mixins/manageTable";
-import { mapActions } from "vuex";
+import { mapActions,mapState } from "vuex";
 export default {
   mixins: [manageTable],
   components: {
@@ -94,6 +94,9 @@ export default {
     ...mapActions({
       delData: "delEnglish"
     })
+  },
+  computed : {
+    ...mapState(['english'])
   }
 };
 </script>

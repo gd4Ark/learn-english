@@ -27,7 +27,7 @@ const routerConfig = {
             }
         },
         {
-            path: "/book/english",
+            path: "/english",
             component: English,
             meta: {
                 title: '单词管理',

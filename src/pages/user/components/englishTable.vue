@@ -8,7 +8,7 @@
     </div>
 
     <el-table
-      :data="$store.state.english.list"
+      :data="english.list"
       class="table"
       height="100%"
     >
@@ -21,7 +21,7 @@
       />
     </el-table>
     <pagination
-      :module="$store.state.english"
+      :module="english"
       @get-data="getData"
     />
   </div>
@@ -30,8 +30,9 @@
 import searchEnglish from "@/pages/admin/components/searchEnglish.vue";
 import pagination from "@/common/components/pagination.vue";
 import currentBook from "@/common/mixins/currentBook";
+import { mapState } from "vuex";
 export default {
-  mixins : [currentBook],
+  mixins: [currentBook],
   components: {
     searchEnglish,
     pagination
@@ -55,6 +56,9 @@ export default {
     getData() {
       this.$emit("get-data");
     }
+  },
+  computed: {
+    ...mapState(["english"])
   }
 };
 </script>

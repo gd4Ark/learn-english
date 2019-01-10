@@ -19,13 +19,19 @@
         v-if="load"
         class="app-content"
       >
-        <slot @success="success"></slot>
+        <router-view @next="next"></router-view>
+      </div>
+      <div
+        v-if="!load"
+        class="load-message"
+      >
+        loading...
       </div>
     </template>
   </pop-wrap>
 </template>
 <script>
-import { mapActions, mapMutations } from "vuex";
+import { mapActions, mapMutations, mapState } from "vuex";
 export default {
   data: () => ({
     load: false,
@@ -34,11 +40,15 @@ export default {
     time: 0
   }),
   mounted() {
+    if (!this.english.book_id) {
+      return this.exit("没有选中单词本！");
+    }
     this.getData().then(() => {
-      setTimeout(() => {
-        this.start();
-      }, 200);
-      this.remaining = this.$store.state.review.total;
+      if (!this.review.total) {
+        return this.exit("单词数量为空！");
+      }
+      this.start();
+      this.remaining = this.review.total;
     });
   },
   destroyed() {
@@ -48,9 +58,12 @@ export default {
     ...mapActions({
       getData: "getReview"
     }),
-    ...mapMutations([
-      'updateSubmit',
-    ]),
+    ...mapMutations(["updateSubmit"]),
+    exit(msg) {
+      this.$util.msg_error(msg).then(() => {
+        this.$router.back();
+      });
+    },
     start() {
       this.load = true;
       this.$util.timer.add("reviewing_timer", 60).update(() => {
@@ -66,10 +79,15 @@ export default {
     },
     success() {
       this.updateSubmit({
-        time: this.time
+        time: this.time,
+        total: this.review.total,
+        module: this.$route.meta.title
       });
-      // this.$router.push("/submit");
+      this.$router.push("/submit");
     }
+  },
+  computed: {
+    ...mapState(["review", "english"])
   }
 };
 </script>

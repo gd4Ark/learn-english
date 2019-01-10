@@ -14,7 +14,7 @@
         placeholder="请选择单词本"
       >
         <el-option
-          v-for="item in $store.state.book.list"
+          v-for="item in book.list"
           :key="item.id"
           :label="item.name"
           :value="item.id"
@@ -26,7 +26,7 @@
 </template>
 <script>
 import modal from "@/common/components/modal";
-import { mapMutations } from "vuex";
+import { mapMutations, mapState } from "vuex";
 export default {
   components: {
     modal
@@ -40,7 +40,7 @@ export default {
       updateBookId: "updateEnglish"
     }),
     open() {
-      this.value = this.$store.state.book.current_id;
+      this.value = this.book.current_id;
     },
     async submit() {
       this.updateBookId({
@@ -51,6 +51,9 @@ export default {
       });
       this.$refs.modal.hidden();
     }
+  },
+  computed: {
+    ...mapState(["book"])
   }
 };
 </script>

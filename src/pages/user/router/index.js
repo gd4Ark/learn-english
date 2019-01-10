@@ -6,7 +6,9 @@ import review from '@/pages/user/views/review';
 import rank from '@/pages/user/views/rank';
 import english from '@/pages/user/views/english';
 
-import partial_spell from '@/pages/user/views/review/partial_spell';
+import reviewing from '@/pages/user/views/reviewing';
+
+import partial_spell from '@/pages/user/views/reviewing/partial_spell';
 
 import submit from '@/pages/user/views/submit';
 
@@ -46,11 +48,15 @@ const routerConfig = {
             title: '单词列表',
         }
     }, {
-        path: "/partial_spell",
-        component: partial_spell,
-        meta: {
-            title: "英文部分拼写",
-        }
+        path: "/reviewing",
+        component: reviewing,
+        children: [{
+            path: "partial_spell",
+            component: partial_spell,
+            meta: {
+                title: '单词部分拼写',
+            }
+        }]
     }, {
         path: "/submit",
         component: submit,

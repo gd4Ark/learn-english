@@ -1,5 +1,5 @@
 <template>
-  <reviewing ref="reviewing">
+  <div class="content">
     <div class="problem">
       <p class="chinese">{{problem.chinese}}</p>
       <p
@@ -14,15 +14,14 @@
       </p>
     </div>
     <keyboard @keydown="keyboard"></keyboard>
-  </reviewing>
+  </div>
 </template>
 
 <script>
-import reviewing from "@/pages/user/components/reviewing";
+import { mapState } from "vuex";
 import keyboard from "@/pages/user/components/keyboard";
 export default {
   components: {
-    reviewing,
     keyboard
   },
   data() {
@@ -41,7 +40,7 @@ export default {
   },
   watch: {
     index(val) {
-      if (val < this.list.length) {
+      if (val < this.review.list.length) {
         this.initProblem();
       }
     }
@@ -52,7 +51,7 @@ export default {
   methods: {
     initProblem() {
       const index = this.index;
-      this.origin = this.list[index];
+      this.origin = this.review.list[index];
       this.problem = {
         ...this.origin,
         english: this.origin.english.split("")
@@ -130,23 +129,25 @@ export default {
     },
     next() {
       this.index++;
-      this.reviewing.next();
+      this.$emit("next");
     }
   },
   computed: {
-    reviewing() {
-      return this.$refs.reviewing;
-    },
-    list() {
-      return this.$store.state.review.list;
-    },
     currentEnterIndex() {
       return this.problem.english.indexOf(this.blank);
-    }
+    },
+    ...mapState({
+      review: "review"
+    })
   }
 };
 </script>
 <style lang="scss" scoped>
+.content {
+  @include flex-column;
+  justify-content: space-between;
+  flex: 1;
+}
 .problem {
   flex: 1;
   @include flex-column;

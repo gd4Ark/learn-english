@@ -22,7 +22,7 @@
 <script>
 import modal from "@/common/components/modal";
 import cForm from "@/common/components/form";
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 export default {
   components: {
     modal,
@@ -45,7 +45,7 @@ export default {
       }
       const id = await this.addEnglish({
         ...this.formData,
-        book_id: this.$store.state.english.book_id
+        book_id: this.english.book_id
       });
       if (id) {
         this.$util.msg_success("添加成功！");
@@ -54,6 +54,9 @@ export default {
         this.$refs.modal.hidden();
       }
     }
+  },
+  computed: {
+    ...mapState(["english"])
   }
 };
 </script>
