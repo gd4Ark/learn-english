@@ -21,7 +21,7 @@ export default {
   data: () => ({
     modules: [
       {
-        title: "英文部分拼写",
+        title: "单词部分拼写",
         module: "/partial_spell"
       }
     ]

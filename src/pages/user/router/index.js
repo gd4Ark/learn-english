@@ -8,6 +8,8 @@ import english from '@/pages/user/views/english';
 
 import partial_spell from '@/pages/user/views/review/partial_spell';
 
+import submit from '@/pages/user/views/submit';
+
 const routerConfig = {
     mode: process.env.NODE_ENV == 'development' ? 'history' : 'hash',
     routes: [{
@@ -19,7 +21,7 @@ const routerConfig = {
         meta: {
             title: '首页',
             icon: "el-icon-ali-homefill",
-            inNav : true,
+            inNav: true,
         }
     }, {
         path: "/review",
@@ -27,7 +29,7 @@ const routerConfig = {
         meta: {
             title: '复习',
             icon: "el-icon-ali-learning_fill",
-            inNav : true,
+            inNav: true,
         }
     }, {
         path: "/rank",
@@ -35,7 +37,7 @@ const routerConfig = {
         meta: {
             title: '排行榜',
             icon: "el-icon-ali-rankfill",
-            inNav : true,
+            inNav: true,
         }
     }, {
         path: "/english",
@@ -49,7 +51,13 @@ const routerConfig = {
         meta: {
             title: "英文部分拼写",
         }
-    }]
+    }, {
+        path: "/submit",
+        component: submit,
+        meta: {
+            title: '提交',
+        }
+    }, ]
 }
 
 Vue.use(VueRouter);
