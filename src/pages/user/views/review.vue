@@ -28,7 +28,7 @@ export default {
   }),
   methods: {
     toLearnModule(route) {
-      this.$router.push(route);
+      this.$router.push("/reviewing" + route);
     }
   }
 };
