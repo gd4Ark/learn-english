@@ -6,6 +6,7 @@ import createPersist from 'vuex-localstorage'
 import book from "./modules/book";
 import english from "./modules/english";
 import review from "./modules/review";
+import submit from "./modules/submit";
 
 import mutations from "./mutations";
 import actions from "./actions";
@@ -18,6 +19,7 @@ export default new vuex.Store({
         book,
         english,
         review,
+        submit,
     },
     mutations: {
         ...mutations,

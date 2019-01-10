@@ -25,7 +25,7 @@
   </pop-wrap>
 </template>
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapMutations } from "vuex";
 export default {
   data: () => ({
     load: false,
@@ -48,6 +48,9 @@ export default {
     ...mapActions({
       getData: "getReview"
     }),
+    ...mapMutations([
+      'updateSubmit',
+    ]),
     start() {
       this.load = true;
       this.$util.timer.add("reviewing_timer", 60).update(() => {
@@ -62,7 +65,10 @@ export default {
       }
     },
     success() {
-      this.$router.push("/submit");
+      this.updateSubmit({
+        time: this.time
+      });
+      // this.$router.push("/submit");
     }
   }
 };

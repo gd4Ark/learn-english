@@ -7,7 +7,7 @@
       >
         <div class="content-panel">
           <div
-            v-if="$util.isEmptyObj($store.state.book.current)"
+            v-if="!currentBook"
             class="message"
           >
             <i
@@ -18,10 +18,10 @@
           </div>
           <div v-else>
             <p class="english-count">
-              {{$store.state.book.current.english_count}}
+              {{currentBook.english_count}}
             </p>
             <p class="book-name">
-              {{$store.state.book.current.name}}
+              {{currentBook.name}}
             </p>
             <el-button
               type="text"
@@ -40,7 +40,9 @@
 <script>
 import { mapActions } from "vuex";
 import selectBook from "@/pages/user/components/selectBook";
+import currentBook from "@/common/mixins/currentBook";
 export default {
+  mixins : [currentBook],
   components: {
     selectBook
   },
@@ -51,7 +53,7 @@ export default {
     ...mapActions({
       getData: "getBook"
     })
-  }
+  },
 };
 </script>
 <style lang="scss" scoped>

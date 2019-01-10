@@ -17,4 +17,10 @@ export default {
             ...data,
         }
     },
+    updateSubmit(state, data) {
+        state.submit = {
+            ...state.submit,
+            ...data,
+        }
+    },
 }
