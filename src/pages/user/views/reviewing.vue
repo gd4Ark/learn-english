@@ -21,6 +21,12 @@
       >
         <router-view @next="next"></router-view>
       </div>
+      <div
+        v-if="!load"
+        class="load-message"
+      >
+        loading...
+      </div>
     </template>
   </pop-wrap>
 </template>
@@ -35,17 +41,13 @@ export default {
   }),
   mounted() {
     if (!this.english.book_id) {
-      setTimeout(() => {
-        this.$util.msg_error("没有选中单词本！").then(() => {
-          this.$router.back();
-        });
-      }, 200);
-      return;
+      return this.exit("没有选中单词本！");
     }
     this.getData().then(() => {
-      setTimeout(() => {
-        this.start();
-      }, 200);
+      if (!this.review.total) {
+        return this.exit("单词数量为空！");
+      }
+      this.start();
       this.remaining = this.review.total;
     });
   },
@@ -57,6 +59,11 @@ export default {
       getData: "getReview"
     }),
     ...mapMutations(["updateSubmit"]),
+    exit(msg) {
+      this.$util.msg_error(msg).then(() => {
+        this.$router.back();
+      });
+    },
     start() {
       this.load = true;
       this.$util.timer.add("reviewing_timer", 60).update(() => {
