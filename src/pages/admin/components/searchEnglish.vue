@@ -2,8 +2,8 @@
   <search
     :title="title"
     :formItem="$runtime_data.english.searchformItem"
-    :formData="$store.state.english.searchData"
-    :searchState="$store.state.english.keyword.length"
+    :formData="english.searchData"
+    :searchState="english.keyword.length"
     @submit="submit"
     @reset="reset"
   >
@@ -11,12 +11,15 @@
 </template>
 <script>
 import Search from "@/common/components/search";
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 export default {
   components: {
     Search
   },
-    mounted(){
+  data: () => ({
+    title: "单词筛选框"
+  }),
+  mounted() {
     this.reset();
   },
   methods: {
@@ -29,10 +32,8 @@ export default {
       this.resetEnglishSearchData();
     }
   },
-  computed : {
-    title(){
-      return  '单词筛选框';
-    }
+  computed: {
+    ...mapState(["english"])
   }
 };
 </script>

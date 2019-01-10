@@ -15,7 +15,7 @@
     </div>
 
     <el-table
-      :data="$store.state.book.list"
+      :data="book.list"
       class="table"
       height="100%"
       @selection-change="handleSelectionChange"
@@ -57,7 +57,7 @@
       </el-table-column>
     </el-table>
     <pagination
-      :module="$store.state.book"
+      :module="book"
       @get-data="getData"
     />
   </div>
@@ -68,7 +68,7 @@ import addBook from "@/pages/admin/components/addBook.vue";
 import editBook from "@/pages/admin/components/editBook.vue";
 import pagination from "@/common/components/pagination.vue";
 import manageTable from "@/common/mixins/manageTable";
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 export default {
   mixins: [manageTable],
   components: {
@@ -99,12 +99,15 @@ export default {
     }),
     handleManage(id) {
       this.$router.push({
-        path: "/book/english",
+        path: "/english",
         query: {
           book_id: id
         }
       });
     }
+  },
+  computed: {
+    ...mapState(["book"])
   }
 };
 </script>

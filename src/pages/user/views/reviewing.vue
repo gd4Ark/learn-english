@@ -80,10 +80,7 @@ export default {
     }
   },
   computed: {
-    ...mapState({
-      review: "review",
-      english: "english"
-    })
+    ...mapState(["review", "english"])
   }
 };
 </script>
