@@ -32,6 +32,7 @@
           </div>
         </div>
       </el-card>
+      <el-button type="primary">随机模块</el-button>
       <select-book />
     </div>
   </wrap>
@@ -65,10 +66,13 @@ export default {
   > * {
     width: 90%;
   }
+  > button{
+    margin: 6vh 0;
+  }
   .content-panel {
     @include flex-column;
     @include sub-center;
-    min-height: 35vh;
+    min-height: 45vh;
     > div {
       @include flex-column;
       @include sub-center;

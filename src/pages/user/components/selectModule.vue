@@ -1,17 +1,17 @@
 <template>
   <modal
     ref="modal"
-    title="选择单词本"
+    title="选择模块"
     @open="open"
     @submit="submit"
   >
     <template slot="btn">
-      <el-button icon="el-icon-tickets">选择单词本</el-button>
+      <el-button type="text">单词部分拼写</el-button>
     </template>
     <template slot="body">
       <el-select
         v-model="value"
-        placeholder="请选择单词本"
+        placeholder="请选择模块"
       >
         <el-option
           v-for="item in book.list"
@@ -62,9 +62,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-button {
-  width: 100%;
-}
 .option-box {
   @include flex;
   justify-content: space-between;

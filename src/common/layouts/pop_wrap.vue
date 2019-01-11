@@ -5,7 +5,7 @@
         <slot name="back">
           <back v-if="useBack" />
         </slot>
-        <h1 class="title">{{$config.title}} - {{$route.meta.title}}</h1>
+        <h1 class="title">{{$route.meta.title}}</h1>
       </div>
     </slot>
     <div
