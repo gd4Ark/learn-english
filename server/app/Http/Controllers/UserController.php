@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Book;
 use App\English;
 
+use App\Score;
 use DemeterChain\B;
 use Illuminate\Http\Request;
 
@@ -36,5 +37,24 @@ class UserController extends Controller{
         // 正常搜索分页
         $list = $this->search($request,$list);
         return $this->pagination($request,$list);
+    }
+
+    public function submit(Request $request){
+        $all = $request->all();
+        $data = Score::where([
+            'book_id' => $all['book_id'],
+            'module' => $all['module'],
+            'username' => $all['username'],
+        ])->first();
+        if (!$data){
+            Score::create($request->all());
+            return;
+        }
+        if ($all['time'] < $data->time){
+            $data->time = $all['time'];
+            $data->save();
+            return;
+        }
+
     }
 }

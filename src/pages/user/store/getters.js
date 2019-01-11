@@ -26,4 +26,13 @@ export default {
         };
         return data;
     },
+    submitData(state) {
+        const {
+            book_id,
+        } = state.english;
+        const data = {
+            book_id,
+        };
+        return data;
+    },
 }
