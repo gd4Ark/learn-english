@@ -2,6 +2,7 @@
   <div id="wrap">
     <div class="app-header">
       <h1 class="title">{{$config.title}} - {{$route.meta.title}}</h1>
+      <slot name="header"></slot>
     </div>
     <div
       id="content"

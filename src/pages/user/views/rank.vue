@@ -1,5 +1,8 @@
 <template>
   <wrap padding="0 2% 2%">
+    <template slot="header">
+      <select-module></select-module>
+    </template>
     <div class="app-content">
       <el-tabs
         :stretch="true"
@@ -18,9 +21,11 @@
 
 <script>
 import { mapActions } from "vuex";
+import selectModule from "@/pages/user/components/selectModule";
 import dayRank from "@/pages/user/components/dayRank";
 export default {
   components: {
+    selectModule,
     dayRank
   },
   methods: {
