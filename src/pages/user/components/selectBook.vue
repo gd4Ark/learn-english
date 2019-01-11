@@ -19,10 +19,10 @@
           :label="item.name"
           :value="item.id"
         >
-        <div class="option-box">
-          <span>{{ item.name }}</span>
-        <span>{{ item.english_count }}</span>
-        </div>
+          <div class="option-box">
+            <span>{{ item.name }}</span>
+            <span>{{ item.english_count }}</span>
+          </div>
         </el-option>
       </el-select>
     </template>
@@ -66,7 +66,7 @@ button {
   margin-top: 12vh;
   width: 100%;
 }
-.option-box{
+.option-box {
   @include flex;
   justify-content: space-between;
 }
