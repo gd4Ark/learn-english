@@ -9,7 +9,11 @@ export default {
         context.commit('updateReview', await this._vm.$axios.get('/english', context.getters.requestReivewListData));
     },
     async submit(context,data) {
-        console.log(data);
+        const response =  await this._vm.$axios.post('/submit',{
+            ...context.getters.submitData,
+            ...data,
+        });
+        return response;
     },
     async englishKeyword(context, keyword = []) {
         await context.commit('updateEnglish', {

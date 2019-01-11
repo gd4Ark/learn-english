@@ -19,6 +19,8 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
     $router->get('english','UserController@getEnglish');
 
+    $router->post('submit','UserController@submit');
+
     $router->group(['middleware'=>'auth:api'],function () use ($router){
 
         $router->post('checkLogin','AdminController@checkLogin');

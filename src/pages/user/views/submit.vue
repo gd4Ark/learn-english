@@ -67,11 +67,13 @@ export default {
       if (!username) {
         return this.$util.msg_error("请填写完整！");
       }
-      const response = await this.submit({
+      await this.submit({
         ...this.submitInfo,
-        ...this.formData
+        ...this.formData,
       });
-      console.log(response);
+      this.$util.msg_success('提交成功！').then(()=>{
+        this.$router.push('/rank');
+      });
     }
   },
   computed: {
