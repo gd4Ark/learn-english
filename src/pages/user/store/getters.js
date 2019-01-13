@@ -22,7 +22,20 @@ export default {
         } = state.english;
         const data = {
             book_id,
-            review : true,
+            review: true,
+        };
+        return data;
+    },
+    requestRankData(state) {
+        const {
+            review_module,
+        } = state.rank;
+        const {
+            book_id,
+        } = state.english;
+        const data = {
+            book_id,
+            review_module,
         };
         return data;
     },

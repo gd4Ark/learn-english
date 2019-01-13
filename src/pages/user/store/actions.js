@@ -8,6 +8,11 @@ export default {
     async getReview(context) {
         context.commit('updateReview', await this._vm.$axios.get('/english', context.getters.requestReivewListData));
     },
+    async getDayRank(context) {
+        context.commit('updateRank', {
+            day : await this._vm.$axios.get('/rank/day',context.getters.requestRankData)
+        });
+    },
     async submit(context,data) {
         const response =  await this._vm.$axios.post('/submit',{
             ...context.getters.submitData,

@@ -77,8 +77,9 @@
   @include flex;
   align-items: center;
   justify-content: space-between;
-  background: #eeece8;
-  border-bottom: 1px solid $line-color;
+  background: $principal-color;
+  border-bottom: 1px solid #e5e6e8;
+  // border-bottom: 1px solid $line-color;
   .title {
     font-size: 1.2rem;
     font-weight: 600;
