@@ -17,6 +17,12 @@ export default {
             ...data,
         }
     },
+    updateRank(state, data) {
+        state.rank = {
+            ...state.rank,
+            ...data,
+        }
+    },
     updateSubmit(state, data) {
         state.submit = {
             ...state.submit,

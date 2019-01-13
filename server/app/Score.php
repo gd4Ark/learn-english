@@ -14,7 +14,7 @@ class Score extends Model{
      * @var array
      */
 
-    protected $fillable = ['id','book_id','module','username','time','created_at','updated_at'];
+    protected $fillable = ['id','book_id','review_module','username','time','created_at','updated_at'];
 
     public $timestamps = false;
 

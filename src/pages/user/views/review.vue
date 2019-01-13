@@ -3,10 +3,10 @@
     <div class="app-content">
       <div class="learn-modules">
         <div
-          class="module"
-          v-for="(item,index) in modules"
+          class="review_module"
+          v-for="(item,index) in review_modules"
           :key="index"
-          @click="toLearnModule(item.module)"
+          @click="toLearnModule(item.review_module)"
         >
           <h2 class="title">{{item.title}}</h2>
         </div>
@@ -19,10 +19,10 @@
 import { mapActions } from "vuex";
 export default {
   data: () => ({
-    modules: [
+    review_modules: [
       {
         title: "单词部分拼写",
-        module: "/partial_spell"
+        review_module: "/partial_spell"
       }
     ]
   }),

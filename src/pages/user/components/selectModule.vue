@@ -14,15 +14,11 @@
         placeholder="请选择模块"
       >
         <el-option
-          v-for="item in book.list"
-          :key="item.id"
-          :label="item.name"
-          :value="item.id"
+          v-for="item in review_modules"
+          :key="item.path"
+          :label="item.meta.title"
+          :value="item.meta.title"
         >
-          <div class="option-box">
-            <span>{{ item.name }}</span>
-            <span>{{ item.english_count }}</span>
-          </div>
         </el-option>
       </el-select>
     </template>
@@ -36,15 +32,19 @@ export default {
     modal
   },
   data: () => ({
-    value: ""
+    value: "",
+    review_modules : [],
   }),
+  mounted(){
+    this.review_modules = this.$router.options.routes.find((el)=> el.path === "/reviewing" ).children;
+  },
   methods: {
     ...mapMutations({
       updateCurrent: "updateBook",
       updateBookId: "updateEnglish"
     }),
     open() {
-      this.value = this.book.current_id;
+      this.value = this.rank.review_module;
     },
     async submit() {
       this.updateBookId({
@@ -57,7 +57,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(["book"])
+    ...mapState(["rank"])
   }
 };
 </script>

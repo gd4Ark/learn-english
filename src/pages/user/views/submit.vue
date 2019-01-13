@@ -9,7 +9,7 @@
           <p>
             <strong>所在模块：</strong>
             <span>
-              {{ submitInfo.module }}
+              {{ submitInfo.review_module }}
             </span>
           </p>
           <p>
