@@ -22,6 +22,10 @@ class Score extends Model{
         $this->attributes['username'] = trim($name);
     }
 
+    // public function getTimeAttribute($val){
+    //     return $val . '--';
+    // }
+
     public function english(){
         return $this->hasMany(English::class,'book_id','id');
     }

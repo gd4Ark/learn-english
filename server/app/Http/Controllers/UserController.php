@@ -57,26 +57,18 @@ class UserController extends Controller{
         }
     }
 
-    public function dayRank(Request $request){
-        return Score::where([
+    public function getRank(Request $request){
+        $data = Score::where([
                 'book_id' => $request->input('book_id'),
                 'review_module' => $request->input('review_module'),
             ])
-            ->whereDate('updated_at',date('Y-m-d'))
             ->orderBy('time')
             ->orderBy('updated_at','DESC')
             ->limit(30)
             ->get(['id','username','time']);
-    }
-
-    public function totalRank(Request $request){
-        return Score::where([
-                'book_id' => '7',
-                'review_module' => '单词部分拼写',
-            ])
-            ->orderBy('time')
-            ->orderBy('updated_at','DESC')
-            ->limit(30)
-            ->get(['id','username','time']);
+        foreach($data as $key=>$value){
+            $data[$key]['position'] = $key + 1;
+        }
+        return $data;
     }
 }
