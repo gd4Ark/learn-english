@@ -19,7 +19,7 @@
             </span>
           </p>
           <p>
-            <strong>所需时间：</strong>
+            <strong>平均时间：</strong>
             <span>
               {{ $util.timeFormat(submitInfo.time) }}
             </span>
@@ -65,7 +65,10 @@ export default {
     async handleSubmit() {
       const { username } = this.formData;
       if (!username) {
-        return this.$util.msg_error("请填写完整！");
+        return this.$util.msg_warning("请填写完整！");
+      }
+      if (username.length > 6){
+        return this.$util.msg_warning("名字长度不可超过6位数！");
       }
       await this.submit({
         ...this.submitInfo,

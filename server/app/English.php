@@ -23,6 +23,7 @@ class English extends Model{
     }
 
     public function setEnglishAttribute($english){
+        $english = merge_spaces($english);
         $this->attributes['english'] = trim($english);
     }
 

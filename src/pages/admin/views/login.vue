@@ -38,7 +38,7 @@ export default {
     async submit() {
       const { username, password } = this.formData;
       if (!username || !password) {
-        return this.$util.msg_error("请填写完整！");
+        return this.$util.msg_warning("请填写完整！");
       }
       const response = await this.login(this.formData);
       this.$router.push("/index");

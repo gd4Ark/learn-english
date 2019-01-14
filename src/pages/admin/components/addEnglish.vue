@@ -41,7 +41,7 @@ export default {
     },
     async submit() {
       if (!this.$util.verifForm(this.formData)) {
-        return this.$util.msg_error("请填写正确！");
+        return this.$util.msg_warning("请填写正确！");
       }
       const id = await this.addEnglish({
         ...this.formData,

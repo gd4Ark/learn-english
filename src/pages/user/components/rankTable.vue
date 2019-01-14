@@ -27,7 +27,7 @@ export default {
         prop: "username"
       },
       {
-        label: "时间",
+        label: "平均时间",
         prop: "time"
       }
     ]

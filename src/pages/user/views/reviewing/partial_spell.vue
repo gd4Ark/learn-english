@@ -61,12 +61,15 @@ export default {
     },
     setBlankindex() {
       this.blankIndexes = [];
-      const len = this.problem.english.length;
+      const len = this.problem.english.filter(el => el !== " ").length;
       let n = Math.floor(len / 1.2);
       while (n--) {
         while (true) {
           const index = this.$util.random(0, len);
-          if (!this.blankIndexes.includes(index)) {
+          if (
+            this.problem.english[index] !== " " &&
+            !this.blankIndexes.includes(index)
+          ) {
             this.blankIndexes.push(index);
             break;
           }

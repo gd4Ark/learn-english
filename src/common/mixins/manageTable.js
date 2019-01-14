@@ -5,7 +5,7 @@ export default {
         },
         handleDelete(ids) {
             if (ids.length === 0) {
-                return this.$util.msg_error("没有选中项！");
+                return this.$util.msg_warning("没有选中项！");
             }
             this.$util
                 .confirm({

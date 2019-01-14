@@ -79,7 +79,7 @@ export default {
     },
     success() {
       this.updateSubmit({
-        time: this.time,
+        time: Math.floor(this.time / this.review.total),
         total: this.review.total,
         review_module: this.$route.meta.title
       });

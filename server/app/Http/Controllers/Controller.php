@@ -9,14 +9,6 @@ class Controller extends BaseController
     private $default_page_size = 30;
     private $default_page_index = 1;
 
-    public function response($data = []){
-        return response()->json(['data' => $data],200);
-    }
-
-    public function responseErr($message = '',$status = 500){
-        return response()->json(['message' => $message],$status);
-    }
-
     public function search($request,$list){
         $has_keyword = $request->has('keyword');
         if ($has_keyword){
@@ -52,21 +44,11 @@ class Controller extends BaseController
         ];
     }
 
-    public function numberFormat($num){
-        return $num > 9 ? $num : '0' . $num;
-    }
-
-    public function timeFormat($time){
-        $m = floor($time / 60);
-        $s = $time % 60;
-        return $this->numberFormat($m) . ':' . $this->numberFormat($s);
-    }
-
     public function sortRank($data){
         $position = 0;
         foreach($data as $key=>$value){
             $time = $data[$key]['time'];
-            $data[$key]['time'] = $this->timeFormat($time);
+            $data[$key]['time'] = timeFormat($time);
             if ($key === 0){
                 $data[$key]['position'] = ++$position;
             }else{
@@ -77,7 +59,7 @@ class Controller extends BaseController
                     $data[$key]['position'] = ++$position;
                 }
             }
-            $data[$key]['position'] = $this->numberFormat($data[$key]['position']);
+            $data[$key]['position'] = numberFormat($data[$key]['position']);
         }
         return $data;
     }
