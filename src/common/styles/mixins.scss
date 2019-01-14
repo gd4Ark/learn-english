@@ -56,6 +56,8 @@
   justify-content: space-around;
   align-items: center;
   .nav-item a {
+    display: block;
+    @include size(100%);
     color: $secondary-font-color;
     &.router-link-active {
       color: $highlight-color;

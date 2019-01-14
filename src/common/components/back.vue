@@ -1,8 +1,9 @@
 <template>
-  <i
+  <el-button
+    type="text"
+    icon="el-icon-back"
     @click="back"
-    class="el-icon-back"
-  ></i>
+  ></el-button>
 </template>
 <script>
 export default {
@@ -29,3 +30,10 @@ export default {
   }
 };
 </script>
+<style lang="scss" scoped>
+button{
+  width: 10vw;
+  color: inherit;
+  text-align: left;
+}
+</style>

@@ -81,7 +81,7 @@ export default {
       this.updateSubmit({
         time: this.time,
         total: this.review.total,
-        module: this.$route.meta.title
+        review_module: this.$route.meta.title
       });
       this.$router.push("/submit");
     }

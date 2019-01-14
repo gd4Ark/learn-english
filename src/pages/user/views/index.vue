@@ -32,7 +32,7 @@
           </div>
         </div>
       </el-card>
-      <el-button type="primary">随机模块</el-button>
+      <el-button @click="randomModule" type="primary">随机模块</el-button>
       <select-book />
     </div>
   </wrap>
@@ -53,7 +53,12 @@ export default {
   methods: {
     ...mapActions({
       getData: "getBook"
-    })
+    }),
+    randomModule(){
+      const modules = this.$router.options.routes.find((el)=> el.path === "/reviewing" ).children;
+      const path = modules[this.$util.random(0,modules.length)].path;
+      this.$router.push('/reviewing/' + path);
+    }
   },
 };
 </script>

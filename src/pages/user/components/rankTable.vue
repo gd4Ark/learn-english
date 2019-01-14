@@ -1,6 +1,6 @@
 <template>
   <el-table
-    :data="rank.day"
+    :data="rank.list"
     height="100%"
   >
     <el-table-column
@@ -14,7 +14,7 @@
 </template>
 
   <script>
-import { mapActions,mapState } from "vuex";
+import { mapActions, mapState } from "vuex";
 export default {
   data: () => ({
     tableColumns: [
@@ -23,31 +23,22 @@ export default {
         prop: "position"
       },
       {
-        label: "名字",
+        label: "姓名",
         prop: "username"
       },
       {
         label: "时间",
         prop: "time"
       }
-    ],
-    data: [
-      {
-        position: "01",
-        name: "王小虎",
-        time: "22"
-      }
     ]
   }),
-  mounted(){
-    this.getData().then(()=>{
-      console.log(this.rank);
-    })
+  mounted() {
+    this.getData();
   },
-  methods : {
-    ...mapActions({
-      getData: "getDayRank"
-    }),
+  methods: {
+    getData(){
+      this.$emit('get-data');
+    }
   },
   computed: {
     ...mapState(["rank"])

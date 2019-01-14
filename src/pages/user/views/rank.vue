@@ -4,17 +4,7 @@
       <select-module></select-module>
     </template>
     <div class="app-content">
-      <el-tabs
-        :stretch="true"
-        style="height: 100%;display: flex;flex-direction: column;"
-      >
-        <el-tab-pane label="日榜">
-          <day-rank />
-        </el-tab-pane>
-        <el-tab-pane label="总榜">
-          <day-rank />
-        </el-tab-pane>
-      </el-tabs>
+      <rank-table @get-data="getData" />
     </div>
   </wrap>
 </template>
@@ -22,15 +12,15 @@
 <script>
 import { mapActions } from "vuex";
 import selectModule from "@/pages/user/components/selectModule";
-import dayRank from "@/pages/user/components/dayRank";
+import rankTable from "@/pages/user/components/rankTable";
 export default {
   components: {
     selectModule,
-    dayRank
+    rankTable,
   },
   methods: {
     ...mapActions({
-      getData: "getBook"
+      getData: "getRank"
     })
   }
 };

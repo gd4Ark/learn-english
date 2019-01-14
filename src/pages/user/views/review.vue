@@ -41,7 +41,7 @@ export default {
     @include flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    .module {
+    .review_module {
       @include sub-center;
       margin: 1vh 0;
       width: 45%;

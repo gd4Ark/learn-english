@@ -21,9 +21,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
     $router->post('submit','UserController@submit');
 
-    $router->get('rank/day','UserController@dayRank');
-
-    $router->get('rank/total','UserController@totalRank');
+    $router->get('rank','UserController@getRank');
 
     $router->group(['middleware'=>'auth:api'],function () use ($router){
 

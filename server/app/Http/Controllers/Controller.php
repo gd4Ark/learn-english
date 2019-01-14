@@ -51,4 +51,34 @@ class Controller extends BaseController
             'total' => $total,
         ];
     }
+
+    public function numberFormat($num){
+        return $num > 9 ? $num : '0' . $num;
+    }
+
+    public function timeFormat($time){
+        $m = floor($time / 60);
+        $s = $time % 60;
+        return $this->numberFormat($m) . ':' . $this->numberFormat($s);
+    }
+
+    public function sortRank($data){
+        $position = 0;
+        foreach($data as $key=>$value){
+            $time = $data[$key]['time'];
+            $data[$key]['time'] = $this->timeFormat($time);
+            if ($key === 0){
+                $data[$key]['position'] = ++$position;
+            }else{
+                $before = $data[$key - 1];
+                if ($before['time'] === $data[$key]['time']){
+                    $data[$key]['position'] = $position;
+                }else{
+                    $data[$key]['position'] = ++$position;
+                }
+            }
+            $data[$key]['position'] = $this->numberFormat($data[$key]['position']);
+        }
+        return $data;
+    }
 }
