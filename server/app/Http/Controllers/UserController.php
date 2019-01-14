@@ -66,9 +66,8 @@ class UserController extends Controller{
             ->orderBy('updated_at','DESC')
             ->limit(30)
             ->get(['id','username','time']);
-        foreach($data as $key=>$value){
-            $data[$key]['position'] = $key + 1;
-        }
-        return $data;
+        return [
+            'list' => $this->sortRank($data),
+        ];
     }
 }

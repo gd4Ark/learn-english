@@ -1,6 +1,6 @@
 <template>
   <el-table
-    :data="rank.total"
+    :data="rank.list"
     height="100%"
   >
     <el-table-column
@@ -23,7 +23,7 @@ export default {
         prop: "position"
       },
       {
-        label: "名字",
+        label: "姓名",
         prop: "username"
       },
       {
