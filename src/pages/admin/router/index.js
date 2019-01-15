@@ -4,6 +4,8 @@ import VueRouter from 'vue-router';
 import Book from '@/pages/admin/views/book';
 import English from '@/pages/admin/views/english';
 
+import Setting from '@/pages/admin/views/setting';
+
 
 import Login from '@/pages/admin/views/login';
 
@@ -31,6 +33,15 @@ const routerConfig = {
             component: English,
             meta: {
                 title: '单词管理',
+            }
+        },
+        {
+            path: "/setting",
+            component: Setting,
+            meta: {
+                title: '设置',
+                icon: "el-icon-ali-settings",
+                inNav: true,
             }
         },
         {

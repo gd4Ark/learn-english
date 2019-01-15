@@ -9,6 +9,13 @@ class Controller extends BaseController
     private $default_page_size = 30;
     private $default_page_index = 1;
 
+    public function response($data = []){
+        return response()->json(['data' => $data],200);
+    }
+    public function responseErr($message = '',$status = 500){
+        return response()->json(['message' => $message],$status);
+    }
+
     public function search($request,$list){
         $has_keyword = $request->has('keyword');
         if ($has_keyword){
