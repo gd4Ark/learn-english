@@ -1,7 +1,7 @@
 <template>
   <el-button
     type="text"
-    icon="el-icon-back"
+    icon="el-icon-ali-back"
     @click="back"
   ></el-button>
 </template>

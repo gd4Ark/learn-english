@@ -73,7 +73,6 @@ label {
 .el-form-item {
   label {
     text-align: left;
-    padding-left: 1.5vw;
   }
 }
 
@@ -85,8 +84,15 @@ label {
   background:transparent;
   border: none;
   border-bottom: 1px solid #dcdfe6;
-  border-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
+
+.el-select .el-input.is-focus .el-input__inner{
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
 
 .el-input__icon {
   display: none;

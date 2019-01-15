@@ -31,6 +31,8 @@
       v-else
       :type="item.type"
       :placeholder="item.label"
+      :min="item.min"
+      :max="item.max"
       v-model="val"
     ></el-input>
   </div>

@@ -6,6 +6,7 @@ import English from '@/pages/admin/views/english';
 
 import Setting from '@/pages/admin/views/setting';
 import Password from '@/pages/admin/views/setting/password';
+import Rank from '@/pages/admin/views/setting/rank';
 
 
 import Login from '@/pages/admin/views/login';
@@ -51,13 +52,19 @@ const routerConfig = {
                 meta: {
                     title: '修改密码',
                 }
+            },{
+                path: "rank",
+                component: Rank,
+                meta: {
+                    title: '排行榜设置',
+                }
             }]
         },
         {
             path: "/login",
             component: Login,
             meta: {
-                title: '登录',
+                title: '清技背单词后台 - 登录',
             }
         },
     ]

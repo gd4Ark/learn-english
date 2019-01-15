@@ -41,7 +41,7 @@ export default {
       ],
       [
         {
-          path: "/",
+          path: "/setting/rank",
           label: "排行榜设置"
         },
         {
@@ -85,7 +85,7 @@ export default {
     i {
       color: #adadad;
     }
-    &:hover {
+    &:active {
       transition: all 0.5s ease;
       background: #d3d6d3;
     }

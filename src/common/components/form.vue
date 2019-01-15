@@ -2,7 +2,7 @@
   <el-form
     v-if="formData"
     ref="form"
-    label-width="65px"
+    label-width="70px"
     autocomplete="off"
   >
 

@@ -78,13 +78,18 @@
   @include size(100%, 50px);
   @include flex;
   align-items: center;
-  // justify-content: space-between;
+  justify-content: space-between;
   background: $principal-color;
   border-bottom: 1px solid #e5e6e8;
   // border-bottom: 1px solid $line-color;
   .title {
     font-size: 1.2rem;
     font-weight: 500;
+  }
+  .left{
+    flex: 1; 
+    @include flex;
+    align-items: center;
   }
 }
 

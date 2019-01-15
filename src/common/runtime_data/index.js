@@ -2,6 +2,8 @@ import book from "./modules/book";
 import english from "./modules/english";
 import adminLogin from "./modules/adminLogin";
 import userSubmit from "./modules/userSubmit";
+import updatePassword from "./modules/updatePassword";
+import rank from "./modules/rank";
 
 export default {
     install(Vue) {
@@ -11,6 +13,8 @@ export default {
             english,
             adminLogin,
             userSubmit,
+            updatePassword,
+            rank,
         };
     }
 }

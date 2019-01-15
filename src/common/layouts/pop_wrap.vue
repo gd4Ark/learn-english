@@ -2,10 +2,15 @@
   <div id="pop-wrap">
     <slot name="header">
       <div class="app-header">
-        <slot name="back">
-          <back v-if="useBack" />
+        <div class="left">
+          <slot name="back">
+            <back v-if="useBack" />
+          </slot>
+          <h1 class="title">{{$route.meta.title}}</h1>
+        </div>
+        <slot name="header-right">
+            
         </slot>
-        <h1 class="title">{{$route.meta.title}}</h1>
       </div>
     </slot>
     <div

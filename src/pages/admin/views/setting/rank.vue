@@ -9,7 +9,7 @@
     </template>
     <div class="app-content">
       <c-form
-        :formItem="$runtime_data.updatePassword.formItem"
+        :formItem="$runtime_data.rank.formItem"
         :formData="formData"
       >
       </c-form>
@@ -28,8 +28,7 @@ export default {
   data() {
     return {
       formData: {
-        old_password: "",
-        new_password: ""
+        limit_quantity: "",
       }
     };
   },

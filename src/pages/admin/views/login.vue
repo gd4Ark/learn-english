@@ -5,13 +5,11 @@
         :formItem="$runtime_data.adminLogin.formItem"
         :formData="formData"
       >
-        <el-col :offset="9">
-          <el-button
-            type="primary"
-            @click="submit"
-          >登 录</el-button>
-        </el-col>
       </c-form>
+      <el-button
+        type="primary"
+        @click="submit"
+      >登 录</el-button>
     </div>
   </pop-wrap>
 </template>
@@ -21,6 +19,9 @@ import { async } from "q";
 import { mapActions } from "vuex";
 
 export default {
+  components: {
+    cForm
+  },
   data() {
     return {
       formData: {
@@ -28,9 +29,6 @@ export default {
         password: ""
       }
     };
-  },
-  components: {
-    cForm
   },
   methods: {
     ...mapActions(["login"]),
@@ -50,5 +48,8 @@ export default {
 .app-content {
   @include flex-column;
   justify-content: center;
+}
+button{
+  width: 100%;
 }
 </style>
