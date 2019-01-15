@@ -4,7 +4,7 @@
       <div class="learn-modules">
         <div
           class="review_module"
-          v-for="(item,index) in review_modules"
+          v-for="(item,index) in reviewModules"
           :key="index"
           @click="toModule(item.path)"
         >
@@ -17,16 +17,9 @@
 
 <script>
 import { mapActions } from "vuex";
+import ReviewModules from "@/common/mixins/ReviewModules";
 export default {
-  data: () => ({
-    review_modules: []
-  }),
-  mounted() {
-    this.review_modules = this.$router.options.routes.find(
-      el => el.path === "/reviewing"
-    ).children;
-    console.log(this.review_modules);
-  },
+  mixins : [ReviewModules],
   methods: {
     toModule(route) {
       this.$router.push("/reviewing/" + route);

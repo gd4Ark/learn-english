@@ -32,7 +32,10 @@
           </div>
         </div>
       </el-card>
-      <el-button @click="randomModule" type="primary">随机模块</el-button>
+      <el-button
+        @click="randomModule"
+        type="primary"
+      >随机模块</el-button>
       <select-book />
     </div>
   </wrap>
@@ -40,12 +43,13 @@
 
 <script>
 import { mapActions } from "vuex";
-import SelectBook from "@/pages/user/components/SelectBook";
+import ReviewModules from "@/common/mixins/ReviewModules";
 import CurrentBook from "@/common/mixins/CurrentBook";
+import SelectBook from "@/pages/user/components/SelectBook";
 export default {
-  mixins : [CurrentBook],
+  mixins: [ReviewModules,CurrentBook],
   components: {
-    SelectBook,
+    SelectBook
   },
   mounted() {
     this.getData();
@@ -54,12 +58,12 @@ export default {
     ...mapActions({
       getData: "getBook"
     }),
-    randomModule(){
-      const modules = this.$router.options.routes.find((el)=> el.path === "/reviewing" ).children;
+    randomModule() {
+      const modules = this.reviewModules;
       const path = modules[this.$util.random(0,modules.length)].path;
       this.$router.push('/reviewing/' + path);
     }
-  },
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -71,7 +75,7 @@ export default {
   > * {
     width: 90%;
   }
-  > button{
+  > button {
     margin: 6vh 0;
   }
   .content-panel {
