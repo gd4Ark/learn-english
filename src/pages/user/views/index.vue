@@ -40,12 +40,12 @@
 
 <script>
 import { mapActions } from "vuex";
-import selectBook from "@/pages/user/components/selectBook";
-import currentBook from "@/common/mixins/currentBook";
+import SelectBook from "@/pages/user/components/SelectBook";
+import CurrentBook from "@/common/mixins/CurrentBook";
 export default {
-  mixins : [currentBook],
+  mixins : [CurrentBook],
   components: {
-    selectBook
+    SelectBook,
   },
   mounted() {
     this.getData();

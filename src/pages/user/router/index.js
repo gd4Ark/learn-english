@@ -1,16 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router';
 
-import index from '@/pages/user/views/index';
-import review from '@/pages/user/views/review';
-import rank from '@/pages/user/views/rank';
-import english from '@/pages/user/views/english';
+import Index from '@/pages/user/views/Index';
+import Review from '@/pages/user/views/Review';
+import Rank from '@/pages/user/views/Rank';
+import English from '@/pages/user/views/English';
 
-import reviewing from '@/pages/user/views/reviewing';
+import Reviewing from '@/pages/user/views/Reviewing';
 
-import partial_spell from '@/pages/user/views/reviewing/partial_spell';
+import PartialSpell from '@/pages/user/views/Reviewings/PartialSpell';
 
-import submit from '@/pages/user/views/submit';
+import Submit from '@/pages/user/views/Submit';
 
 const routerConfig = {
     mode: process.env.NODE_ENV == 'development' ? 'history' : 'hash',
@@ -19,7 +19,7 @@ const routerConfig = {
         redirect: '/index',
     }, {
         path: '/index',
-        component: index,
+        component: Index,
         meta: {
             title: '首页',
             icon: "el-icon-ali-homefill",
@@ -27,7 +27,7 @@ const routerConfig = {
         }
     }, {
         path: "/review",
-        component: review,
+        component: Review,
         meta: {
             title: '复习',
             icon: "el-icon-ali-learning_fill",
@@ -35,7 +35,7 @@ const routerConfig = {
         }
     }, {
         path: "/rank",
-        component: rank,
+        component: Rank,
         meta: {
             title: '排行榜',
             icon: "el-icon-ali-rankfill",
@@ -43,23 +43,23 @@ const routerConfig = {
         }
     }, {
         path: "/english",
-        component: english,
+        component: English,
         meta: {
             title: '单词列表',
         }
     }, {
         path: "/reviewing",
-        component: reviewing,
+        component: Reviewing,
         children: [{
-            path: "partial_spell",
-            component: partial_spell,
+            path: "partialSpell",
+            component: PartialSpell,
             meta: {
                 title: '单词部分拼写',
             }
         }]
     }, {
         path: "/submit",
-        component: submit,
+        component: Submit,
         meta: {
             title: '提交',
         }

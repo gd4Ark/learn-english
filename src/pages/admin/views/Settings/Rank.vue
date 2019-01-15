@@ -1,15 +1,18 @@
 <template>
-  <pop-wrap :useBack="false">
+  <pop-wrap>
+    <template slot="header-right">
+      <el-button
+        size="small"
+        type="primary"
+        @click="submit"
+      >完 成</el-button>
+    </template>
     <div class="app-content">
       <c-form
-        :formItem="$formData.adminLogin.formItem"
+        :formItem="$formData.rank.formItem"
         :formData="formData"
       >
       </c-form>
-      <el-button
-        type="primary"
-        @click="submit"
-      >登 录</el-button>
     </div>
   </pop-wrap>
 </template>
@@ -25,8 +28,7 @@ export default {
   data() {
     return {
       formData: {
-        username: "",
-        password: ""
+        limit_quantity: "",
       }
     };
   },
@@ -48,8 +50,5 @@ export default {
 .app-content {
   @include flex-column;
   justify-content: center;
-}
-button{
-  width: 100%;
 }
 </style>

@@ -84,7 +84,12 @@
   // border-bottom: 1px solid $line-color;
   .title {
     font-size: 1.2rem;
-    font-weight: 600;
+    font-weight: 500;
+  }
+  .left{
+    flex: 1; 
+    @include flex;
+    align-items: center;
   }
 }
 

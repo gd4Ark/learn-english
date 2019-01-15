@@ -25,8 +25,8 @@
   </modal>
 </template>
 <script>
-import Modal from "@/common/components/modal";
-import cForm from "@/common/components/form";
+import Modal from "@/common/components/Modal";
+import cForm from "@/common/components/Form";
 export default {
   data() {
     return {

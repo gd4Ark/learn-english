@@ -2,7 +2,8 @@
   <el-form
     v-if="formData"
     ref="form"
-    label-width="65px"
+    label-width="70px"
+    autocomplete="off"
   >
 
     <el-form-item
@@ -45,7 +46,7 @@
   </el-form>
 </template>
 <script>
-import FormItem from "@/common/components/formItem";
+import FormItem from "@/common/components/FormItem";
 export default {
   props: {
     formData: Object,

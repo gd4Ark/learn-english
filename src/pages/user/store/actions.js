@@ -25,7 +25,7 @@ export default {
     },
     async resetEnglishSearchData(context) {
         await context.commit('updateEnglish', {
-            searchData: this._vm.$runtime_data.english.searchData(),
+            searchData: this._vm.$formData.english.searchData(),
         });
     },
 }

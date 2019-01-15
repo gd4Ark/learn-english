@@ -1,7 +1,7 @@
 <template>
   <search
     :title="title"
-    :formItem="$runtime_data.book.searchformItem"
+    :formItem="$formData.book.searchformItem"
     :formData="book.searchData"
     :searchState="book.keyword.length"
     @submit="submit"
@@ -10,7 +10,7 @@
   </search>
 </template>
 <script>
-import Search from "@/common/components/search";
+import Search from "@/common/components/Search";
 import { mapActions, mapState } from "vuex";
 export default {
   components: {

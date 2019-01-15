@@ -31,6 +31,8 @@
       v-else
       :type="item.type"
       :placeholder="item.label"
+      :min="item.min"
+      :max="item.max"
       v-model="val"
     ></el-input>
   </div>
@@ -67,22 +69,5 @@ export default {
 }
 .el-form-item {
   margin-bottom: 12px;
-}
-</style>
-<style lang="scss">
-.el-form-item {
-  label {
-    font-weight: bold;
-  }
-}
-.el-date-editor.el-input,
-.el-date-editor.el-input__inner {
-  width: auto;
-}
-.el-input__icon {
-  display: none;
-}
-.el-input--prefix .el-input__inner {
-  padding: 0 15px;
 }
 </style>

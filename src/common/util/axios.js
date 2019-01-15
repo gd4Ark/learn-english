@@ -46,7 +46,7 @@ export default {
             }
             return config;
         }, err => {
-            vm.$util.msg_error('请求超时!');
+            vm.$util.msg.error('请求超时!');
             return Promise.reject(err);
         });
 
@@ -58,17 +58,17 @@ export default {
             const message = err.response.data.message;
             switch (status) {
                 case 401:
-                    vm.$util.msg_error(message).then(() => {
+                    vm.$util.msg.error(message).then(() => {
                         router.push('/login');
                     });
                     break;
                 case 403:
                 case 404:
                 case 405:
-                    vm.$util.msg_error(message || '请求服务器失败！');
+                    vm.$util.msg.error(message || '请求服务器失败！');
                     break;
                 case 500:
-                    vm.$util.msg_error('服务器发生错误！');
+                    vm.$util.msg.error('服务器发生错误！');
                     break;
             }
             return Promise.reject(err);

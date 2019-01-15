@@ -25,7 +25,7 @@
   </modal>
 </template>
 <script>
-import modal from "@/common/components/modal";
+import modal from "@/common/components/Modal";
 import { mapMutations, mapState } from "vuex";
 export default {
   components: {
@@ -41,13 +41,13 @@ export default {
   methods: {
     ...mapMutations({
       updateCurrent: "updateBook",
-      updateBookId: "updateEnglish"
+      updatebook_id: "updateEnglish"
     }),
     open() {
       this.value = this.rank.review_module;
     },
     async submit() {
-      this.updateBookId({
+      this.updatebook_id({
         book_id: this.value
       });
       this.updateCurrent({

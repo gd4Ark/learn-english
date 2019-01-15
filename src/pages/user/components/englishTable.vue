@@ -20,22 +20,22 @@
         align="center"
       />
     </el-table>
-    <pagination
+    <Pagination
       :module="english"
       @get-data="getData"
     />
   </div>
 </template>
 <script>
-import searchEnglish from "@/pages/admin/components/searchEnglish.vue";
-import pagination from "@/common/components/pagination.vue";
-import currentBook from "@/common/mixins/currentBook";
+import SearchEnglish from "@/pages/admin/components/SearchEnglish.vue";
+import Pagination from "@/common/components/Pagination.vue";
+import CurrentBook from "@/common/mixins/CurrentBook";
 import { mapState } from "vuex";
 export default {
-  mixins: [currentBook],
+  mixins: [CurrentBook],
   components: {
-    searchEnglish,
-    pagination
+    SearchEnglish,
+    Pagination
   },
   data: () => ({
     tableColumns: [

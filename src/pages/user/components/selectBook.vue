@@ -29,11 +29,11 @@
   </modal>
 </template>
 <script>
-import modal from "@/common/components/modal";
+import Modal from "@/common/components/Modal";
 import { mapMutations, mapState } from "vuex";
 export default {
   components: {
-    modal
+    Modal,
   },
   data: () => ({
     value: ""
@@ -41,13 +41,13 @@ export default {
   methods: {
     ...mapMutations({
       updateCurrent: "updateBook",
-      updateBookId: "updateEnglish"
+      updatebook_id: "updateEnglish"
     }),
     open() {
       this.value = this.book.current_id;
     },
     async submit() {
-      this.updateBookId({
+      this.updatebook_id({
         book_id: this.value
       });
       this.updateCurrent({

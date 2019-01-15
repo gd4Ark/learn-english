@@ -1,11 +1,15 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router';
 
-import Book from '@/pages/admin/views/book';
-import English from '@/pages/admin/views/english';
+import Book from '@/pages/admin/views/Book';
+import English from '@/pages/admin/views/English';
+
+import Setting from '@/pages/admin/views/Setting';
+import Password from '@/pages/admin/views/Settings/Password';
+import Rank from '@/pages/admin/views/Settings/Rank';
 
 
-import Login from '@/pages/admin/views/login';
+import Login from '@/pages/admin/views/Login';
 
 const routerConfig = {
     mode: process.env.NODE_ENV == 'development' ? 'history' : 'hash',
@@ -34,10 +38,33 @@ const routerConfig = {
             }
         },
         {
+            path: "/setting",
+            component: Setting,
+            name : 'setting',
+            meta: {
+                title: '设置',
+                icon: "el-icon-ali-settings",
+                inNav: true,
+            },
+            children: [{
+                path: "password",
+                component: Password,
+                meta: {
+                    title: '修改密码',
+                }
+            },{
+                path: "rank",
+                component: Rank,
+                meta: {
+                    title: '排行榜设置',
+                }
+            }]
+        },
+        {
             path: "/login",
             component: Login,
             meta: {
-                title: '登录',
+                title: '清技背单词后台 - 登录',
             }
         },
     ]

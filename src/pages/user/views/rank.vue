@@ -11,12 +11,12 @@
 
 <script>
 import { mapActions } from "vuex";
-import selectModule from "@/pages/user/components/selectModule";
-import rankTable from "@/pages/user/components/rankTable";
+import SelectModule from "@/pages/user/components/SelectModule";
+import RankTable from "@/pages/user/components/RankTable";
 export default {
   components: {
-    selectModule,
-    rankTable,
+    SelectModule,
+    RankTable,
   },
   methods: {
     ...mapActions({
