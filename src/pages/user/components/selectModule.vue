@@ -14,7 +14,7 @@
         placeholder="请选择模块"
       >
         <el-option
-          v-for="item in review_modules"
+          v-for="item in reviewModules"
           :key="item.path"
           :label="item.meta.title"
           :value="item.meta.title"
@@ -26,32 +26,26 @@
 </template>
 <script>
 import modal from "@/common/components/Modal";
+import ReviewModules from "@/common/mixins/ReviewModules";
 import { mapMutations, mapState } from "vuex";
 export default {
+  mixins: [ReviewModules],
   components: {
     modal
   },
   data: () => ({
-    value: "",
-    review_modules : [],
+    value: ""
   }),
-  mounted(){
-    this.review_modules = this.$router.options.routes.find((el)=> el.path === "/reviewing" ).children;
-  },
   methods: {
     ...mapMutations({
-      updateCurrent: "updateBook",
-      updatebook_id: "updateEnglish"
+      updateModule: "updateRank",
     }),
     open() {
       this.value = this.rank.review_module;
     },
     async submit() {
-      this.updatebook_id({
-        book_id: this.value
-      });
-      this.updateCurrent({
-        current_id: this.value
+      this.updateModule({
+        review_module: this.value
       });
       this.$refs.modal.hidden();
     }
