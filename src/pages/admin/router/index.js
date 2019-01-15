@@ -64,7 +64,7 @@ const routerConfig = {
             path: "/login",
             component: Login,
             meta: {
-                title: '清技背单词后台 - 登录',
+                title: '登录',
             }
         },
     ]

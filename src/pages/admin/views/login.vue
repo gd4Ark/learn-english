@@ -1,5 +1,5 @@
 <template>
-  <pop-wrap :useBack="false">
+  <pop-wrap :showSiteTitle="true" :useBack="false">
     <div class="app-content">
       <c-form
         :formItem="$formData.adminLogin.formItem"

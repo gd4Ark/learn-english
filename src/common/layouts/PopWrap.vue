@@ -6,7 +6,11 @@
           <slot name="back">
             <back v-if="useBack" />
           </slot>
-          <h1 class="title">{{$route.meta.title}}</h1>
+          <h1 class="title">
+            <template v-if="showSiteTitle">
+              {{$config.title}} - 
+            </template>
+            {{$route.meta.title}}</h1>
         </div>
         <slot name="header-right">
             
@@ -31,6 +35,10 @@ export default {
     load: false
   }),
   props: {
+    showSiteTitle : {
+      type : Boolean,
+      default : false,
+    },
     useBack: {
       type: Boolean,
       default: true
