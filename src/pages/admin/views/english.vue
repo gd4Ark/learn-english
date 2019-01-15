@@ -7,11 +7,11 @@
 </template>
 
 <script>
-import englishTable from "@/pages/admin/components/englishTable.vue";
+import EnglishTable from "@/pages/admin/components/EnglishTable.vue";
 import { mapActions,mapMutations } from "vuex";
 export default {
   components: {
-    englishTable,
+    EnglishTable,
   },
   data(){
     return {
@@ -19,7 +19,7 @@ export default {
     }
   },
   mounted(){
-    this.updateBookId({
+    this.updatebook_id({
       book_id : this.id,
     });
     // Update the book ID first and then get
@@ -32,7 +32,7 @@ export default {
       getData: "getEnglish",
     }),
     ...mapMutations({
-      updateBookId: "updateEnglish",
+      updatebook_id: "updateEnglish",
     }),
   },
   computed : {

@@ -53,26 +53,26 @@
         </template>
       </el-table-column>
     </el-table>
-    <pagination
+    <Pagination
       :module="english"
       @get-data="getData"
     />
   </div>
 </template>
 <script>
-import searchEnglish from "@/pages/admin/components/searchEnglish.vue";
-import addEnglish from "@/pages/admin/components/addEnglish.vue";
-import editEnglish from "@/pages/admin/components/editEnglish.vue";
-import pagination from "@/common/components/pagination.vue";
-import manageTable from "@/common/mixins/manageTable";
+import SearchEnglish from "@/pages/admin/components/SearchEnglish.vue";
+import AddEnglish from "@/pages/admin/components/AddEnglish.vue";
+import EditEnglish from "@/pages/admin/components/EditEnglish.vue";
+import Pagination from "@/common/components/Pagination.vue";
+import ManageTable from "@/common/mixins/ManageTable";
 import { mapActions,mapState } from "vuex";
 export default {
-  mixins: [manageTable],
+  mixins: [ManageTable],
   components: {
-    searchEnglish,
-    addEnglish,
-    editEnglish,
-    pagination
+    SearchEnglish,
+    AddEnglish,
+    EditEnglish,
+    Pagination
   },
   data: () => ({
     tableColumns: [

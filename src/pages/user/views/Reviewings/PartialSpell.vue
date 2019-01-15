@@ -19,10 +19,10 @@
 
 <script>
 import { mapState } from "vuex";
-import keyboard from "@/pages/user/components/keyboard";
+import Keyboard from "@/pages/user/components/Keyboard";
 export default {
   components: {
-    keyboard
+    Keyboard,
   },
   data() {
     return {

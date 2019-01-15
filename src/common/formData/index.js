@@ -8,7 +8,7 @@ import rank from "./modules/rank";
 export default {
     install(Vue) {
 
-        Vue.prototype.$runtime_data = {
+        Vue.prototype.$formData = {
             book,
             english,
             adminLogin,

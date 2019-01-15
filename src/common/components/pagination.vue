@@ -1,5 +1,5 @@
 <template>
-  <el-pagination
+  <el-Pagination
     background
     small
     layout="total,sizes,prev,next,jumper"
@@ -10,7 +10,7 @@
     @current-change="handleCurrentChange"
     @size-change="handleSizeChange"
   >
-  </el-pagination>
+  </el-Pagination>
 </template>
 <script>
 export default {

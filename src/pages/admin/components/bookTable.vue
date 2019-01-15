@@ -56,26 +56,26 @@
         </template>
       </el-table-column>
     </el-table>
-    <pagination
+    <Pagination
       :module="book"
       @get-data="getData"
     />
   </div>
 </template>
 <script>
-import searchBook from "@/pages/admin/components/searchBook.vue";
-import addBook from "@/pages/admin/components/addBook.vue";
-import editBook from "@/pages/admin/components/editBook.vue";
-import pagination from "@/common/components/pagination.vue";
-import manageTable from "@/common/mixins/manageTable";
+import SearchBook from "@/pages/admin/components/SearchBook.vue";
+import AddBook from "@/pages/admin/components/AddBook.vue";
+import EditBook from "@/pages/admin/components/EditBook.vue";
+import Pagination from "@/common/components/Pagination.vue";
+import ManageTable from "@/common/mixins/ManageTable";
 import { mapActions, mapState } from "vuex";
 export default {
-  mixins: [manageTable],
+  mixins: [ManageTable],
   components: {
-    searchBook,
-    addBook,
-    editBook,
-    pagination
+    SearchBook,
+    AddBook,
+    EditBook,
+    Pagination
   },
   data: () => ({
     tableColumns: [

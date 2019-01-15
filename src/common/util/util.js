@@ -46,23 +46,32 @@ export default {
             return true;
         };
 
-        ['success', 'warning', 'error', 'info'].forEach(el => {
-            const duration = 1000;
-            o['msg_' + el] = (message) => {
-                return new Promise((resolve) => {
-                    vm.$message({
-                        message,
-                        type: el,
-                        duration,
-                        center: true,
-                        showClose: true,
-                        onClose: () => {
-                            resolve();
-                        }
-                    });
-                })
-            };
-        });
+        o.msg = (() => {
+
+            const m = {};
+
+
+            ['success', 'warning', 'error', 'info'].forEach(el => {
+                const duration = 1000;
+                m[el] = (message) => {
+                    return new Promise((resolve) => {
+                        vm.$message({
+                            message,
+                            type: el,
+                            duration,
+                            center: true,
+                            showClose: true,
+                            onClose: () => {
+                                resolve();
+                            }
+                        });
+                    })
+                };
+            });
+
+            return m;
+
+        })();
 
         o.confirm = (({
             title = '提示',

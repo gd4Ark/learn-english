@@ -9,7 +9,7 @@
     </template>
     <div class="app-content">
       <c-form
-        :formItem="$runtime_data.updatePassword.formItem"
+        :formItem="$formData.updatePassword.formItem"
         :formData="formData"
       >
       </c-form>
@@ -17,7 +17,7 @@
   </pop-wrap>
 </template>
 <script>
-import cForm from "@/common/components/form";
+import cForm from "@/common/components/Form";
 import { async } from "q";
 import { mapActions } from "vuex";
 
@@ -39,7 +39,7 @@ export default {
     async submit() {
       const { username, password } = this.formData;
       if (!username || !password) {
-        return this.$util.msg_warning("请填写完整！");
+        return this.$util.msg.warning("请填写完整！");
       }
       const response = await this.login(this.formData);
       this.$router.push("/index");

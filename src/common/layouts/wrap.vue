@@ -18,7 +18,7 @@
   </div>
 </template>
 <script>
-import AppNav from "@/common/layouts/nav";
+import AppNav from "@/common/layouts/Nav";
 export default {
   components: {
     AppNav,

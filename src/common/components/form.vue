@@ -46,7 +46,7 @@
   </el-form>
 </template>
 <script>
-import FormItem from "@/common/components/formItem";
+import FormItem from "@/common/components/FormItem";
 export default {
   props: {
     formData: Object,

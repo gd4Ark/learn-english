@@ -24,7 +24,7 @@ export default {
     async delBook(context, data) {
         return await this._vm.$axios.delete('/book', data);
     },
-    async addEnglish(context, data) {
+    async AddEnglish(context, data) {
         return await this._vm.$axios.put('/english', data);
     },
     async updateEnglish(context, data) {
@@ -40,7 +40,7 @@ export default {
     },
     async resetBookSearchData(context) {
         await context.commit('updateBook', {
-            searchData: this._vm.$runtime_data.book.searchData(),
+            searchData: this._vm.$formData.book.searchData(),
         });
     },
     async englishKeyword(context, keyword = []) {
@@ -50,7 +50,7 @@ export default {
     },
     async resetEnglishSearchData(context) {
         await context.commit('updateEnglish', {
-            searchData: this._vm.$runtime_data.english.searchData(),
+            searchData: this._vm.$formData.english.searchData(),
         });
     },
 }

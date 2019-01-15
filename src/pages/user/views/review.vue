@@ -6,9 +6,9 @@
           class="review_module"
           v-for="(item,index) in review_modules"
           :key="index"
-          @click="toLearnModule(item.review_module)"
+          @click="toModule(item.path)"
         >
-          <h2 class="title">{{item.title}}</h2>
+          <h2 class="title">{{item.meta.title}}</h2>
         </div>
       </div>
     </div>
@@ -19,16 +19,17 @@
 import { mapActions } from "vuex";
 export default {
   data: () => ({
-    review_modules: [
-      {
-        title: "单词部分拼写",
-        review_module: "/partial_spell"
-      }
-    ]
+    review_modules: []
   }),
+  mounted() {
+    this.review_modules = this.$router.options.routes.find(
+      el => el.path === "/reviewing"
+    ).children;
+    console.log(this.review_modules);
+  },
   methods: {
-    toLearnModule(route) {
-      this.$router.push("/reviewing" + route);
+    toModule(route) {
+      this.$router.push("/reviewing/" + route);
     }
   }
 };

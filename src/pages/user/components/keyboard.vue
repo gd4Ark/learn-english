@@ -28,7 +28,7 @@
 export default {
   data: () => ({
     isUpper: false,
-    fn_list: {
+    fnList: {
       close2: "delete",
       capslock: "capslock"
     },
@@ -40,7 +40,7 @@ export default {
   }),
   methods: {
     isFn(key) {
-      return this.fn_list[key];
+      return this.fnList[key];
     },
     className(key) {
       return this.isFn(key) ? ["key", "fn"] : "key";
@@ -50,7 +50,7 @@ export default {
       const list = target.classList;
       if (!list.contains("key")) return;
       const value = target.getAttribute("value");
-      const key = this.fn_list[value] || value;
+      const key = this.fnList[value] || value;
       if (key === "capslock") {
         return this.caseChange();
       }

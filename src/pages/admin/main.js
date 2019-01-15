@@ -22,9 +22,9 @@ Vue.use(localStore);
 import util from "@/common/util/util";
 Vue.use(util);
 
-import runtime_data from "@/common/runtime_data/index";
+import formData from "@/common/formData/index";
 
-Vue.use(runtime_data);
+Vue.use(formData);
 
 import axios from "@/common/util/axios";
 
@@ -33,14 +33,14 @@ Vue.use(axios, {
   useToekn: true,
 });
 
-import back from "@/common/components/back";
-Vue.component('back',back);
+import Back from "@/common/components/Back";
+Vue.component('Back',Back);
 
-import wrap from "@/common/layouts/wrap.vue";
-Vue.component('wrap',wrap);
+import Wrap from "@/common/layouts/Wrap";
+Vue.component('Wrap',Wrap);
 
-import popWrap from "@/common/layouts/pop_wrap.vue";
-Vue.component('popWrap',popWrap);
+import PopWrap from "@/common/layouts/PopWrap.vue";
+Vue.component('PopWrap',PopWrap);
 
 Vue.config.productionTip = false
 

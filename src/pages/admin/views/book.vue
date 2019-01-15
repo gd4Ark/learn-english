@@ -7,11 +7,11 @@
 </template>
 
 <script>
-import bookTable from "@/pages/admin/components/bookTable.vue";
+import BookTable from "@/pages/admin/components/BookTable.vue";
 import { mapActions } from "vuex";
 export default {
   components: {
-    bookTable
+    BookTable
   },
   mounted() {
     this.getData();

@@ -1,15 +1,15 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router';
 
-import Book from '@/pages/admin/views/book';
-import English from '@/pages/admin/views/english';
+import Book from '@/pages/admin/views/Book';
+import English from '@/pages/admin/views/English';
 
-import Setting from '@/pages/admin/views/setting';
-import Password from '@/pages/admin/views/setting/password';
-import Rank from '@/pages/admin/views/setting/rank';
+import Setting from '@/pages/admin/views/Setting';
+import Password from '@/pages/admin/views/Settings/Password';
+import Rank from '@/pages/admin/views/Settings/Rank';
 
 
-import Login from '@/pages/admin/views/login';
+import Login from '@/pages/admin/views/Login';
 
 const routerConfig = {
     mode: process.env.NODE_ENV == 'development' ? 'history' : 'hash',

@@ -27,7 +27,7 @@
         </div>
       </div>
       <c-form
-        :formItem="$runtime_data.userSubmit.formItem"
+        :formItem="$formData.userSubmit.formItem"
         :formData="formData"
       >
         <el-col :offset="9">
@@ -41,7 +41,7 @@
   </pop-wrap>
 </template>
 <script>
-import cForm from "@/common/components/form";
+import cForm from "@/common/components/Form";
 import { async } from "q";
 import { mapActions, mapState } from "vuex";
 
@@ -65,16 +65,16 @@ export default {
     async handleSubmit() {
       const { username } = this.formData;
       if (!username) {
-        return this.$util.msg_warning("请填写完整！");
+        return this.$util.msg.warning("请填写完整！");
       }
       if (username.length > 6){
-        return this.$util.msg_warning("名字长度不可超过6位数！");
+        return this.$util.msg.warning("名字长度不可超过6位数！");
       }
       await this.submit({
         ...this.submitInfo,
         ...this.formData,
       });
-      this.$util.msg_success('提交成功！').then(()=>{
+      this.$util.msg.success('提交成功！').then(()=>{
         this.$router.push('/rank');
       });
     }

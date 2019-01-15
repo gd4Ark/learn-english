@@ -60,7 +60,7 @@ export default {
     }),
     ...mapMutations(["updateSubmit"]),
     exit(msg) {
-      this.$util.msg_error(msg).then(() => {
+      this.$util.msg.error(msg).then(() => {
         this.$router.back();
       });
     },
@@ -97,9 +97,6 @@ export default {
   @include flex-column;
   justify-content: space-between;
   flex: 1;
-}
-.left {
-  @include sub-center;
 }
 .info {
   margin-left: 5vw;

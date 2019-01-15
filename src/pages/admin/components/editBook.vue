@@ -14,19 +14,19 @@
     </template>
     <template slot="body">
       <c-form
-        :formItem="$runtime_data.book.formItem"
+        :formItem="$formData.book.formItem"
         :formData="formData"
       />
     </template>
   </modal>
 </template>
 <script>
-import modal from "@/common/components/modal";
-import cForm from "@/common/components/form";
+import Modal from "@/common/components/Modal";
+import cForm from "@/common/components/Form";
 import { mapActions } from "vuex";
 export default {
   components: {
-    modal,
+    Modal,
     cForm
   },
   data: () => ({
@@ -44,11 +44,11 @@ export default {
     },
     async submit() {
       if (!this.$util.verifForm(this.formData)) {
-        return this.$util.msg_warning("请填写正确！");
+        return this.$util.msg.warning("请填写正确！");
       }
       const id = await this.updateBook(this.formData);
       if (id) {
-        this.$util.msg_success("更新成功！");
+        this.$util.msg.success("更新成功！");
         this.$emit("get-data");
         this.$refs.modal.hidden();
       }
