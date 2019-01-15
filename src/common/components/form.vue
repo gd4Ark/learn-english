@@ -3,6 +3,7 @@
     v-if="formData"
     ref="form"
     label-width="65px"
+    autocomplete="off"
   >
 
     <el-form-item

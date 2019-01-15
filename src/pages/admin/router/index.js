@@ -5,6 +5,7 @@ import Book from '@/pages/admin/views/book';
 import English from '@/pages/admin/views/english';
 
 import Setting from '@/pages/admin/views/setting';
+import Password from '@/pages/admin/views/setting/password';
 
 
 import Login from '@/pages/admin/views/login';
@@ -38,11 +39,19 @@ const routerConfig = {
         {
             path: "/setting",
             component: Setting,
+            name : 'setting',
             meta: {
                 title: '设置',
                 icon: "el-icon-ali-settings",
                 inNav: true,
-            }
+            },
+            children: [{
+                path: "password",
+                component: Password,
+                meta: {
+                    title: '修改密码',
+                }
+            }]
         },
         {
             path: "/login",

@@ -35,11 +35,11 @@ label {
   @include app-header;
 }
 
-.app-content{
+.app-content {
   @include size(100%);
 }
 
-.table-content{
+.table-content {
   @include size(100%);
   @include flex-column;
 }
@@ -66,6 +66,32 @@ label {
   max-width: 450px;
 }
 
-.el-select{
+.el-select {
   width: 100%;
+}
+
+.el-form-item {
+  label {
+    text-align: left;
+    padding-left: 1.5vw;
+  }
+}
+
+.el-date-editor.el-input,
+.el-date-editor.el-input__inner {
+  width: auto;
+}
+.el-input__inner{
+  background:transparent;
+  border: none;
+  border-bottom: 1px solid #dcdfe6;
+  border-radius: 0;
+}
+
+.el-input__icon {
+  display: none;
+}
+
+.el-input--prefix .el-input__inner {
+  padding: 0 15px;
 }

@@ -5,6 +5,11 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+:-webkit-autofill {
+  -webkit-text-fill-color: inherit !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
 a {
   text-decoration: none;
   color: inherit;

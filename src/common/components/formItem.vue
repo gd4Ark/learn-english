@@ -69,20 +69,3 @@ export default {
   margin-bottom: 12px;
 }
 </style>
-<style lang="scss">
-.el-form-item {
-  label {
-    font-weight: bold;
-  }
-}
-.el-date-editor.el-input,
-.el-date-editor.el-input__inner {
-  width: auto;
-}
-.el-input__icon {
-  display: none;
-}
-.el-input--prefix .el-input__inner {
-  padding: 0 15px;
-}
-</style>
