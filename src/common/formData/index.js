@@ -4,6 +4,7 @@ import adminLogin from "./modules/adminLogin";
 import userSubmit from "./modules/userSubmit";
 import updatePassword from "./modules/updatePassword";
 import rank from "./modules/rank";
+import feedback from "./modules/feedback";
 
 export default {
     install(Vue) {
@@ -15,6 +16,7 @@ export default {
             userSubmit,
             updatePassword,
             rank,
+            feedback,
         };
     }
 }

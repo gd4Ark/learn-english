@@ -1,22 +1,33 @@
 <template>
-  <pop-wrap padding="0">
+  <pop-wrap
+    v-if="$route.name === 'setting/about'"
+    padding="0"
+  >
     <div class="app-content">
-      <img
-        class="logo"
-        :src="logo"
-        alt="logo"
-      >
-      <h1>{{ $config.title }}</h1>
-      <p>V {{ $config.version }}</p>
-      <Menu :optionsGroups="optionsGroups" />
+      <div class="header">
+        <img
+          class="logo"
+          :src="logo"
+          alt="logo"
+        >
+        <h1>{{ $config.title }}</h1>
+        <p>V {{ $config.version }}</p>
+      </div>
+      <div class="content">
+        <Menu :optionsGroups="optionsGroups" />
+      </div>
+      <div class="footer">
+        Copyright &copy; 2019 4Ark. All Rights Reserved.
+      </div>
     </div>
   </pop-wrap>
+  <router-view v-else></router-view>
 </template>
 <script>
 import logo from "@/common/img/logo.png";
 import Menu from "@/common/components/Menu";
 export default {
-  components : {
+  components: {
     Menu
   },
   data: () => ({
@@ -24,8 +35,12 @@ export default {
     optionsGroups: [
       [
         {
-          path: "/setting/password",
-          label: "单词部分拼写"
+          path: "/setting/about/log",
+          label: "更新日志"
+        },
+        {
+          path: "/setting/about/we",
+          label: "关于我们"
         }
       ]
     ]
@@ -34,18 +49,35 @@ export default {
 </script>
 <style lang="scss" scoped>
 .app-content {
-  padding-top: 15%;
-  text-align: center;
-  h1 {
-    margin-top: 5%;
-    font-size: 1.2rem;
+  @include flex-column;
+  align-items: center;
+  > * {
+    width: 100%;
+    text-align: center;
   }
-  p{
+  .header {
+    margin-top: 10%;
+    height: 30%;
+    .logo {
+      width: 80px;
+      height: 80px;
+    }
+    h1 {
+      margin-top: 5%;
+      font-size: 1.2rem;
+    }
+    p {
       margin: 2%;
+    }
   }
-}
-.logo {
-  width: 80px;
-  height: 80px;
+  .content {
+    flex: 1;
+  }
+  .footer {
+    @include sub-center;
+
+    font-size: 0.8rem;
+    height: 30px;
+  }
 }
 </style>

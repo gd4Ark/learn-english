@@ -72,7 +72,7 @@ label {
 
 .el-form-item {
   label {
-    text-align: left;
+    text-align: center;
   }
 }
 
@@ -80,13 +80,13 @@ label {
 .el-date-editor.el-input__inner {
   width: auto;
 }
-.el-input__inner{
-  background:transparent;
-  border: none;
-  border-bottom: 1px solid #dcdfe6;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
+// .el-input__inner{
+//   background:transparent;
+//   border: none;
+//   border-bottom: 1px solid #dcdfe6;
+//   border-bottom-left-radius: 0;
+//   border-bottom-right-radius: 0;
+// }
 
 .el-select .el-input.is-focus .el-input__inner{
   border-bottom-left-radius: 0;

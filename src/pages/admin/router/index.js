@@ -6,12 +6,16 @@ import English from '@/pages/admin/views/English';
 
 import Setting from '@/pages/admin/views/Setting';
 
+// Setting options 
 import Password from '@/pages/admin/views/Settings/Password';
 import Rank from '@/pages/admin/views/Settings/Rank';
 import Review from '@/pages/admin/views/Settings/Review';
 import About from '@/pages/admin/views/Settings/About';
 import Feedback from '@/pages/admin/views/Settings/Feedback';
 
+// Abouts option
+import Log from '@/pages/admin/views/Settings/Abouts/Log';
+import We from '@/pages/admin/views/Settings/Abouts/We';
 
 import Login from '@/pages/admin/views/Login';
 
@@ -51,38 +55,53 @@ const routerConfig = {
                 inNav: true,
             },
             children: [{
-                path: "password",
-                component: Password,
-                meta: {
-                    title: '修改密码',
+                    path: "password",
+                    component: Password,
+                    meta: {
+                        title: '修改密码',
+                    }
+                }, {
+                    path: "rank",
+                    component: Rank,
+                    meta: {
+                        title: '排行榜设置',
+                    }
+                }, {
+                    path: "review",
+                    component: Review,
+                    name: 'setting/review',
+                    meta: {
+                        title: '复习模块设置',
+                    }
+                }, {
+                    path: "about",
+                    component: About,
+                    name: 'setting/about',
+                    meta: {
+                        title: '关于',
+                    },
+                    children: [{
+                        path: "log",
+                        component: Log,
+                        meta: {
+                            title: '更新日志',
+                        }
+                    }, {
+                        path: "we",
+                        component: We,
+                        meta: {
+                            title: '关于我们',
+                        }
+                    }, ]
+                },
+                {
+                    path: "feedback",
+                    component: Feedback,
+                    meta: {
+                        title: '帮助与反馈',
+                    }
                 }
-            }, {
-                path: "rank",
-                component: Rank,
-                meta: {
-                    title: '排行榜设置',
-                }
-            }, {
-                path: "review",
-                component: Review,
-                name: 'setting/review',
-                meta: {
-                    title: '复习模块设置',
-                }
-            }, {
-                path: "about",
-                component: About,
-                meta: {
-                    title: '关于',
-                }
-            },
-            {
-                path: "feedback",
-                component: Feedback,
-                meta: {
-                    title: '帮助与反馈',
-                }
-            }]
+            ]
         },
         {
             path: "/login",

@@ -31,6 +31,7 @@
       v-else
       :type="item.type"
       :placeholder="item.label"
+      :rows="item.row"
       :min="item.min"
       :max="item.max"
       v-model="val"

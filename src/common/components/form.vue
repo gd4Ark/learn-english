@@ -2,14 +2,14 @@
   <el-form
     v-if="formData"
     ref="form"
-    label-width="70px"
+    :label-width="showLabel ? '70px' : '0'"
     autocomplete="off"
   >
 
     <el-form-item
       v-for="(item,index) in formItem"
       :key="index"
-      :label="item.label"
+      :label="showLabel ? item.label : null"
     >
 
       <!-- 一行多个 -->
@@ -50,7 +50,11 @@ import FormItem from "@/common/components/FormItem";
 export default {
   props: {
     formData: Object,
-    formItem: Array
+    formItem: Array,
+    showLabel : {
+      type : Boolean,
+      default : true
+    }
   },
   components: {
     FormItem
