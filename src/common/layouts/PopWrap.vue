@@ -8,12 +8,12 @@
           </slot>
           <h1 class="title">
             <template v-if="showSiteTitle">
-              {{$config.title}} - 
+              {{$config.title}} -
             </template>
             {{$route.meta.title}}</h1>
         </div>
         <slot name="header-right">
-            
+
         </slot>
       </div>
     </slot>
@@ -35,9 +35,9 @@ export default {
     load: false
   }),
   props: {
-    showSiteTitle : {
-      type : Boolean,
-      default : false,
+    showSiteTitle: {
+      type: Boolean,
+      default: false
     },
     useBack: {
       type: Boolean,

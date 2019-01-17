@@ -5,8 +5,12 @@ import Book from '@/pages/admin/views/Book';
 import English from '@/pages/admin/views/English';
 
 import Setting from '@/pages/admin/views/Setting';
+
 import Password from '@/pages/admin/views/Settings/Password';
 import Rank from '@/pages/admin/views/Settings/Rank';
+import Review from '@/pages/admin/views/Settings/Review';
+import About from '@/pages/admin/views/Settings/About';
+import Feedback from '@/pages/admin/views/Settings/Feedback';
 
 
 import Login from '@/pages/admin/views/Login';
@@ -40,7 +44,7 @@ const routerConfig = {
         {
             path: "/setting",
             component: Setting,
-            name : 'setting',
+            name: 'setting',
             meta: {
                 title: '设置',
                 icon: "el-icon-ali-settings",
@@ -52,11 +56,31 @@ const routerConfig = {
                 meta: {
                     title: '修改密码',
                 }
-            },{
+            }, {
                 path: "rank",
                 component: Rank,
                 meta: {
                     title: '排行榜设置',
+                }
+            }, {
+                path: "review",
+                component: Review,
+                name: 'setting/review',
+                meta: {
+                    title: '复习模块设置',
+                }
+            }, {
+                path: "about",
+                component: About,
+                meta: {
+                    title: '关于',
+                }
+            },
+            {
+                path: "feedback",
+                component: Feedback,
+                meta: {
+                    title: '帮助与反馈',
                 }
             }]
         },

@@ -1,36 +1,18 @@
 <template>
   <wrap
-    v-if="$route.name === 'setting' "
-    padding="0px"
+    padding="0"
+    v-if="$route.name === 'setting'"
   >
-    <div class="app-content">
-      <ul class="option-group-list">
-        <li
-          class="option-group"
-          v-for="(group,index) in optionsGroups"
-          :key="index"
-        >
-          <ul class="option-list">
-            <li
-              class="option-item"
-              v-for="(option,index) in group"
-              :key="index"
-            >
-              <router-link :to="option.path">
-                {{option.label}}
-                <i class="el-icon-ali-right1"></i>
-              </router-link>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </div>
+    <Menu :optionsGroups="optionsGroups" />
   </wrap>
   <router-view v-else></router-view>
 </template>
-
 <script>
+import Menu from "@/common/components/Menu";
 export default {
+  components: {
+    Menu
+  },
   data: () => ({
     optionsGroups: [
       [
@@ -45,17 +27,17 @@ export default {
           label: "排行榜设置"
         },
         {
-          path: "/",
+          path: "/setting/review",
           label: "复习模块设置"
         }
       ],
       [
         {
-          path: "/",
-          label: "关于我们"
+          path: "/setting/about",
+          label: "关于"
         },
         {
-          path: "/",
+          path: "/setting/feedback",
           label: "帮助与反馈"
         }
       ],
@@ -69,26 +51,3 @@ export default {
   })
 };
 </script>
-<style lang="scss" scoped>
-.option-group-list {
-  .option-group {
-    margin-bottom: 3vh;
-  }
-  .option-item a {
-    border-bottom: 1px solid $principal-color;
-    @include padding;
-    @include flex;
-    align-items: center;
-    justify-content: space-between;
-    background: white;
-    height: 50px;
-    i {
-      color: #adadad;
-    }
-    &:active {
-      transition: all 0.5s ease;
-      background: #d3d6d3;
-    }
-  }
-}
-</style>
