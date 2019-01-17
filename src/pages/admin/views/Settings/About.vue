@@ -7,7 +7,7 @@
         alt="logo"
       >
       <h1>{{ $config.title }}</h1>
-      <p>V 0.2.2</p>
+      <p>V {{ $config.version }}</p>
     </div>
   </pop-wrap>
 </template>
