@@ -21,7 +21,7 @@
 import AppNav from "@/common/layouts/Nav";
 export default {
   components: {
-    AppNav,
+    AppNav
   },
   data: () => ({
     load: false,
@@ -54,11 +54,11 @@ export default {
 #wrap {
   @include size(100%);
   @include flex-column;
+  background: $principal-color;
 }
 #content {
   @include padding;
   flex: 1;
   overflow-x: hidden;
-  background: $principal-color;
 }
 </style>

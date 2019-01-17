@@ -1,11 +1,13 @@
 <template>
-  <pop-wrap :showSiteTitle="true" :useBack="false">
+  <pop-wrap
+    :showSiteTitle="true"
+    :useBack="false"
+  >
     <div class="app-content">
       <c-form
         :formItem="$formData.adminLogin.formItem"
         :formData="formData"
-      >
-      </c-form>
+      />
       <el-button
         type="primary"
         @click="submit"
@@ -22,14 +24,12 @@ export default {
   components: {
     cForm
   },
-  data() {
-    return {
-      formData: {
-        username: "",
-        password: ""
-      }
-    };
-  },
+  data: () => ({
+    formData: {
+      username: "",
+      password: ""
+    }
+  }),
   methods: {
     ...mapActions(["login"]),
 
@@ -49,7 +49,7 @@ export default {
   @include flex-column;
   justify-content: center;
 }
-button{
+button {
   width: 100%;
 }
 </style>

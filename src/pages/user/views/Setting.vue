@@ -1,15 +1,14 @@
 <template>
-  <pop-wrap
+  <wrap
     padding="0"
-    v-if="$route.name === 'setting/review'"
+    v-if="$route.name === 'setting'"
   >
     <div class="app-content">
       <Menu :optionsGroups="optionsGroups" />
     </div>
-  </pop-wrap>
+  </wrap>
   <router-view v-else></router-view>
 </template>
-
 <script>
 import Menu from "@/common/components/Menu";
 export default {
@@ -20,8 +19,18 @@ export default {
     optionsGroups: [
       [
         {
-          path: "/setting/password",
-          label: "单词部分拼写"
+          path: "/setting/autoSubmit",
+          label: "自动提交设置"
+        }
+      ],
+      [
+        {
+          path: "/setting/feedback",
+          label: "帮助与反馈"
+        },
+        {
+          path: "/setting/about",
+          label: "关于"
         }
       ]
     ]

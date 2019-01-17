@@ -12,6 +12,17 @@ import PartialSpell from '@/pages/user/views/Reviewings/PartialSpell';
 
 import Submit from '@/pages/user/views/Submit';
 
+import Setting from "@/pages/user/views/Setting";
+import AutoSubmit from "@/pages/user/views/Settings/AutoSubmit";
+import About from '@/common/layouts/About';
+import Feedback from "@/pages/user/views/Settings/Feedback";
+
+// Abouts option
+import Log from '@/pages/admin/views/Settings/Abouts/Log';
+import App from '@/common/layouts/Abouts/App';
+import We from '@/common/layouts/Abouts/We';
+
+
 const routerConfig = {
     mode: process.env.NODE_ENV == 'development' ? 'history' : 'hash',
     routes: [{
@@ -63,6 +74,54 @@ const routerConfig = {
         meta: {
             title: '提交',
         }
+    }, {
+        path: "/setting",
+        component: Setting,
+        name: 'setting',
+        meta: {
+            title: '设置',
+            icon: "el-icon-ali-settings",
+            inNav: true,
+        },
+        children: [{
+            path: "autoSubmit",
+            component: AutoSubmit,
+            meta: {
+                title: '自动提交设置',
+            }
+        }, {
+            path: "about",
+            component: About,
+            name: 'setting/about',
+            meta: {
+                title: '关于',
+            },
+            children: [{
+                path: "log",
+                component: Log,
+                meta: {
+                    title: '更新日志',
+                }
+            }, {
+                path: "app",
+                component: App,
+                meta: {
+                    title: '关于清技背单词',
+                }
+            }, {
+                path: "we",
+                component: We,
+                meta: {
+                    title: '关于我们',
+                }
+            }, ]
+        }, {
+            path: "feedback",
+            component: Feedback,
+            meta: {
+                title: '帮助与反馈',
+            }
+        }],
     }, ]
 }
 
