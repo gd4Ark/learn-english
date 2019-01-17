@@ -10,7 +10,10 @@
             <template v-if="showSiteTitle">
               {{$config.title}} -
             </template>
-            {{$route.meta.title}}</h1>
+            <template v-if="showTitle">
+              {{$route.meta.title}}
+            </template>
+          </h1>
         </div>
         <slot name="header-right">
 
@@ -38,6 +41,10 @@ export default {
     showSiteTitle: {
       type: Boolean,
       default: false
+    },
+    showTitle: {
+      type: Boolean,
+      default: true
     },
     useBack: {
       type: Boolean,

@@ -10,12 +10,13 @@ import Setting from '@/pages/admin/views/Setting';
 import Password from '@/pages/admin/views/Settings/Password';
 import Rank from '@/pages/admin/views/Settings/Rank';
 import Review from '@/pages/admin/views/Settings/Review';
-import About from '@/pages/admin/views/Settings/About';
+import About from '@/common/layouts/About';
 import Feedback from '@/pages/admin/views/Settings/Feedback';
 
 // Abouts option
 import Log from '@/pages/admin/views/Settings/Abouts/Log';
-import We from '@/pages/admin/views/Settings/Abouts/We';
+import App from '@/common/layouts/Abouts/App';
+import We from '@/common/layouts/Abouts/We';
 
 import Login from '@/pages/admin/views/Login';
 
@@ -86,6 +87,12 @@ const routerConfig = {
                         meta: {
                             title: '更新日志',
                         }
+                    },{
+                        path: "app",
+                        component: App,
+                        meta: {
+                            title: '关于清技背单词',
+                        }
                     }, {
                         path: "we",
                         component: We,
@@ -98,7 +105,7 @@ const routerConfig = {
                     path: "feedback",
                     component: Feedback,
                     meta: {
-                        title: '帮助与反馈',
+                        title: '反馈管理',
                     }
                 }
             ]

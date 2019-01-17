@@ -19,34 +19,18 @@ export default {
     optionsGroups: [
       [
         {
-          path: "/setting/password",
-          label: "修改密码"
-        }
-      ],
-      [
-        {
-          path: "/setting/rank",
-          label: "排行榜设置"
-        },
-        {
-          path: "/setting/review",
-          label: "复习模块设置"
+          path: "/setting/autoSubmit",
+          label: "自动提交设置"
         }
       ],
       [
         {
           path: "/setting/feedback",
-          label: "反馈管理"
+          label: "帮助与反馈"
         },
         {
           path: "/setting/about",
           label: "关于"
-        }
-      ],
-      [
-        {
-          path: "/",
-          label: "退出"
         }
       ]
     ]
