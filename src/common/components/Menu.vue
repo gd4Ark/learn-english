@@ -1,26 +1,24 @@
 <template>
-  <div class="app-content">
-    <ul class="option-group-list">
-      <li
-        class="option-group"
-        v-for="(group,index) in optionsGroups"
-        :key="index"
-      >
-        <ul class="option-list">
-          <li
-            class="option-item"
-            v-for="(option,index) in group"
-            :key="index"
-          >
-            <router-link :to="option.path">
-              {{option.label}}
-              <i class="el-icon-ali-right1"></i>
-            </router-link>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </div>
+  <ul class="option-group-list">
+    <li
+      class="option-group"
+      v-for="(group,index) in optionsGroups"
+      :key="index"
+    >
+      <ul class="option-list">
+        <li
+          class="option-item"
+          v-for="(option,index) in group"
+          :key="index"
+        >
+          <router-link :to="option.path">
+            {{option.label}}
+            <i class="el-icon-ali-right1"></i>
+          </router-link>
+        </li>
+      </ul>
+    </li>
+  </ul>
 </template>
 
 <script>

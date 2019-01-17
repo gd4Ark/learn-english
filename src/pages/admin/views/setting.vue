@@ -3,7 +3,9 @@
     padding="0"
     v-if="$route.name === 'setting'"
   >
-    <Menu :optionsGroups="optionsGroups" />
+    <div class="app-content">
+      <Menu :optionsGroups="optionsGroups" />
+    </div>
   </wrap>
   <router-view v-else></router-view>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <pop-wrap>
+  <pop-wrap padding="0">
     <div class="app-content">
       <img
         class="logo"
@@ -8,14 +8,27 @@
       >
       <h1>{{ $config.title }}</h1>
       <p>V {{ $config.version }}</p>
+      <Menu :optionsGroups="optionsGroups" />
     </div>
   </pop-wrap>
 </template>
 <script>
 import logo from "@/common/img/logo.png";
+import Menu from "@/common/components/Menu";
 export default {
+  components : {
+    Menu
+  },
   data: () => ({
-    logo
+    logo,
+    optionsGroups: [
+      [
+        {
+          path: "/setting/password",
+          label: "单词部分拼写"
+        }
+      ]
+    ]
   })
 };
 </script>
