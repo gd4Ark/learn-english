@@ -1,6 +1,6 @@
 const config = {};
 
-config.version = "0.3.7";
+config.version = "0.3.8";
 
 config.title = "清技背单词";
 
