@@ -40,13 +40,29 @@ export default {
     async delEnglish(context, data) {
         return await this._vm.$axios.delete('/english', data);
     },
+    async getFeedback(context) {
+        context.commit('updateFeedback', await this._vm.$axios.get('/feedback', context.getters.requestFeedbackListData));
+    },
+    async delFeedback(context, data) {
+        return await this._vm.$axios.delete('/feedback', data);
+    },
+    async feedbackKeyword(context, keyword = []) {
+        context.commit('updateFeedback', {
+            keyword,
+        });
+    },
+    async resetFeedbackSearchData(context) {
+        context.commit('updateFeedback', {
+            searchData: this._vm.$formData.feedback.searchData(),
+        });
+    },
     async bookKeyword(context, keyword = []) {
-        await context.commit('updateBook', {
+        context.commit('updateBook', {
             keyword,
         });
     },
     async resetBookSearchData(context) {
-        await context.commit('updateBook', {
+        context.commit('updateBook', {
             searchData: this._vm.$formData.book.searchData(),
         });
     },

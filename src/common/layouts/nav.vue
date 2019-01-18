@@ -6,7 +6,10 @@
       :key="key"
     >
       <router-link :to="item.path">
-        <i v-if="item.meta.icon" :class="item.meta.icon"></i>
+        <i
+          v-if="item.meta.icon"
+          :class="item.meta.icon"
+        />
         {{ item.meta.title }}
       </router-link>
     </li>
@@ -25,12 +28,12 @@ ul {
   height: $nav-height;
   background: $secondary-color;
   @include nav;
-  a{
+  a {
     font-size: 0.8rem;
   }
 }
 // icon
-i{
+i {
   font-size: 1.25rem;
   display: block;
   text-align: center;

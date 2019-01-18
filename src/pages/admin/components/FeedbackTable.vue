@@ -2,20 +2,18 @@
   <div class="table-content">
     <div class="toolbar">
       <div>
-        <add-english @get-data="getData" />
         <el-button
-          style="margin-left:10px"
           size="mini"
           type="danger"
           icon="el-icon-delete"
           @click="handleDelete(multipleSelection)"
         />
       </div>
-      <search-english @get-data="getData" />
+      <search-feedback @get-data="getData" />
     </div>
 
     <el-table
-      :data="english.list"
+      :data="feedback.list"
       class="table"
       height="100%"
       @selection-change="handleSelectionChange"
@@ -24,7 +22,29 @@
         type="selection"
         width="40"
         align="center"
-      >
+      />
+      <el-table-column type="expand">
+        <template slot-scope="props">
+          <div class="text">
+            <h3>问题描述：</h3>
+            <el-card shadow="never">
+              {{props.row.message}}
+            </el-card>
+          </div>
+          <div
+            v-if="props.row.contact"
+            class="text"
+          >
+            <h3>
+              联系方式：
+              <span>{{props.row.contact}}</span>
+            </h3>
+            <h3>
+              提交时间：
+              <span>{{props.row.created_at}}</span>
+            </h3>
+          </div>
+        </template>
       </el-table-column>
       <el-table-column
         v-for="(item,index) in tableColumns"
@@ -39,12 +59,7 @@
         align="center"
       >
         <template slot-scope="scope">
-          <edit-english
-            @get-data="getData"
-            :current="scope.row"
-          />
           <el-button
-            style="margin: 0 10px"
             size="mini"
             type="danger"
             icon="el-icon-delete"
@@ -54,35 +69,27 @@
       </el-table-column>
     </el-table>
     <Pagination
-      :module="english"
+      :module="feedback"
       @get-data="getData"
     />
   </div>
 </template>
 <script>
-import SearchEnglish from "@/pages/admin/components/SearchEnglish.vue";
-import AddEnglish from "@/pages/admin/components/AddEnglish.vue";
-import EditEnglish from "@/pages/admin/components/EditEnglish.vue";
-import Pagination from "@/common/components/Pagination.vue";
+import SearchFeedback from "@/pages/admin/components/SearchFeedback";
+import Pagination from "@/common/components/Pagination";
 import ManageTable from "@/common/mixins/ManageTable";
-import { mapActions,mapState } from "vuex";
+import { mapActions, mapState } from "vuex";
 export default {
   mixins: [ManageTable],
   components: {
-    SearchEnglish,
-    AddEnglish,
-    EditEnglish,
+    SearchFeedback,
     Pagination
   },
   data: () => ({
     tableColumns: [
       {
-        label: "中文",
-        prop: "chinese"
-      },
-      {
-        label: "英文",
-        prop: "english"
+        label: "类型",
+        prop: "type"
       }
     ],
     multipleSelection: []
@@ -92,11 +99,23 @@ export default {
   },
   methods: {
     ...mapActions({
-      delData: "delEnglish"
-    })
+      delData: "delFeedback"
+    }),
   },
-  computed : {
-    ...mapState(['english'])
+  computed: {
+    ...mapState(["feedback"])
   }
 };
 </script>
+<style lang="scss" scoped>
+.text + .text {
+  margin-top: 3vh;
+}
+.text {
+  h3 {
+    font-size: 0.9rem;
+    font-weight: normal;
+    margin-bottom: 2vh;
+  }
+}
+</style>

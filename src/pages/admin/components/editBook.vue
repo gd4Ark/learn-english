@@ -10,7 +10,7 @@
         style="margin:0 10px"
         size="mini"
         icon="el-icon-edit-outline"
-      ></el-button>
+      />
     </template>
     <template slot="body">
       <c-form

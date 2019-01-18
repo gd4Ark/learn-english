@@ -25,6 +25,14 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
     $router->get('setting','UserController@getSetting');
 
+//    $router->group(['middleware' => ['throttle:10,2']],function () use ($router){
+//
+//        $router->get('feedback','UserController@addFeedback');
+//
+//    });
+
+    $router->post('feedback','UserController@addFeedback');
+
     $router->group(['middleware'=>'auth:api'],function () use ($router){
 
         $router->post('checkLogin','AdminController@checkLogin');
@@ -46,6 +54,10 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->put('english','AdminController@addEnglish');
 
         $router->delete('english','AdminController@delEnglish');
+
+        $router->get('feedback','AdminController@getFeedback');
+
+        $router->delete('feedback','AdminController@delFeedback');
 
     });
 

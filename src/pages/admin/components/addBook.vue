@@ -9,7 +9,7 @@
         size="mini"
         type="primary"
         icon="el-icon-plus"
-      ></el-button>
+      />
     </template>
     <template slot="body">
       <c-form

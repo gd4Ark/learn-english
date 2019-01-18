@@ -7,7 +7,7 @@
       <Menu :optionsGroups="optionsGroups" />
     </div>
   </pop-wrap>
-  <router-view v-else></router-view>
+  <router-view v-else/>
 </template>
 
 <script>

@@ -13,7 +13,7 @@
       </transition>
     </div>
     <div id="nav">
-      <app-nav :list="navList"></app-nav>
+      <app-nav :list="navList" />
     </div>
   </div>
 </template>

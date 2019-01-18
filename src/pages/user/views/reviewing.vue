@@ -19,7 +19,7 @@
         v-if="load"
         class="app-content"
       >
-        <router-view @next="next"></router-view>
+        <router-view @next="next"/>
       </div>
       <div
         v-if="!load"

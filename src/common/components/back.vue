@@ -3,7 +3,7 @@
     type="text"
     icon="el-icon-ali-back"
     @click="back"
-  ></el-button>
+  />
 </template>
 <script>
 export default {

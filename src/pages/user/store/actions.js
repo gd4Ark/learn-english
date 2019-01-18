@@ -10,11 +10,13 @@ export default {
         context.commit('updateRank', await this._vm.$axios.get('/rank', context.getters.requestRankData));
     },
     async submit(context, data) {
-        const response = await this._vm.$axios.post('/submit', {
+        return await this._vm.$axios.post('/submit', {
             ...context.getters.submitData,
             ...data,
         });
-        return response;
+    },
+    async feedback(context, data) {
+        return await this._vm.$axios.post('/feedback',data);
     },
     ...actions,
 }

@@ -13,7 +13,7 @@
         >{{item}}</span>
       </p>
     </div>
-    <keyboard @keydown="keyboard"></keyboard>
+    <keyboard @keydown="keyboard"/>
   </div>
 </template>
 

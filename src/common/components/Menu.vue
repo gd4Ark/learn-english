@@ -13,7 +13,7 @@
         >
           <router-link :to="option.path">
             {{option.label}}
-            <i class="el-icon-ali-right1"></i>
+            <i class="el-icon-ali-right1"/>
           </router-link>
         </li>
       </ul>

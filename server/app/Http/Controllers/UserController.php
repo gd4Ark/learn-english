@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Book;
 use App\English;
 
+use App\Feedback;
 use App\Score;
 use App\Setting;
 use DemeterChain\B;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class UserController extends Controller{
@@ -78,5 +80,13 @@ class UserController extends Controller{
 
     public function getSetting(){
         return Setting::all()->first();
+    }
+
+    public function addFeedback(Request $request){
+        try{
+            Feedback::create($request->all());
+        }catch (QueryException $e){
+            return $e->getMessage();
+        }
     }
 }

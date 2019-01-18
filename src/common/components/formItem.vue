@@ -55,7 +55,7 @@
       :min="item.min"
       :max="item.max"
       v-model="val"
-    ></el-input>
+    />
   </div>
 </template>
 <script>

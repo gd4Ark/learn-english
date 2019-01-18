@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Book;
 use App\English;
 use App\Admin;
+use App\Feedback;
 use App\Setting;
 use Carbon\Carbon;
 use Illuminate\Database\QueryException;
@@ -119,6 +120,19 @@ class AdminController extends Controller{
     public function delEnglish(Request $request){
         $ids = $request->input('ids',array());
         English::destroy($ids);
+    }
+
+    //获取反馈
+    public function getFeedback(Request $request){
+        $list = Feedback::query();
+        $list = $this->search($request,$list);
+        return $this->pagination($request,$list);
+    }
+
+    // 删除
+    public function delFeedback(Request $request){
+        $ids = $request->input('ids',array());
+        Feedback::destroy($ids);
     }
 
     // 加密秘钥
