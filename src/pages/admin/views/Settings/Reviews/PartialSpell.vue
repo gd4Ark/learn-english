@@ -9,7 +9,7 @@
     </template>
     <div class="app-content">
       <c-form
-        :formItem="$formData.rank.formItem"
+        :formItem="$formData.partialSpell.formItem"
         :formData="formData"
       >
       </c-form>
@@ -28,7 +28,7 @@ export default {
   data() {
     return {
       formData: {
-        rank_limit_quantity: ""
+        partial_spell_proportion: 0
       }
     };
   },
@@ -44,9 +44,9 @@ export default {
   },
   mounted() {
     this.getSetting().then(() => {
-      const { rank_limit_quantity } = this.setting;
+      const { partial_spell_proportion } = this.setting;
       this.formData = {
-        rank_limit_quantity
+        partial_spell_proportion
       };
     });
   },

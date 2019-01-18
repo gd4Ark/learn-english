@@ -1,14 +1,4 @@
+import mutations from "@/common/store/mutations";
 export default {
-    updateBook(state, data) {
-        state.book = {
-            ...state.book,
-            ...data,
-        }
-    },
-    updateEnglish(state, data) {
-        state.english = {
-            ...state.english,
-            ...data,
-        }
-    },
+    ...mutations,
 }

@@ -20,7 +20,7 @@ export default {
     optionsGroups: [
       [
         {
-          path: "/setting/password",
+          path: "/setting/review/partialSpell",
           label: "单词部分拼写"
         }
       ]

@@ -19,6 +19,9 @@ import Log from '@/pages/admin/views/Settings/Abouts/Log';
 import App from '@/common/layouts/Abouts/App';
 import We from '@/common/layouts/Abouts/We';
 
+// Reviews option
+import PartialSpell from '@/pages/admin/views/Settings/Reviews/PartialSpell';
+
 import Login from '@/pages/admin/views/Login';
 
 const routerConfig = {
@@ -74,7 +77,14 @@ const routerConfig = {
                     name: 'setting/review',
                     meta: {
                         title: '复习模块设置',
-                    }
+                    },
+                    children: [{
+                        path: "partialSpell",
+                        component: PartialSpell,
+                        meta: {
+                            title: '单词部分拼写',
+                        }
+                    }, ]
                 }, {
                     path: "about",
                     component: About,
@@ -88,7 +98,7 @@ const routerConfig = {
                         meta: {
                             title: '更新日志',
                         }
-                    },{
+                    }, {
                         path: "app",
                         component: App,
                         meta: {

@@ -34,8 +34,7 @@ export default {
     ...mapActions(["login"]),
 
     async submit() {
-      const { username, password } = this.formData;
-      if (!username || !password) {
+      if (this.$util.checkEmptyForm(this.formData)) {
         return this.$util.msg.warning("请填写完整！");
       }
       await this.login(this.formData);

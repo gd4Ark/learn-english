@@ -1,7 +1,7 @@
 <template>
   <wrap
     padding="0"
-    v-if="$route.name === 'setting'"
+    v-if="!loadSub"
   >
     <div class="app-content">
       <Menu :optionsGroups="optionsGroups" />
@@ -11,6 +11,7 @@
 </template>
 <script>
 import Menu from "@/common/components/Menu";
+import { mapActions } from "vuex";
 export default {
   components: {
     Menu
@@ -50,6 +51,11 @@ export default {
         }
       ]
     ]
-  })
+  }),
+  computed: {
+    loadSub() {
+      return this.$route.name !== "setting";
+    }
+  }
 };
 </script>

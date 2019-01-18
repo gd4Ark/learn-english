@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Score extends Model{
+class Setting extends Model{
 
-    protected $table = 'score';
+    protected $table = 'setting';
 
     /**
      * The attributes that are mass assignable.
@@ -14,17 +14,14 @@ class Score extends Model{
      * @var array
      */
 
-    protected $fillable = ['id','book_id','review_module','username','time','created_at','updated_at'];
+    protected $fillable = ['rank_limit_quantity','partial_spell_proportion','created_at','updated_at'];
 
     public $timestamps = false;
 
-    public function setUsernameAttribute($name){
-        $this->attributes['username'] = trim($name);
-    }
-
-    public function english(){
-        return $this->hasMany(English::class,'book_id','id');
-    }
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
 
     public static function boot() {
         parent::boot();

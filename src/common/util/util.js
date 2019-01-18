@@ -35,17 +35,6 @@ export default {
             return num / 10000 + 'w';
         }
 
-        o.verifForm = (formObj) => {
-            for (const key in formObj) {
-                let el = formObj[key];
-                el = ("" + el).trim();
-                if (!el) {
-                    return false;
-                }
-            }
-            return true;
-        };
-
         o.msg = (() => {
 
             const m = {};
@@ -101,6 +90,15 @@ export default {
         o.isEqual = (obj1, obj2) => {
             return JSON.stringify(obj1) === JSON.stringify(obj2);
         }
+
+        o.checkEmptyForm = (formData) => {
+            for (let v of Object.values(formData)) {
+                v = ("" + v).trim();
+                if (v !== 0 && !v) {
+                    return true;
+                }
+            }
+        };
 
         o.timer = (() => {
 

@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Book;
 use App\English;
 use App\Admin;
+use App\Setting;
 use Carbon\Carbon;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -38,7 +40,7 @@ class AdminController extends Controller{
     }
 
     public function checkLogin(Request $request){
-        return 1;
+        return;
     }
 
     public function logout(){
@@ -53,11 +55,17 @@ class AdminController extends Controller{
         if ($admin->password === $old_pass){
             $admin->password = $this->getEncrypt($username,$request->input('new_pass'));;
             if ($admin->save()){
-                return 1;
+                return;
             }
             return $this->responseErr('修改失败！',403);
         }
         return $this->responseErr('旧密码错误！',403);
+    }
+
+    // 更新设置
+    public function updateSetting(Request $request){
+        $data = Setting::all()->first();
+        $data->update($request->all());
     }
 
     // 添加

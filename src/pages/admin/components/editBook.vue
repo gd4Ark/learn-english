@@ -43,7 +43,7 @@ export default {
       };
     },
     async submit() {
-      if (!this.$util.verifForm(this.formData)) {
+      if (this.$util.checkEmptyForm(this.formData)) {
         return this.$util.msg.warning("请填写正确！");
       }
       const id = await this.updateBook(this.formData);

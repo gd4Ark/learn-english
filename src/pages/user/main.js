@@ -9,7 +9,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 
 Vue.use(ElementUI);
 
-import App from './App.vue'
+import App from '@/common/App.vue'
 
 import router from './router/index';
 
@@ -30,13 +30,13 @@ Vue.use(axios, {
 });
 
 import Back from "@/common/components/Back";
-Vue.component('Back',Back);
+Vue.component('Back', Back);
 
 import Wrap from "@/common/layouts/Wrap";
-Vue.component('Wrap',Wrap);
+Vue.component('Wrap', Wrap);
 
 import PopWrap from "@/common/layouts/PopWrap.vue";
-Vue.component('PopWrap',PopWrap);
+Vue.component('PopWrap', PopWrap);
 
 Vue.config.productionTip = false
 

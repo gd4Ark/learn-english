@@ -1,3 +1,4 @@
+import actions from "@/common/store/actions";
 export default {
     async login(context, data) {
         const response = await this._vm.$axios.post('/login', data);
@@ -12,14 +13,14 @@ export default {
     async logout() {
         return await this._vm.$axios.post('/logout');
     },
-    async updatePassword(context,data) {
-        return await this._vm.$axios.post('/password',data);
+    async updatePassword(context, data) {
+        return await this._vm.$axios.post('/password', data);
+    },
+    async updateSetting(context, data) {
+        return await this._vm.$axios.post('/setting', data);
     },
     async getBook(context) {
         context.commit('updateBook', await this._vm.$axios.get('/book', context.getters.requestBookListData));
-    },
-    async getEnglish(context) {
-        context.commit('updateEnglish', await this._vm.$axios.get('/english', context.getters.requestEnglishListData));
     },
     async addBook(context, data) {
         return await this._vm.$axios.put('/book', data);
@@ -49,14 +50,5 @@ export default {
             searchData: this._vm.$formData.book.searchData(),
         });
     },
-    async englishKeyword(context, keyword = []) {
-        await context.commit('updateEnglish', {
-            keyword,
-        });
-    },
-    async resetEnglishSearchData(context) {
-        await context.commit('updateEnglish', {
-            searchData: this._vm.$formData.english.searchData(),
-        });
-    },
+    ...actions,
 }

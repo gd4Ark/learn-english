@@ -1,21 +1,5 @@
+import getters from "@/common/store/getters";
 export default {
-    requestEnglishListData(state) {
-        const {
-            book_id,
-            pageIndex,
-            pageSize,
-            keyword,
-        } = state.english;
-        const data = {
-            book_id,
-            pageIndex,
-            pageSize,
-        };
-        if (keyword.length) {
-            data.keyword = keyword;
-        }
-        return data;
-    },
     requestReivewListData(state) {
         const {
             book_id,
@@ -48,4 +32,5 @@ export default {
         };
         return data;
     },
+    ...getters,
 }

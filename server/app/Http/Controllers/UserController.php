@@ -6,6 +6,7 @@ use App\Book;
 use App\English;
 
 use App\Score;
+use App\Setting;
 use DemeterChain\B;
 use Illuminate\Http\Request;
 
@@ -72,5 +73,9 @@ class UserController extends Controller{
         return [
             'list' => $this->sortRank($data),
         ];
+    }
+
+    public function getSetting(){
+        return Setting::all()->first();
     }
 }
