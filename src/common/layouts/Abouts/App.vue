@@ -1,8 +1,7 @@
 <template>
-  <pop-wrap :showTitle="false">
+  <pop-wrap>
     <div class="app-content">
       <div class="message">
-        <h2>清技背单词</h2>
         <p>
           清技背单词是一款复习单词的 Web 应用，主要由教师提供单词，
           学生进行多项模块复习，并以完成每个单词的平均时间作为成绩进行排名，

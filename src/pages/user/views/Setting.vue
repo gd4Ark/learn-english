@@ -19,12 +19,6 @@ export default {
     optionsGroups: [
       [
         {
-          path: "/setting/autoSubmit",
-          label: "自动提交设置"
-        }
-      ],
-      [
-        {
           path: "/setting/feedback",
           label: "帮助与反馈"
         },

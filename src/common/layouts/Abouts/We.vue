@@ -1,8 +1,7 @@
 <template>
-  <pop-wrap :showTitle="false">
+  <pop-wrap>
     <div class="app-content">
       <div class="message">
-        <h2>关于我们</h2>
         <p>
           我们是清远市技师学院计算机专业的学生，同时也是我校《网站设计与开发》工作室的成员。
         </p>
