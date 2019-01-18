@@ -105,7 +105,7 @@ const routerConfig = {
                 path: "we",
                 component: We,
                 meta: {
-                    title: '关于我们',
+                    title: '关于开发者',
                 }
             }, ]
         }, {

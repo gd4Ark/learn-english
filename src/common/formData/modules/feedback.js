@@ -1,6 +1,6 @@
 export default {
     formItem: [{
-        label: "描述一下您的问题",
+        label: "描述一下您的问题，请不要少于15个字",
         key: "message",
         type: "textarea",
         row: 10,

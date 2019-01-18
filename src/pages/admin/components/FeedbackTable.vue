@@ -32,10 +32,9 @@
             </el-card>
           </div>
           <div
-            v-if="props.row.contact"
             class="text"
           >
-            <h3>
+            <h3 v-if="props.row.contact">
               联系方式：
               <span>{{props.row.contact}}</span>
             </h3>
