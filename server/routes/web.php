@@ -27,6 +27,8 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
         $router->post('checkLogin','AdminController@checkLogin');
 
+        $router->post('logout','AdminController@logout');
+
         $router->post('book','AdminController@updateBook');
 
         $router->put('book','AdminController@addBook');

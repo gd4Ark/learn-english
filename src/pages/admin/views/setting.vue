@@ -45,7 +45,7 @@ export default {
       ],
       [
         {
-          path: "/",
+          path: "/setting/logout",
           label: "退出"
         }
       ]

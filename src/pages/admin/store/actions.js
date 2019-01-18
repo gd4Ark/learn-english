@@ -9,6 +9,9 @@ export default {
     async checkLogin() {
         return await this._vm.$axios.post('/checkLogin');
     },
+    async logout() {
+        return await this._vm.$axios.post('/logout');
+    },
     async getBook(context) {
         context.commit('updateBook', await this._vm.$axios.get('/book', context.getters.requestBookListData));
     },

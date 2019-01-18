@@ -41,6 +41,10 @@ class AdminController extends Controller{
         return 1;
     }
 
+    public function logout(){
+        Auth::invalidate(true);
+    }
+
     // 更新密码
     public function updatePassword($password){
         $admin = Admin::find(1);

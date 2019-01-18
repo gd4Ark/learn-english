@@ -12,6 +12,7 @@ import Rank from '@/pages/admin/views/Settings/Rank';
 import Review from '@/pages/admin/views/Settings/Review';
 import About from '@/common/layouts/About';
 import Feedback from '@/pages/admin/views/Settings/Feedback';
+import Logout from '@/pages/admin/views/Settings/Logout';
 
 // Abouts option
 import Log from '@/pages/admin/views/Settings/Abouts/Log';
@@ -106,6 +107,13 @@ const routerConfig = {
                     component: Feedback,
                     meta: {
                         title: '反馈管理',
+                    }
+                },
+                {
+                    path: "logout",
+                    component: Logout,
+                    meta: {
+                        title: '退出',
                     }
                 }
             ]
