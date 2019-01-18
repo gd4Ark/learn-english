@@ -59,13 +59,14 @@ class UserController extends Controller{
     }
 
     public function getRank(Request $request){
+        $setting = $this->getSetting();
         $data = Score::where([
                 'book_id' => $request->input('book_id'),
                 'review_module' => $request->input('review_module'),
             ])
             ->orderBy('time')
             ->orderBy('updated_at','DESC')
-            ->limit(30)
+            ->limit($setting->rank_limit_quantity)
             ->get(['id','username','time']);
         foreach($data as $key=>$value){
             $data[$key]['position'] = $key + 1;

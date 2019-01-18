@@ -39,24 +39,25 @@ export default {
     remaining: 0,
     time: 0
   }),
-  mounted() {
+  async mounted() {
     if (!this.english.book_id) {
       return this.exit("没有选中单词本！");
     }
-    this.getData().then(() => {
-      if (!this.review.total) {
-        return this.exit("单词数量为空！");
-      }
-      this.start();
-      this.remaining = this.review.total;
-    });
+    await this.getData();
+    await this.getSetting();
+    if (!this.review.total) {
+      return this.exit("单词数量为空！");
+    }
+    this.start();
+    this.remaining = this.review.total;
   },
   destroyed() {
     this.$util.timer.remove("reviewing_timer");
   },
   methods: {
     ...mapActions({
-      getData: "getReview"
+      getData: "getReview",
+      getSetting: "getSetting"
     }),
     ...mapMutations(["updateSubmit"]),
     exit(msg) {
