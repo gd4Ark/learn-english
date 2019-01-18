@@ -76,9 +76,13 @@ label {
   }
 }
 
+.el-input-number,
 .el-date-editor.el-input,
 .el-date-editor.el-input__inner {
   width: auto;
+}
+.el-input-number--mini{
+  width: 130px;
 }
 // .el-input__inner{
 //   background:transparent;
