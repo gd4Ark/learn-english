@@ -5,6 +5,7 @@ import userSubmit from "./modules/userSubmit";
 import updatePassword from "./modules/updatePassword";
 import rank from "./modules/rank";
 import feedback from "./modules/feedback";
+import partialSpell from "./modules/partialSpell";
 
 export default {
     install(Vue) {
@@ -17,6 +18,7 @@ export default {
             updatePassword,
             rank,
             feedback,
+            partialSpell,
         };
     }
 }

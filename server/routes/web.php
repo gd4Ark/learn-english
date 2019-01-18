@@ -23,9 +23,17 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
     $router->get('rank','UserController@getRank');
 
+    $router->get('setting','UserController@getSetting');
+
     $router->group(['middleware'=>'auth:api'],function () use ($router){
 
         $router->post('checkLogin','AdminController@checkLogin');
+
+        $router->post('logout','AdminController@logout');
+
+        $router->post('password','AdminController@updatePassword');
+
+        $router->post('setting','AdminController@updateSetting');
 
         $router->post('book','AdminController@updateBook');
 

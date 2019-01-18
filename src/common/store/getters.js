@@ -1,12 +1,13 @@
-import getters from "@/common/store/getters";
 export default {
-    requestBookListData(state) {
+    requestEnglishListData(state) {
         const {
+            book_id,
             pageIndex,
             pageSize,
             keyword,
-        } = state.book;
+        } = state.english;
         const data = {
+            book_id,
             pageIndex,
             pageSize,
         };
@@ -15,5 +16,4 @@ export default {
         }
         return data;
     },
-    ...getters,
 }

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="load">
     <!-- 选择类型 -->
     <el-select
       v-if="item.type === 'select'"
@@ -26,6 +26,17 @@
       clearable
     >
     </el-date-picker>
+    <!-- 滑块类型 -->
+    <el-slider
+      v-else-if="item.type === 'range'"
+      v-model="val"
+      :step="item.step"
+      :min="item.min"
+      :max="item.max"
+      show-input
+      input-size="mini"
+    >
+    </el-slider>
     <!-- 普通文本框 -->
     <el-input
       v-else
@@ -44,13 +55,13 @@ export default {
     item: Object,
     model: [String, Number]
   },
-  data() {
-    return {
-      val: ""
-    };
-  },
+  data: () => ({
+    load: false,
+    val: ""
+  }),
   mounted() {
     this.val = this.model;
+    this.load = true;
   },
   watch: {
     val(val) {

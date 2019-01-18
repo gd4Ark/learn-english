@@ -40,7 +40,7 @@ export default {
       this.formData = this.$formData.book.formData();
     },
     async submit() {
-      if (!this.$util.verifForm(this.formData)) {
+      if (this.$util.checkEmptyForm(this.formData)) {
         return this.$util.msg.warning("请填写正确！");
       }
       const id = await this.addBook(this.formData);

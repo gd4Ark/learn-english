@@ -19,7 +19,7 @@
 <script>
 import cForm from "@/common/components/Form";
 import { async } from "q";
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 export default {
   components: {
@@ -28,21 +28,30 @@ export default {
   data() {
     return {
       formData: {
-        limit_quantity: "",
+        rank_limit_quantity: ""
       }
     };
   },
   methods: {
-    ...mapActions(["login"]),
-
+    ...mapActions(["updateSetting", "getSetting"]),
     async submit() {
-      const { username, password } = this.formData;
-      if (!username || !password) {
+      if (this.$util.checkEmptyForm(this.formData)) {
         return this.$util.msg.warning("请填写完整！");
       }
-      const response = await this.login(this.formData);
-      this.$router.push("/index");
+      await this.updateSetting(this.formData);
+      this.$util.msg.success("修改成功");
     }
+  },
+  mounted() {
+    this.getSetting().then(() => {
+      const { rank_limit_quantity } = this.setting;
+      this.formData = {
+        rank_limit_quantity
+      };
+    });
+  },
+  computed: {
+    ...mapState(["setting"])
   }
 };
 </script>

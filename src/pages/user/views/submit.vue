@@ -63,19 +63,19 @@ export default {
     ...mapActions(["submit"]),
 
     async handleSubmit() {
-      const { username } = this.formData;
-      if (!username) {
+      if (this.$util.checkEmptyForm(this.formData)) {
         return this.$util.msg.warning("请填写完整！");
       }
-      if (username.length > 6){
+      const { username } = this.formData;
+      if (username.length > 6) {
         return this.$util.msg.warning("名字长度不可超过6位数！");
       }
       await this.submit({
         ...this.submitInfo,
-        ...this.formData,
+        ...this.formData
       });
-      this.$util.msg.success('提交成功！').then(()=>{
-        this.$router.push('/rank');
+      this.$util.msg.success("提交成功！").then(() => {
+        this.$router.push("/rank");
       });
     }
   },

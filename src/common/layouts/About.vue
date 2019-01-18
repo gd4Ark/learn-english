@@ -36,7 +36,7 @@ export default {
       [
         {
           path: "/setting/about/log",
-          label: "更新日志管理"
+          label: "更新日志"
         },
         {
           path: "/setting/about/app",

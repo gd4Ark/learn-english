@@ -13,7 +13,6 @@ import PartialSpell from '@/pages/user/views/Reviewings/PartialSpell';
 import Submit from '@/pages/user/views/Submit';
 
 import Setting from "@/pages/user/views/Setting";
-import AutoSubmit from "@/pages/user/views/Settings/AutoSubmit";
 import About from '@/common/layouts/About';
 import Feedback from "@/pages/user/views/Settings/Feedback";
 
@@ -84,12 +83,6 @@ const routerConfig = {
             inNav: true,
         },
         children: [{
-            path: "autoSubmit",
-            component: AutoSubmit,
-            meta: {
-                title: '自动提交设置',
-            }
-        }, {
             path: "about",
             component: About,
             name: 'setting/about',

@@ -9,7 +9,7 @@
     </template>
     <div class="app-content">
       <c-form
-        :formItem="$formData.updatePassword.formItem"
+        :formItem="$formData.partialSpell.formItem"
         :formData="formData"
       >
       </c-form>
@@ -19,7 +19,7 @@
 <script>
 import cForm from "@/common/components/Form";
 import { async } from "q";
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 export default {
   components: {
@@ -28,26 +28,30 @@ export default {
   data() {
     return {
       formData: {
-        old_pass: "",
-        new_pass: "",
-        new_pass2: "",
+        partial_spell_proportion: 0
       }
     };
   },
   methods: {
-    ...mapActions(["updatePassword"]),
-
+    ...mapActions(["updateSetting", "getSetting"]),
     async submit() {
-      const { old_pass, new_pass,new_pass2 } = this.formData;
-      if (!old_pass || !new_pass || !new_pass2 ) {
+      if (this.$util.checkEmptyForm(this.formData)) {
         return this.$util.msg.warning("请填写完整！");
       }
-      if (new_pass !== new_pass2){
-        return this.$util.msg.warning("新密码不一致！");
-      }
-      await this.updatePassword(this.formData);
-      this.$router.push("/setting/logout");
+      await this.updateSetting(this.formData);
+      this.$util.msg.success("修改成功");
     }
+  },
+  mounted() {
+    this.getSetting().then(() => {
+      const { partial_spell_proportion } = this.setting;
+      this.formData = {
+        partial_spell_proportion
+      };
+    });
+  },
+  computed: {
+    ...mapState(["setting"])
   }
 };
 </script>

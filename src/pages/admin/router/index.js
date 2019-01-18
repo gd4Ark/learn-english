@@ -12,11 +12,15 @@ import Rank from '@/pages/admin/views/Settings/Rank';
 import Review from '@/pages/admin/views/Settings/Review';
 import About from '@/common/layouts/About';
 import Feedback from '@/pages/admin/views/Settings/Feedback';
+import Logout from '@/pages/admin/views/Settings/Logout';
 
 // Abouts option
 import Log from '@/pages/admin/views/Settings/Abouts/Log';
 import App from '@/common/layouts/Abouts/App';
 import We from '@/common/layouts/Abouts/We';
+
+// Reviews option
+import PartialSpell from '@/pages/admin/views/Settings/Reviews/PartialSpell';
 
 import Login from '@/pages/admin/views/Login';
 
@@ -73,7 +77,14 @@ const routerConfig = {
                     name: 'setting/review',
                     meta: {
                         title: '复习模块设置',
-                    }
+                    },
+                    children: [{
+                        path: "partialSpell",
+                        component: PartialSpell,
+                        meta: {
+                            title: '单词部分拼写',
+                        }
+                    }, ]
                 }, {
                     path: "about",
                     component: About,
@@ -87,7 +98,7 @@ const routerConfig = {
                         meta: {
                             title: '更新日志',
                         }
-                    },{
+                    }, {
                         path: "app",
                         component: App,
                         meta: {
@@ -106,6 +117,13 @@ const routerConfig = {
                     component: Feedback,
                     meta: {
                         title: '反馈管理',
+                    }
+                },
+                {
+                    path: "logout",
+                    component: Logout,
+                    meta: {
+                        title: '退出',
                     }
                 }
             ]

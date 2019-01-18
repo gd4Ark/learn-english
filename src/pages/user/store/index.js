@@ -4,7 +4,7 @@ import vuex from 'vuex'
 import createPersist from 'vuex-localstorage'
 
 import book from "./modules/book";
-import english from "./modules/english";
+import english from "@/common/store/modules/english";
 import review from "./modules/review";
 import rank from "./modules/rank";
 import submit from "./modules/submit";
