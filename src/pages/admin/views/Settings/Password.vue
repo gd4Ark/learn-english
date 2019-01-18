@@ -28,21 +28,25 @@ export default {
   data() {
     return {
       formData: {
-        old_password: "",
-        new_password: ""
+        old_pass: "",
+        new_pass: "",
+        new_pass2: "",
       }
     };
   },
   methods: {
-    ...mapActions(["login"]),
+    ...mapActions(["updatePassword"]),
 
     async submit() {
-      const { username, password } = this.formData;
-      if (!username || !password) {
+      const { old_pass, new_pass,new_pass2 } = this.formData;
+      if (!old_pass || !new_pass || !new_pass2 ) {
         return this.$util.msg.warning("请填写完整！");
       }
-      const response = await this.login(this.formData);
-      this.$router.push("/index");
+      if (new_pass !== new_pass2){
+        return this.$util.msg.warning("新密码不一致！");
+      }
+      await this.updatePassword(this.formData);
+      this.$router.push("/setting/logout");
     }
   }
 };

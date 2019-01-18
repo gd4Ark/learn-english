@@ -46,14 +46,18 @@ class AdminController extends Controller{
     }
 
     // 更新密码
-    public function updatePassword($password){
-        $admin = Admin::find(1);
-        $admin->password = $this->getEncrypt($admin->username,$password);
-        $result = [];
-        if ($admin->save()){
-            return $this->response($result);
+    public function updatePassword(Request $request){
+        $admin = Auth::user();
+        $username = $admin->username;
+        $old_pass = $this->getEncrypt($username,$request->input('old_pass'));
+        if ($admin->password === $old_pass){
+            $admin->password = $this->getEncrypt($username,$request->input('new_pass'));;
+            if ($admin->save()){
+                return 1;
+            }
+            return $this->responseErr('修改失败！',403);
         }
-        return $this->responseErr('修改失败！',403);
+        return $this->responseErr('旧密码错误！',403);
     }
 
     // 添加

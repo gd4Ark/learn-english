@@ -38,7 +38,7 @@ export default {
       if (!username || !password) {
         return this.$util.msg.warning("请填写完整！");
       }
-      const response = await this.login(this.formData);
+      await this.login(this.formData);
       this.$router.push("/index");
     }
   }

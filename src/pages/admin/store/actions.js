@@ -12,6 +12,9 @@ export default {
     async logout() {
         return await this._vm.$axios.post('/logout');
     },
+    async updatePassword(context,data) {
+        return await this._vm.$axios.post('/password',data);
+    },
     async getBook(context) {
         context.commit('updateBook', await this._vm.$axios.get('/book', context.getters.requestBookListData));
     },
