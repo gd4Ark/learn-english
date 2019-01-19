@@ -8,7 +8,7 @@
           致力于提高学生的学习兴趣、课外复习的自主性。
         </p>
         <p>
-          本项目在 Github 开放源代码，如有兴趣请点击以下链接：
+          本项目在 GitHub 开放源代码，如有兴趣请点击以下链接：
           <a href="https://github.com/gd4Ark/learn_english">
             https://github.com/gd4Ark/learn_english
           </a> 。

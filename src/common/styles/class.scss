@@ -67,6 +67,7 @@
 }
 
 .el-form-item {
+  margin-bottom: 15px;
   label {
     text-align: center;
   }
@@ -100,4 +101,12 @@
 
 .el-input--prefix .el-input__inner {
   padding: 0 15px;
+}
+
+.el-card__header{
+  padding: 9px 10px;
+}
+
+.el-card__body{
+  padding: 12px;
 }

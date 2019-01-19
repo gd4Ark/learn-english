@@ -25,13 +25,13 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
     $router->get('setting','UserController@getSetting');
 
-//    $router->group(['middleware' => ['throttle:10,2']],function () use ($router){
-//
-//        $router->get('feedback','UserController@addFeedback');
-//
-//    });
+    $router->get('log','UserController@getLog');
 
-    $router->post('feedback','UserController@addFeedback');
+    $router->group(['middleware' => ['throttle:10,2']],function () use ($router){
+
+        $router->put('feedback','UserController@addFeedback');
+
+    });
 
     $router->group(['middleware'=>'auth:api'],function () use ($router){
 
@@ -58,6 +58,12 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->get('feedback','AdminController@getFeedback');
 
         $router->delete('feedback','AdminController@delFeedback');
+
+        $router->delete('log','AdminController@delLog');
+
+        $router->put('log','AdminController@addLog');
+
+        $router->post('log','AdminController@updateLog');
 
     });
 

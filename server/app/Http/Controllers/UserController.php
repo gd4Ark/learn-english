@@ -6,6 +6,7 @@ use App\Book;
 use App\English;
 
 use App\Feedback;
+use App\Log;
 use App\Score;
 use App\Setting;
 use DemeterChain\B;
@@ -83,10 +84,21 @@ class UserController extends Controller{
     }
 
     public function addFeedback(Request $request){
-        try{
-            Feedback::create($request->all());
-        }catch (QueryException $e){
-            return $e->getMessage();
-        }
+        Feedback::create($request->all());
+    }
+
+    //获取日志
+    public function getLog(Request $request){
+        // 拿全部
+        if ($request->has('all')){
+            $list = Log::orderBy('version','DESC')->get();
+            return [
+                'list' => $list,
+                'total' => $list->count(),
+            ];
+        };
+        $list = Log::orderBy('version','DESC');
+        $list = $this->search($request,$list);
+        return $this->pagination($request,$list);
     }
 }

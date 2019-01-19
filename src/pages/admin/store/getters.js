@@ -30,5 +30,20 @@ export default {
         }
         return data;
     },
+    requestLogListData(state) {
+        const {
+            pageIndex,
+            pageSize,
+            keyword,
+        } = state.log;
+        const data = {
+            pageIndex,
+            pageSize,
+        };
+        if (keyword.length) {
+            data.keyword = keyword;
+        }
+        return data;
+    },
     ...getters,
 }

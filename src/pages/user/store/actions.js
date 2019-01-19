@@ -16,7 +16,12 @@ export default {
         });
     },
     async feedback(context, data) {
-        return await this._vm.$axios.post('/feedback',data);
+        return await this._vm.$axios.put('/feedback', data);
+    },
+    async getLog(context) {
+        context.commit('updateLog', await this._vm.$axios.get('/log', {
+            all: true,
+        }));
     },
     ...actions,
 }

@@ -5,6 +5,7 @@ import book from "./modules/book";
 import english from "@/common/store/modules/english";
 import setting from "@/common/store/modules/setting";
 import feedback from "./modules/feedback";
+import log from "./modules/log";
 
 import mutations from "./mutations";
 import actions from "./actions";
@@ -18,6 +19,7 @@ export default new vuex.Store({
         english,
         setting,
         feedback,
+        log,
     },
     mutations: {
         ...mutations,

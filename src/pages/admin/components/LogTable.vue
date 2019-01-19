@@ -2,18 +2,20 @@
   <div class="table-content">
     <div class="toolbar">
       <div>
+        <add-log @get-data="getData" />
         <el-button
+          style="margin-left:10px"
           size="mini"
           type="danger"
           icon="el-icon-delete"
           @click="handleDelete(multipleSelection)"
         />
       </div>
-      <search-feedback @get-data="getData" />
+      <search-log @get-data="getData" />
     </div>
 
     <el-table
-      :data="feedback.list"
+      :data="log.list"
       class="table"
       height="100%"
       @selection-change="handleSelectionChange"
@@ -25,18 +27,27 @@
       />
       <el-table-column type="expand">
         <template slot-scope="props">
-          <div class="text">
-            <h3>问题描述：</h3>
-            <el-card shadow="never">
-              {{props.row.message}}
-            </el-card>
+          <div
+            v-if="props.row.fix !== '无'"
+            class="text"
+          >
+            <h3>修复：</h3>
+            <p>
+              {{props.row.fix}}
+            </p>
+          </div>
+          <div
+            v-if="props.row.feat !== '无'"
+            class="text"
+          >
+            <h3>更新：</h3>
+            <p>
+              {{props.row.feat}}
+            </p>
           </div>
           <div class="text">
-            <h3 v-if="props.row.contact">
-              联系方式：
-              <span>{{props.row.contact}}</span>
-            </h3>
-            <p>提交时间：<span>{{props.row.created_at}}</span></p>
+            <time>创建时间：<span>{{props.row.created_at}}</span></time>
+            <time>更新时间：<span>{{props.row.updated_at}}</span></time>
           </div>
         </template>
       </el-table-column>
@@ -49,11 +60,16 @@
       />
       <el-table-column
         label="操作"
-        width="110"
+        width="145"
         align="center"
       >
         <template slot-scope="scope">
+          <edit-Log
+            @get-data="getData"
+            :current="scope.row"
+          />
           <el-button
+            style="margin: 0 10px"
             size="mini"
             type="danger"
             icon="el-icon-delete"
@@ -63,27 +79,31 @@
       </el-table-column>
     </el-table>
     <Pagination
-      :module="feedback"
+      :module="log"
       @get-data="getData"
     />
   </div>
 </template>
 <script>
-import SearchFeedback from "@/pages/admin/components/SearchFeedback";
-import Pagination from "@/common/components/Pagination";
+import SearchLog from "@/pages/admin/components/SearchLog";
+import AddLog from "@/pages/admin/components/AddLog.vue";
+import EditLog from "@/pages/admin/components/EditLog.vue";
+import Pagination from "@/common/components/Pagination.vue";
 import ManageTable from "@/common/mixins/ManageTable";
 import { mapActions, mapState } from "vuex";
 export default {
   mixins: [ManageTable],
   components: {
-    SearchFeedback,
+    SearchLog,
+    AddLog,
+    EditLog,
     Pagination
   },
   data: () => ({
     tableColumns: [
       {
-        label: "类型",
-        prop: "type"
+        label: "版本",
+        prop: "version"
       }
     ],
     multipleSelection: []
@@ -93,11 +113,11 @@ export default {
   },
   methods: {
     ...mapActions({
-      delData: "delFeedback"
+      delData: "delLog"
     })
   },
   computed: {
-    ...mapState(["feedback"])
+    ...mapState(["log"])
   }
 };
 </script>
@@ -110,6 +130,10 @@ export default {
     font-size: 0.9rem;
     font-weight: normal;
     margin-bottom: 2vh;
+  }
+  p{
+    text-indent: 2rem;
+    font-size: 0.8rem;
   }
 }
 </style>

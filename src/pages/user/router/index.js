@@ -17,7 +17,7 @@ import About from '@/common/layouts/About';
 import Feedback from "@/pages/user/views/Settings/Feedback";
 
 // Abouts option
-import Log from '@/pages/admin/views/Settings/Abouts/Log';
+import Log from '@/pages/user/views/Settings/Abouts/Log';
 import App from '@/common/layouts/Abouts/App';
 import We from '@/common/layouts/Abouts/We';
 

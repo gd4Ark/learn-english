@@ -16,5 +16,11 @@ export default {
             ...state.setting,
             ...data,
         }
+    },
+    updateLog(state, data) {
+        state.log = {
+            ...state.log,
+            ...data,
+        }
     }
 }
