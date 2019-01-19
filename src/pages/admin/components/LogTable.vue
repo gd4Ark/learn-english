@@ -2,7 +2,12 @@
   <div class="table-content">
     <div class="toolbar">
       <div>
-        <add-log @get-data="getData" />
+        <add
+          title="添加日志"
+          moduleKey="log"
+          action="addLog"
+          @get-data="getData"
+        />
         <el-button
           style="margin-left:10px"
           size="mini"
@@ -11,7 +16,13 @@
           @click="handleDelete(multipleSelection)"
         />
       </div>
-      <search-log @get-data="getData" />
+       <search
+        title="日志筛选框"
+        moduleKey="log"
+        submitAction="logKeyword"
+        resetAction="resetLogSearchData"
+        @get-data="getData"
+      />
     </div>
 
     <el-table
@@ -64,7 +75,10 @@
         align="center"
       >
         <template slot-scope="scope">
-          <edit-Log
+          <edit
+            title="编辑日志"
+            moduleKey="log"
+            action="updateLog"
             @get-data="getData"
             :current="scope.row"
           />
@@ -85,18 +99,18 @@
   </div>
 </template>
 <script>
-import SearchLog from "@/pages/admin/components/SearchLog";
-import AddLog from "@/pages/admin/components/AddLog.vue";
-import EditLog from "@/pages/admin/components/EditLog.vue";
+import Search from "@/common/components/Search";
+import Add from "@/common/components/Add";
+import Edit from "@/common/components/Edit";
 import Pagination from "@/common/components/Pagination.vue";
 import ManageTable from "@/common/mixins/ManageTable";
 import { mapActions, mapState } from "vuex";
 export default {
   mixins: [ManageTable],
   components: {
-    SearchLog,
-    AddLog,
-    EditLog,
+    Search,
+    Add,
+    Edit,
     Pagination
   },
   data: () => ({
@@ -131,7 +145,7 @@ export default {
     font-weight: normal;
     margin-bottom: 2vh;
   }
-  p{
+  p {
     text-indent: 2rem;
     font-size: 0.8rem;
   }

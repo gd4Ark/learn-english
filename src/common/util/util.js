@@ -153,7 +153,7 @@ export default {
             const s = time % 60;
             return `${o.numFormat(m)}:${o.numFormat(s)}`;
         };
-
+        
         Vue.prototype.$util = o;
     }
 }

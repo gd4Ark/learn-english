@@ -2,7 +2,12 @@
   <div class="table-content">
     <div class="toolbar">
       <div>
-        <add-book @get-data="getData" />
+        <add
+          title="添加单词本"
+          moduleKey="book"
+          action="addBook"
+          @get-data="getData"
+        />
         <el-button
           style="margin-left:10px"
           size="mini"
@@ -11,7 +16,13 @@
           @click="handleDelete(multipleSelection)"
         />
       </div>
-      <search-book @get-data="getData" />
+      <search
+        title="单词本筛选框"
+        moduleKey="book"
+        submitAction="bookKeyword"
+        resetAction="resetBookSearchData"
+        @get-data="getData"
+      />
     </div>
 
     <el-table
@@ -43,7 +54,10 @@
             icon="el-icon-ali-manage"
             @click="handleManage(scope.row.id)"
           />
-          <edit-book
+          <edit
+            title="编辑单词本"
+            moduleKey="book"
+            action="updateBook"
             @get-data="getData"
             :current="scope.row"
           />
@@ -63,18 +77,18 @@
   </div>
 </template>
 <script>
-import SearchBook from "@/pages/admin/components/SearchBook.vue";
-import AddBook from "@/pages/admin/components/AddBook.vue";
-import EditBook from "@/pages/admin/components/EditBook.vue";
+import Search from "@/common/components/Search";
+import Add from "@/common/components/Add";
+import Edit from "@/common/components/Edit";
 import Pagination from "@/common/components/Pagination.vue";
 import ManageTable from "@/common/mixins/ManageTable";
 import { mapActions, mapState } from "vuex";
 export default {
   mixins: [ManageTable],
   components: {
-    SearchBook,
-    AddBook,
-    EditBook,
+    Search,
+    Add,
+    Edit,
     Pagination
   },
   data: () => ({
