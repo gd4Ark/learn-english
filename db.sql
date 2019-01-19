@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： 127.0.0.1
--- 生成日期： 2019-01-18 15:32:10
+-- 生成日期： 2019-01-19 08:48:23
 -- 服务器版本： 10.1.37-MariaDB
 -- PHP 版本： 7.3.0
 
@@ -120,6 +120,29 @@ INSERT INTO `feedback` (`id`, `type`, `message`, `contact`, `created_at`, `updat
 -- --------------------------------------------------------
 
 --
+-- 表的结构 `log`
+--
+
+CREATE TABLE `log` (
+  `id` int(6) NOT NULL,
+  `version` varchar(20) NOT NULL,
+  `feat` text,
+  `fix` text,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `log`
+--
+
+INSERT INTO `log` (`id`, `version`, `feat`, `fix`, `created_at`, `updated_at`) VALUES
+(3, '1.0.0', '完成主体功能', '无', '2019-01-18 22:50:17', '2019-01-18 22:50:17'),
+(4, '1.0.1', '无', '修复一些BUG', '2019-01-18 22:50:31', '2019-01-18 22:50:31');
+
+-- --------------------------------------------------------
+
+--
 -- 表的结构 `score`
 --
 
@@ -205,6 +228,13 @@ ALTER TABLE `feedback`
   ADD PRIMARY KEY (`id`);
 
 --
+-- 表的索引 `log`
+--
+ALTER TABLE `log`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `version` (`version`);
+
+--
 -- 表的索引 `score`
 --
 ALTER TABLE `score`
@@ -244,6 +274,12 @@ ALTER TABLE `english`
 --
 ALTER TABLE `feedback`
   MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- 使用表AUTO_INCREMENT `log`
+--
+ALTER TABLE `log`
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- 使用表AUTO_INCREMENT `score`
