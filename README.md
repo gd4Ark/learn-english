@@ -16,6 +16,12 @@ Vue2 + Vuex + Vue-router + Element UI + Axios + Scss
 
 Lumen (PHP) + Mysql
 
+## 部分运行截图
+
+请查看：
+
+https://github.com/gd4Ark/learn_english/tree/master/screenshots
+
 ## 使用
 
 ### 初始化
@@ -49,10 +55,6 @@ npm run build
 
 1. **在开发模式中，只能调试一个页面，需在`vue.config.js`里面注释`pages`其中一项，如你有更好的解决方法欢迎提issue，感谢。**
 
-
-
 如果你有任何疑问或不解，欢迎发送邮件（邮箱地址在我主页）。
-
-
 
 最后，感谢您的观看！
