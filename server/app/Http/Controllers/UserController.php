@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Book;
 use App\English;
 
+use App\Feedback;
+use App\Log;
 use App\Score;
 use App\Setting;
 use DemeterChain\B;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class UserController extends Controller{
@@ -59,13 +62,14 @@ class UserController extends Controller{
     }
 
     public function getRank(Request $request){
+        $setting = $this->getSetting();
         $data = Score::where([
                 'book_id' => $request->input('book_id'),
                 'review_module' => $request->input('review_module'),
             ])
             ->orderBy('time')
             ->orderBy('updated_at','DESC')
-            ->limit(30)
+            ->limit($setting->rank_limit_quantity)
             ->get(['id','username','time']);
         foreach($data as $key=>$value){
             $data[$key]['position'] = $key + 1;
@@ -77,5 +81,24 @@ class UserController extends Controller{
 
     public function getSetting(){
         return Setting::all()->first();
+    }
+
+    public function addFeedback(Request $request){
+        Feedback::create($request->all());
+    }
+
+    //获取日志
+    public function getLog(Request $request){
+        // 拿全部
+        if ($request->has('all')){
+            $list = Log::orderBy('version','DESC')->get();
+            return [
+                'list' => $list,
+                'total' => $list->count(),
+            ];
+        };
+        $list = Log::orderBy('version','DESC');
+        $list = $this->search($request,$list);
+        return $this->pagination($request,$list);
     }
 }

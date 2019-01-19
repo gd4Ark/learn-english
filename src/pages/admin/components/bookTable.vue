@@ -9,7 +9,7 @@
           type="danger"
           icon="el-icon-delete"
           @click="handleDelete(multipleSelection)"
-        ></el-button>
+        />
       </div>
       <search-book @get-data="getData" />
     </div>
@@ -42,7 +42,7 @@
             size="mini"
             icon="el-icon-ali-manage"
             @click="handleManage(scope.row.id)"
-          ></el-button>
+          />
           <edit-book
             @get-data="getData"
             :current="scope.row"
@@ -52,7 +52,7 @@
             type="danger"
             icon="el-icon-delete"
             @click="handleDelete([scope.row.id])"
-          ></el-button>
+          />
         </template>
       </el-table-column>
     </el-table>

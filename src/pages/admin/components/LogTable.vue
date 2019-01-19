@@ -2,7 +2,7 @@
   <div class="table-content">
     <div class="toolbar">
       <div>
-        <add-english @get-data="getData" />
+        <add-log @get-data="getData" />
         <el-button
           style="margin-left:10px"
           size="mini"
@@ -11,11 +11,11 @@
           @click="handleDelete(multipleSelection)"
         />
       </div>
-      <search-english @get-data="getData" />
+      <search-log @get-data="getData" />
     </div>
 
     <el-table
-      :data="english.list"
+      :data="log.list"
       class="table"
       height="100%"
       @selection-change="handleSelectionChange"
@@ -24,7 +24,32 @@
         type="selection"
         width="40"
         align="center"
-      >
+      />
+      <el-table-column type="expand">
+        <template slot-scope="props">
+          <div
+            v-if="props.row.fix !== '无'"
+            class="text"
+          >
+            <h3>修复：</h3>
+            <p>
+              {{props.row.fix}}
+            </p>
+          </div>
+          <div
+            v-if="props.row.feat !== '无'"
+            class="text"
+          >
+            <h3>更新：</h3>
+            <p>
+              {{props.row.feat}}
+            </p>
+          </div>
+          <div class="text">
+            <time>创建时间：<span>{{props.row.created_at}}</span></time>
+            <time>更新时间：<span>{{props.row.updated_at}}</span></time>
+          </div>
+        </template>
       </el-table-column>
       <el-table-column
         v-for="(item,index) in tableColumns"
@@ -35,11 +60,11 @@
       />
       <el-table-column
         label="操作"
-        width="110"
+        width="145"
         align="center"
       >
         <template slot-scope="scope">
-          <edit-english
+          <edit-Log
             @get-data="getData"
             :current="scope.row"
           />
@@ -54,35 +79,31 @@
       </el-table-column>
     </el-table>
     <Pagination
-      :module="english"
+      :module="log"
       @get-data="getData"
     />
   </div>
 </template>
 <script>
-import SearchEnglish from "@/pages/admin/components/SearchEnglish.vue";
-import AddEnglish from "@/pages/admin/components/AddEnglish.vue";
-import EditEnglish from "@/pages/admin/components/EditEnglish.vue";
+import SearchLog from "@/pages/admin/components/SearchLog";
+import AddLog from "@/pages/admin/components/AddLog.vue";
+import EditLog from "@/pages/admin/components/EditLog.vue";
 import Pagination from "@/common/components/Pagination.vue";
 import ManageTable from "@/common/mixins/ManageTable";
-import { mapActions,mapState } from "vuex";
+import { mapActions, mapState } from "vuex";
 export default {
   mixins: [ManageTable],
   components: {
-    SearchEnglish,
-    AddEnglish,
-    EditEnglish,
+    SearchLog,
+    AddLog,
+    EditLog,
     Pagination
   },
   data: () => ({
     tableColumns: [
       {
-        label: "中文",
-        prop: "chinese"
-      },
-      {
-        label: "英文",
-        prop: "english"
+        label: "版本",
+        prop: "version"
       }
     ],
     multipleSelection: []
@@ -92,11 +113,27 @@ export default {
   },
   methods: {
     ...mapActions({
-      delData: "delEnglish"
+      delData: "delLog"
     })
   },
-  computed : {
-    ...mapState(['english'])
+  computed: {
+    ...mapState(["log"])
   }
 };
 </script>
+<style lang="scss" scoped>
+.text + .text {
+  margin-top: 3vh;
+}
+.text {
+  h3 {
+    font-size: 0.9rem;
+    font-weight: normal;
+    margin-bottom: 2vh;
+  }
+  p{
+    text-indent: 2rem;
+    font-size: 0.8rem;
+  }
+}
+</style>

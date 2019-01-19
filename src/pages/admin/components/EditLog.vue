@@ -1,7 +1,7 @@
 <template>
   <modal
     ref="modal"
-    title="编辑单词本"
+    title="编辑日志"
     @submit="submit"
     @open="resetData"
   >
@@ -14,7 +14,7 @@
     </template>
     <template slot="body">
       <c-form
-        :formItem="$formData.book.formItem"
+        :formItem="$formData.log.formItem"
         :formData="formData"
       />
     </template>
@@ -36,7 +36,7 @@ export default {
     current: Object
   },
   methods: {
-    ...mapActions(["updateBook"]),
+    ...mapActions(["updateLog"]),
     resetData() {
       this.formData = {
         ...this.current
@@ -46,7 +46,7 @@ export default {
       if (this.$util.checkEmptyForm(this.formData)) {
         return this.$util.msg.warning("请填写正确！");
       }
-      const id = await this.updateBook(this.formData);
+      const id = await this.updateLog(this.formData);
       if (id) {
         this.$util.msg.success("更新成功！");
         this.$emit("get-data");

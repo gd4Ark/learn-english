@@ -3,12 +3,12 @@ export default {
         context.commit('updateEnglish', await this._vm.$axios.get('/english', context.getters.requestEnglishListData));
     },
     async englishKeyword(context, keyword = []) {
-        await context.commit('updateEnglish', {
+        context.commit('updateEnglish', {
             keyword,
         });
     },
     async resetEnglishSearchData(context) {
-        await context.commit('updateEnglish', {
+        context.commit('updateEnglish', {
             searchData: this._vm.$formData.english.searchData(),
         });
     },

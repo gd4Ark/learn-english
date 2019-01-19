@@ -22,6 +22,7 @@
 </template>
 <script>
 import cForm from "@/common/components/Form";
+import { mapActions } from "vuex";
 export default {
   components: {
     cForm
@@ -44,7 +45,20 @@ export default {
     }
   }),
   methods: {
-    submit() {}
+    ...mapActions(["feedback"]),
+    async submit() {
+      const { message } = this.formData;
+      if (!message || message.length < 15) {
+        return this.$util.msg.warning("请填写完整！");
+      }
+      await this.feedback({
+        type: this.type,
+        ...this.formData
+      });
+      this.$util.msg.success('提交成功').then(()=>{
+        this.$router.back();
+      });
+    }
   }
 };
 </script>

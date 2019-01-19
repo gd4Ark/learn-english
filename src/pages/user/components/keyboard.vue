@@ -15,7 +15,7 @@
         :value="key"
       >
         <template v-if="isFn(key)">
-          <i :class="[key ,'el-icon-ali-' + key,{'isUpper' : isUpper}]"></i>
+          <i :class="[key ,'el-icon-ali-' + key,{'isUpper' : isUpper}]"/>
         </template>
         <template v-else>
           {{key}}

@@ -9,7 +9,7 @@
       <el-button
         size="mini"
         icon="el-icon-edit-outline"
-      ></el-button>
+      />
     </template>
     <template slot="body">
       <c-form

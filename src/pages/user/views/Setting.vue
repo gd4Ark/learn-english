@@ -7,7 +7,7 @@
       <Menu :optionsGroups="optionsGroups" />
     </div>
   </wrap>
-  <router-view v-else></router-view>
+  <router-view v-else/>
 </template>
 <script>
 import Menu from "@/common/components/Menu";

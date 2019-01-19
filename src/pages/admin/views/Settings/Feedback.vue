@@ -1,16 +1,22 @@
 <template>
   <pop-wrap>
     <div class="app-content">
-      
+      <feedback-table @get-data="getData" />
     </div>
   </pop-wrap>
 </template>
+
 <script>
-import cForm from "@/common/components/Form";
+import FeedbackTable from "@/pages/admin/components/FeedbackTable";
+import { mapActions } from "vuex";
 export default {
   components: {
-    cForm
+    FeedbackTable,
   },
-  data: () => ({})
+  methods: {
+    ...mapActions({
+      getData: "getFeedback",
+    }),
+  },
 };
 </script>

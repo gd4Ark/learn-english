@@ -13,7 +13,7 @@
             <i
               style="font-size:1.5rem;margin-bottom:1vh;"
               class="el-icon-ali-sad1"
-            ></i>
+            />
             没有选择单词本
           </div>
           <div v-else>

@@ -13,7 +13,7 @@
         >{{item}}</span>
       </p>
     </div>
-    <keyboard @keydown="keyboard"></keyboard>
+    <keyboard @keydown="keyboard"/>
   </div>
 </template>
 
@@ -35,7 +35,8 @@ export default {
         english: []
       },
       origin: {},
-      errorStatus: false
+      errorStatus: false,
+      spellProportion : null,
     };
   },
   watch: {
@@ -46,6 +47,7 @@ export default {
     }
   },
   mounted() {
+    this.spellProportion = this.setting.partial_spell_proportion;
     this.initProblem();
   },
   methods: {
@@ -62,7 +64,7 @@ export default {
     setBlankindex() {
       this.blankIndexes = [];
       const len = this.problem.english.filter(el => el !== " ").length;
-      let n = Math.floor(len / 1.2);
+      let n = Math.floor(len * this.spellProportion);
       while (n--) {
         while (true) {
           const index = this.$util.random(0, len);
@@ -139,9 +141,7 @@ export default {
     currentEnterIndex() {
       return this.problem.english.indexOf(this.blank);
     },
-    ...mapState({
-      review: "review"
-    })
+    ...mapState(['review','setting'])
   }
 };
 </script>

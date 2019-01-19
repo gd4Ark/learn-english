@@ -5,6 +5,7 @@ import userSubmit from "./modules/userSubmit";
 import updatePassword from "./modules/updatePassword";
 import rank from "./modules/rank";
 import feedback from "./modules/feedback";
+import log from "./modules/log";
 import partialSpell from "./modules/partialSpell";
 
 export default {
@@ -18,6 +19,7 @@ export default {
             updatePassword,
             rank,
             feedback,
+            log,
             partialSpell,
         };
     }

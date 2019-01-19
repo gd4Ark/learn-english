@@ -37,6 +37,15 @@
       input-size="mini"
     >
     </el-slider>
+    <!-- 计数类型 -->
+    <el-input-number
+      v-else-if="item.type === 'inputNumber'"
+      v-model="val"
+      :step="item.step"
+      :min="item.min"
+      :max="item.max"
+    >
+    </el-input-number>
     <!-- 普通文本框 -->
     <el-input
       v-else
@@ -46,7 +55,7 @@
       :min="item.min"
       :max="item.max"
       v-model="val"
-    ></el-input>
+    />
   </div>
 </template>
 <script>
