@@ -31,8 +31,11 @@ export default {
     async delBook(context, data) {
         return await this._vm.$axios.delete('/book', data);
     },
-    async AddEnglish(context, data) {
-        return await this._vm.$axios.put('/english', data);
+    async addEnglish(context, data) {
+        return await this._vm.$axios.put('/english', {
+            ...data,
+            book_id: context.state.english.book_id
+        });
     },
     async updateEnglish(context, data) {
         return await this._vm.$axios.post('/english', data);

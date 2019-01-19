@@ -2,7 +2,12 @@
   <div class="table-content">
     <div class="toolbar">
       <div>
-        <add-english @get-data="getData" />
+        <add
+          title="添加单词"
+          moduleKey="english"
+          action="addEnglish"
+          @get-data="getData"
+        />
         <el-button
           style="margin-left:10px"
           size="mini"
@@ -11,7 +16,13 @@
           @click="handleDelete(multipleSelection)"
         />
       </div>
-      <search-english @get-data="getData" />
+      <search
+        title="单词本筛选框"
+        moduleKey="english"
+        submitAction="englishKeyword"
+        resetAction="resetEnglishSearchData"
+        @get-data="getData"
+      />
     </div>
 
     <el-table
@@ -39,9 +50,13 @@
         align="center"
       >
         <template slot-scope="scope">
-          <edit-english
+          <edit
+            title="编辑单词"
+            moduleKey="english"
+            action="updateEnglish"
             @get-data="getData"
             :current="scope.row"
+            :noMargin="true"
           />
           <el-button
             style="margin: 0 10px"
@@ -60,18 +75,18 @@
   </div>
 </template>
 <script>
-import SearchEnglish from "@/pages/admin/components/SearchEnglish.vue";
-import AddEnglish from "@/pages/admin/components/AddEnglish.vue";
-import EditEnglish from "@/pages/admin/components/EditEnglish.vue";
+import Search from "@/common/components/Search";
+import Add from "@/common/components/Add";
+import Edit from "@/common/components/Edit";
 import Pagination from "@/common/components/Pagination.vue";
 import ManageTable from "@/common/mixins/ManageTable";
-import { mapActions,mapState } from "vuex";
+import { mapActions, mapState } from "vuex";
 export default {
   mixins: [ManageTable],
   components: {
-    SearchEnglish,
-    AddEnglish,
-    EditEnglish,
+    Search,
+    Add,
+    Edit,
     Pagination
   },
   data: () => ({
@@ -95,8 +110,8 @@ export default {
       delData: "delEnglish"
     })
   },
-  computed : {
-    ...mapState(['english'])
+  computed: {
+    ...mapState(["english"])
   }
 };
 </script>

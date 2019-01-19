@@ -1,54 +1,55 @@
 <template>
   <modal
     ref="modal"
-    title="编辑日志"
+    :title="title"
     @submit="submit"
-    @open="resetData"
   >
     <template slot="btn">
       <el-button
-        style="margin:0 10px"
         size="mini"
-        icon="el-icon-edit-outline"
+        type="primary"
+        icon="el-icon-plus"
       />
     </template>
     <template slot="body">
       <c-form
-        :formItem="$formData.log.formItem"
+        :formItem="$formData[moduleKey].formItem"
         :formData="formData"
       />
     </template>
   </modal>
 </template>
 <script>
-import Modal from "@/common/components/Modal";
+import modal from "@/common/components/Modal";
 import cForm from "@/common/components/Form";
-import { mapActions } from "vuex";
 export default {
   components: {
-    Modal,
+    modal,
     cForm
+  },
+  props: {
+    title: String,
+    moduleKey: String,
+    action: String
   },
   data: () => ({
     formData: null
   }),
-  props: {
-    current: Object
+  mounted() {
+    this.resetData();
   },
   methods: {
-    ...mapActions(["updateLog"]),
     resetData() {
-      this.formData = {
-        ...this.current
-      };
+      this.formData = this.$formData[this.moduleKey].formData();
     },
     async submit() {
       if (this.$util.checkEmptyForm(this.formData)) {
         return this.$util.msg.warning("请填写正确！");
       }
-      const id = await this.updateLog(this.formData);
+      const id = await this.$store.dispatch(this.action, this.formData);
       if (id) {
-        this.$util.msg.success("更新成功！");
+        this.$util.msg.success("添加成功！");
+        this.resetData();
         this.$emit("get-data");
         this.$refs.modal.hidden();
       }

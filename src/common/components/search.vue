@@ -18,9 +18,12 @@
       />
     </template>
     <template slot="footer">
-      <el-button @click="resetFormData">重 置</el-button>
-      <el-button type="primary"  @click="submit">确 定</el-button>
-      
+      <el-button @click="reset">重 置</el-button>
+      <el-button
+        type="primary"
+        @click="submit"
+      >确 定</el-button>
+
     </template>
   </modal>
 </template>
@@ -38,20 +41,20 @@ export default {
       type: String,
       default: "筛选框"
     },
-    formItem: Array,
-    formData: Object,
-    searchState: {
-      type: Number,
-      default: 0
-    }
+    moduleKey: String,
+    submitAction: String,
+    resetAction: String
   },
   components: {
     Modal,
     cForm
   },
+  mounted() {
+    this.reset();
+  },
   methods: {
-    resetFormData() {
-      this.$emit("reset");
+    reset() {
+      this.$store.dispatch(this.resetAction);
     },
     submit() {
       this.keyword = [];
@@ -72,13 +75,23 @@ export default {
           this.keyword.push([key, operation, item]);
         }
       });
-      this.$emit("submit", this.keyword);
+      this.handleSubmit();
       this.$refs.modal.hidden();
+    },
+    async handleSubmit() {
+      await this.$store.dispatch(this.submitAction, this.keyword);
+      this.$emit("get-data");
     }
   },
   computed: {
     hasSearch() {
-      return this.searchState;
+      return this.$store.state[this.moduleKey].keyword.length;
+    },
+    formData() {
+      return this.$store.state[this.moduleKey].searchData;
+    },
+    formItem() {
+      return this.$formData[this.moduleKey].searchformItem;
     }
   }
 };

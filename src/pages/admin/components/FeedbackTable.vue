@@ -9,7 +9,13 @@
           @click="handleDelete(multipleSelection)"
         />
       </div>
-      <search-feedback @get-data="getData" />
+      <search
+        title="反馈筛选框"
+        moduleKey="feedback"
+        submitAction="feedbackKeyword"
+        resetAction="resetFeedbackSearchData"
+        @get-data="getData"
+      />
     </div>
 
     <el-table
@@ -69,14 +75,14 @@
   </div>
 </template>
 <script>
-import SearchFeedback from "@/pages/admin/components/SearchFeedback";
+import Search from "@/common/components/Search";
 import Pagination from "@/common/components/Pagination";
 import ManageTable from "@/common/mixins/ManageTable";
 import { mapActions, mapState } from "vuex";
 export default {
   mixins: [ManageTable],
   components: {
-    SearchFeedback,
+    Search,
     Pagination
   },
   data: () => ({
