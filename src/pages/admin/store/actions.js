@@ -19,8 +19,8 @@ export default {
     async updateSetting(context, data) {
         return await this._vm.$axios.post('/setting', data);
     },
-    async getBook(context) {
-        context.commit('updateBook', await this._vm.$axios.get('/book', context.getters.requestBookListData));
+    async getBook({commit,state,getters}) {
+        commit('updateBook', await this._vm.$axios.get('/book', getters.requestData(state.book)));
     },
     async addBook(context, data) {
         return await this._vm.$axios.put('/book', data);
@@ -43,14 +43,14 @@ export default {
     async delEnglish(context, data) {
         return await this._vm.$axios.delete('/english', data);
     },
-    async getFeedback(context) {
-        context.commit('updateFeedback', await this._vm.$axios.get('/feedback', context.getters.requestFeedbackListData));
+    async getFeedback({commit,state,getters}) {
+        commit('updateFeedback', await this._vm.$axios.get('/feedback', getters.requestData(state.feedback)));
     },
     async delFeedback(context, data) {
         return await this._vm.$axios.delete('/feedback', data);
     },
-    async getLog(context) {
-        context.commit('updateLog', await this._vm.$axios.get('/log', context.getters.requestLogListData));
+    async getLog({commit,state,getters}) {
+        commit('updateLog', await this._vm.$axios.get('/log', getters.requestData(state.log)));
     },
     async addLog(context, data) {
         return await this._vm.$axios.put('/log', data);

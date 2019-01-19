@@ -4,7 +4,13 @@
       <div>
         {{currentBook.name}}
       </div>
-      <search-english @get-data="getData" />
+      <search
+        title="单词本筛选框"
+        moduleKey="english"
+        submitAction="englishKeyword"
+        resetAction="resetEnglishSearchData"
+        @get-data="getData"
+      />
     </div>
 
     <el-table
@@ -27,14 +33,14 @@
   </div>
 </template>
 <script>
-import SearchEnglish from "@/pages/admin/components/SearchEnglish.vue";
+import Search from "@/common/components/Search";
 import Pagination from "@/common/components/Pagination.vue";
 import CurrentBook from "@/common/mixins/CurrentBook";
 import { mapState } from "vuex";
 export default {
   mixins: [CurrentBook],
   components: {
-    SearchEnglish,
+    Search,
     Pagination
   },
   data: () => ({
