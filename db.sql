@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： 127.0.0.1
--- 生成日期： 2019-01-19 11:01:06
+-- 生成日期： 2019-01-21 09:03:44
 -- 服务器版本： 10.1.37-MariaDB
 -- PHP 版本： 7.3.0
 
@@ -135,7 +135,8 @@ CREATE TABLE `log` (
 --
 
 INSERT INTO `log` (`id`, `version`, `feat`, `fix`, `created_at`, `updated_at`) VALUES
-(5, '1.0.0', '完成主体功能', '无', '2019-01-19 02:00:07', '2019-01-19 02:00:07');
+(5, '1.0.0', '完成主体功能', '无', '2019-01-19 02:00:07', '2019-01-19 02:00:07'),
+(6, '1.1.0', '增加复习模块-单词全部拼写', '无', '2019-01-21 00:02:20', '2019-01-21 00:02:20');
 
 -- --------------------------------------------------------
 
@@ -167,7 +168,9 @@ INSERT INTO `score` (`id`, `book_id`, `review_module`, `username`, `time`, `crea
 (7, 7, '单词部分拼写', 'test-3', 2, '2019-01-19 01:54:18', '2019-01-19 01:54:18'),
 (8, 7, '单词部分拼写', 'test-4', 3, '2019-01-19 01:54:33', '2019-01-19 01:54:33'),
 (9, 7, '单词部分拼写', 'test-5', 4, '2019-01-19 01:57:19', '2019-01-19 01:57:19'),
-(10, 6, '单词部分拼写', 'test-5', 2, '2019-01-19 01:57:52', '2019-01-19 01:57:52');
+(10, 6, '单词部分拼写', 'test-5', 2, '2019-01-19 01:57:52', '2019-01-19 01:57:52'),
+(11, 6, '单词全部拼写', 'test-1', 4, '2019-01-20 23:40:39', '2019-01-20 23:40:39'),
+(12, 6, '单词全部拼写', 'test-2', 3, '2019-01-20 23:43:46', '2019-01-20 23:57:27');
 
 -- --------------------------------------------------------
 
@@ -254,13 +257,13 @@ ALTER TABLE `admin`
 -- 使用表AUTO_INCREMENT `book`
 --
 ALTER TABLE `book`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- 使用表AUTO_INCREMENT `english`
 --
 ALTER TABLE `english`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- 使用表AUTO_INCREMENT `feedback`
@@ -272,13 +275,13 @@ ALTER TABLE `feedback`
 -- 使用表AUTO_INCREMENT `log`
 --
 ALTER TABLE `log`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- 使用表AUTO_INCREMENT `score`
 --
 ALTER TABLE `score`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- 限制导出的表
