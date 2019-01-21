@@ -1,7 +1,7 @@
 <template>
   <wrap padding="0 2% 2%">
     <template slot="header">
-      <select-module/>
+      <select-module @get-data="getData"/>
     </template>
     <div class="app-content">
       <rank-table @get-data="getData" />

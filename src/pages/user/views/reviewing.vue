@@ -62,7 +62,7 @@ export default {
     ...mapMutations(["updateSubmit"]),
     exit(msg) {
       this.$util.msg.error(msg).then(() => {
-        this.$router.back();
+        this.$router.push('/review');
       });
     },
     start() {

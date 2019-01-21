@@ -6,7 +6,7 @@
     @submit="submit"
   >
     <template slot="btn">
-      <el-button type="text">单词部分拼写</el-button>
+      <el-button type="text">{{ rank.review_module }}</el-button>
     </template>
     <template slot="body">
       <el-select
@@ -47,6 +47,7 @@ export default {
       this.updateModule({
         review_module: this.value
       });
+      this.$emit('get-data');
       this.$refs.modal.hidden();
     }
   },

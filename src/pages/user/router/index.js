@@ -9,6 +9,7 @@ import English from '@/pages/user/views/English';
 import Reviewing from '@/pages/user/views/Reviewing';
 
 import PartialSpell from '@/pages/user/views/Reviewings/PartialSpell';
+import AllSpell from '@/pages/user/views/Reviewings/AllSpell';
 
 import Submit from '@/pages/user/views/Submit';
 
@@ -65,6 +66,12 @@ const routerConfig = {
             component: PartialSpell,
             meta: {
                 title: '单词部分拼写',
+            }
+        },{
+            path: "AllSpell",
+            component: AllSpell,
+            meta: {
+                title: '单词全部拼写',
             }
         }]
     }, {
