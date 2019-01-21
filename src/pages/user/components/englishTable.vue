@@ -34,7 +34,7 @@
 </template>
 <script>
 import Search from "@/common/components/Search";
-import Pagination from "@/common/components/Pagination.vue";
+import Pagination from "@/common/components/Pagination";
 import CurrentBook from "@/common/mixins/CurrentBook";
 import { mapState } from "vuex";
 export default {

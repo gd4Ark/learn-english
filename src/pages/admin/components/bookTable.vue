@@ -80,7 +80,7 @@
 import Search from "@/common/components/Search";
 import Add from "@/common/components/Add";
 import Edit from "@/common/components/Edit";
-import Pagination from "@/common/components/Pagination.vue";
+import Pagination from "@/common/components/Pagination";
 import ManageTable from "@/common/mixins/ManageTable";
 import { mapActions, mapState } from "vuex";
 export default {
