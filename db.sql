@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： 127.0.0.1
--- 生成日期： 2019-01-21 09:03:44
+-- 生成日期： 2019-01-21 09:07:54
 -- 服务器版本： 10.1.37-MariaDB
 -- PHP 版本： 7.3.0
 
@@ -41,7 +41,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `username`, `password`) VALUES
-(1, 'admin', '15ff02e8983acf94a2d72a385a4a9dc4');
+(1, 'admin', 'e292f6af4d8995560729cac5b0ffdbf9');
 
 -- --------------------------------------------------------
 
