@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import EnglishTable from "@/pages/user/components/EnglishTable.vue";
+import EnglishTable from "@/pages/user/components/EnglishTable";
 import { mapActions, mapMutations } from "vuex";
 export default {
   components: {
