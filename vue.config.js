@@ -1,7 +1,7 @@
 const CompressionPlugin = require("compression-webpack-plugin");
 const isDev = process.env.NODE_ENV == 'development';
 const config = {
-  baseUrl: isDev ? '/' : './',
+  publicPath : isDev ? '/' : './',
   pages: {
     index: {
       entry: 'src/pages/admin/main.js',
