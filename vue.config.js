@@ -1,13 +1,30 @@
 const CompressionPlugin = require("compression-webpack-plugin");
 const isDev = process.env.NODE_ENV == 'development';
-const config = {
-  publicPath : isDev ? '/' : './',
-  pages: {
+const current = 'user'; // admin or user
+const pages = [
+  // development
+  // 只能调试一个
+  {
     index: {
-      entry: 'src/pages/admin/main.js',
+      entry: `src/pages/${current}/main.js`,
       filename: 'index.html',
     },
   },
+  // production
+  {
+    index: {
+      entry: 'src/pages/user/main.js',
+      filename: 'index.html',
+    },
+    admin: {
+      entry: 'src/pages/admin/main.js',
+      filename: 'index.html',
+    },
+  }
+];
+const config = {
+  baseUrl: isDev ? '/' : './',
+  pages: pages[isDev ? 0 : 1],
   lintOnSave: false,
   css: {
     loaderOptions: {
