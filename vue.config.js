@@ -1,6 +1,6 @@
 const CompressionPlugin = require("compression-webpack-plugin");
 const isDev = process.env.NODE_ENV == 'development';
-const current = 'user'; // admin or user
+const current = 'admin'; // admin or user
 const pages = [
   // development
   // 只能调试一个
