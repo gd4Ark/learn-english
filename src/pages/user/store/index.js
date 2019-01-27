@@ -33,7 +33,7 @@ export default new vuex.Store({
         ...getters,
     },
     plugins: [createPersist({
-        namespace: 'namespace-for-state',
+        namespace: 'learn-english-user',
         initialState: {},
         // ONE_WEEK
         expires: 7 * 24 * 60 * 60 * 1e3
