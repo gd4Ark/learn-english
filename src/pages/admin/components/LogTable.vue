@@ -4,7 +4,7 @@
       <div>
         <add
           title="添加日志"
-          moduleKey="log"
+          module="log"
           action="addLog"
           @get-data="getData"
         />
@@ -75,7 +75,7 @@
         <template slot-scope="scope">
           <edit
             title="编辑日志"
-            moduleKey="log"
+            module="log"
             action="updateLog"
             @get-data="getData"
             :current="scope.row"

@@ -14,7 +14,7 @@
     </template>
     <template slot="body">
       <c-form
-        :formItem="$formData[moduleKey].formItem"
+        :formItem="$formData[module].formItem"
         :formData="formData"
       />
     </template>
@@ -30,7 +30,7 @@ export default {
   },
   props: {
     title: String,
-    moduleKey: String,
+    module: String,
     action: String,
     current: Object,
     noMargin : {

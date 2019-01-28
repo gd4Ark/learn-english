@@ -4,7 +4,7 @@
       <div>
         <add
           title="添加单词"
-          moduleKey="english"
+          module="english"
           action="addEnglish"
           @get-data="getData"
         />
@@ -50,7 +50,7 @@
         <template slot-scope="scope">
           <edit
             title="编辑单词"
-            moduleKey="english"
+            module="english"
             action="updateEnglish"
             @get-data="getData"
             :current="scope.row"

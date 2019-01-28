@@ -4,7 +4,7 @@
       <div>
         <add
           title="添加单词本"
-          moduleKey="book"
+          module="book"
           action="addBook"
           @get-data="getData"
         />
@@ -54,7 +54,7 @@
           />
           <edit
             title="编辑单词本"
-            moduleKey="book"
+            module="book"
             action="updateBook"
             @get-data="getData"
             :current="scope.row"
