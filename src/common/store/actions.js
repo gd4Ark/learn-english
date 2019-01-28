@@ -8,7 +8,7 @@ export default {
 
     async resetSearchData(context, module) {
         context.commit(`update${this._vm.$util.firstUpperCase(module)}`, {
-            searchData: this._vm.$formData[module].searchData(),
+            searchData: this._vm.$formData[module].search.data(),
         });
     },
     async updateKeyword(context, {

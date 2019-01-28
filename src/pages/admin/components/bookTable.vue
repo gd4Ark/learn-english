@@ -4,7 +4,8 @@
       <div>
         <add
           title="添加单词本"
-          module="book"
+          :formItem="$formData.book.admin.item"
+          :getFormData="$formData.book.admin.data"
           action="addBook"
           @get-data="getData"
         />
@@ -54,10 +55,10 @@
           />
           <edit
             title="编辑单词本"
-            module="book"
+            :formItem="$formData.book.admin.item"
+            :current="scope.row"
             action="updateBook"
             @get-data="getData"
-            :current="scope.row"
           />
           <el-button
             size="mini"

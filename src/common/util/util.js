@@ -93,7 +93,6 @@ export default {
 
         o.checkEmptyForm = (formData) => {
             for (let v of Object.values(formData)) {
-                v = ("" + v).trim();
                 if (v !== 0 && !v) {
                     return true;
                 }

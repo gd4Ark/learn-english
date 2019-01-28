@@ -8,50 +8,52 @@
       >完 成</el-button>
     </template>
     <div class="app-content">
-      <c-form
-        :formItem="$formData.partialSpell.formItem"
+      <base-form
+        v-if="done"
+        ref="baseForm"
+        :formItem="$formData.review.partialSpell.item"
         :formData="formData"
+        @submit="handleSubmit"
       >
-      </c-form>
+      </base-form>
     </div>
   </pop-wrap>
 </template>
 <script>
-import cForm from "@/common/components/Form";
-import { async } from "q";
+import BaseForm from "@/common/components/BaseForm";
 import { mapActions, mapState } from "vuex";
 
 export default {
   components: {
-    cForm
+    BaseForm
   },
-  data() {
-    return {
-      formData: {
-        partial_spell_proportion: 0
-      }
-    };
-  },
+  data: () => ({
+    formData: {
+      partial_spell_proportion : null
+    }
+  }),
   methods: {
     ...mapActions(["updateSetting", "getSetting"]),
-    async submit() {
-      if (this.$util.checkEmptyForm(this.formData)) {
-        return this.$util.msg.warning("请填写完整！");
-      }
-      await this.updateSetting(this.formData);
+    submit() {
+      this.$refs.baseForm.submit();
+    },
+    async handleSubmit(formData) {
+      await this.updateSetting(formData);
       this.$util.msg.success("修改成功");
     }
   },
-  mounted() {
-    this.getSetting().then(() => {
-      const { partial_spell_proportion } = this.setting;
-      this.formData = {
-        partial_spell_proportion
-      };
-    });
+  async mounted() {
+    await this.getSetting();
+    const { partial_spell_proportion  } = this.setting;
+    this.formData = {
+      partial_spell_proportion 
+    };
   },
   computed: {
-    ...mapState(["setting"])
+    ...mapState(["setting"]),
+    done(){
+      return this.formData.partial_spell_proportion  !== null;
+    }
   }
 };
 </script>
