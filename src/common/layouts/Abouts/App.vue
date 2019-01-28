@@ -26,6 +26,8 @@
     }
     line-height: 1.5;
     text-indent: 1em;
+    font-size: 0.9rem;
   }
 }
 </style>
+

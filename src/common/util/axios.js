@@ -6,7 +6,7 @@ export default {
     install(Vue, options) {
 
         let vm = Vue.prototype;
-        
+
         let config = vm.$config;
 
         let router = options.router;
@@ -14,13 +14,13 @@ export default {
         const useToekn = options.useToekn;
 
         axios.defaults.baseURL = config.server_url + 'api';
-        
+
 
         // 请求拦截器
 
         axios.interceptors.request.use(config => {
             // Add Token
-            if (useToekn){
+            if (useToekn) {
                 const user = vm.$localStore.get('user');
                 if (user && user.token) {
                     const stringifyStatus = ['get', 'delete'].includes(config.method);
@@ -42,7 +42,7 @@ export default {
                             break;
                     }
                     config[stringifyStatus ? 'params' : 'data'] = data;
-                }   
+                }
             }
             return config;
         }, err => {
@@ -56,18 +56,16 @@ export default {
         }, err => {
             const status = err.response.status;
             const message = err.response.data.message;
-            switch (status) {
-                case 401:
+            switch (true) {
+                case (status === 401):
                     vm.$util.msg.error(message).then(() => {
                         router.push('/login');
                     });
                     break;
-                case 403:
-                case 404:
-                case 405:
-                    vm.$util.msg.error(message || '请求服务器失败！');
+                case (status >= 400 && status < 500):
+                    vm.$util.msg.error(message || '操作失败！');
                     break;
-                case 500:
+                case (status >= 500 && status < 600):
                     vm.$util.msg.error('服务器发生错误！');
                     break;
             }

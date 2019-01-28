@@ -4,7 +4,8 @@
       <div>
         <add
           title="添加日志"
-          moduleKey="log"
+          :formItem="$formData.log.base.item"
+          :getFormData="$formData.log.base.data"
           action="addLog"
           @get-data="getData"
         />
@@ -16,11 +17,9 @@
           @click="handleDelete(multipleSelection)"
         />
       </div>
-       <search
+      <search
         title="日志筛选框"
-        moduleKey="log"
-        submitAction="logKeyword"
-        resetAction="resetLogSearchData"
+        module="log"
         @get-data="getData"
       />
     </div>
@@ -77,10 +76,10 @@
         <template slot-scope="scope">
           <edit
             title="编辑日志"
-            moduleKey="log"
+            :formItem="$formData.log.base.item"
+            :current="scope.row"
             action="updateLog"
             @get-data="getData"
-            :current="scope.row"
           />
           <el-button
             style="margin: 0 10px"

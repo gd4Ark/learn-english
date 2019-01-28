@@ -3,7 +3,7 @@
     ref="modal"
     :title="title"
     @submit="submit"
-    @open="resetData"
+    @open="reset"
   >
     <template slot="btn">
       <el-button
@@ -13,45 +13,51 @@
       />
     </template>
     <template slot="body">
-      <c-form
-        :formItem="$formData[moduleKey].formItem"
-        :formData="formData"
+      <baseForm
+        ref="baseForm"
+        :formItem="formItem"
+        :formData="current"
+        @submit="handleSubmit"
       />
     </template>
   </modal>
 </template>
 <script>
 import Modal from "@/common/components/Modal";
-import cForm from "@/common/components/Form";
+import BaseForm from "@/common/components/BaseForm";
 export default {
   components: {
     Modal,
-    cForm
+    BaseForm
   },
   props: {
     title: String,
-    moduleKey: String,
+    formItem: Array,
     action: String,
     current: Object,
-    noMargin : {
-      type : Boolean,
-      default : false,
+    noMargin: {
+      type: Boolean,
+      default: false
     }
   },
   data: () => ({
     formData: null
   }),
   methods: {
-    resetData() {
-      this.formData = {
-        ...this.current
-      };
+    submit() {
+      this.$refs.baseForm.submit();
     },
-    async submit() {
-      if (this.$util.checkEmptyForm(this.formData)) {
-        return this.$util.msg.warning("请填写正确！");
+    reset(){
+      // 需要异步执行 否则无法调用 baseForm.reset 方法
+      setTimeout(()=>{
+        this.$refs.baseForm.reset();
+      },0);
+    },
+    async handleSubmit(formData) {
+      if (!this.action) {
+        return this.$emit("submit", formData);
       }
-      const id = await this.$store.dispatch(this.action, this.formData);
+      const id = await this.$store.dispatch(this.action, formData);
       if (id) {
         this.$util.msg.success("更新成功！");
         this.$emit("get-data");

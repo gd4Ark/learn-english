@@ -93,12 +93,15 @@ export default {
 
         o.checkEmptyForm = (formData) => {
             for (let v of Object.values(formData)) {
-                v = ("" + v).trim();
                 if (v !== 0 && !v) {
                     return true;
                 }
             }
         };
+
+        o.firstUpperCase = (str) => (
+            str.toLowerCase().replace(/( |^)[a-z]/g, (L) => L.toUpperCase())
+        )
 
         o.timer = (() => {
 

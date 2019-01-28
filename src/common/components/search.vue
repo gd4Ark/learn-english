@@ -30,31 +30,29 @@
 <script>
 import Modal from "@/common/components/Modal";
 import cForm from "@/common/components/Form";
+import { mapActions } from "vuex";
 export default {
-  data() {
-    return {
-      keyword: []
-    };
+  components: {
+    Modal,
+    cForm
   },
   props: {
     title: {
       type: String,
       default: "筛选框"
     },
-    moduleKey: String,
-    submitAction: String,
-    resetAction: String
+    module: String
   },
-  components: {
-    Modal,
-    cForm
-  },
+  data: () => ({
+    keyword: []
+  }),
   mounted() {
     this.reset();
   },
   methods: {
+    ...mapActions(["resetSearchData", "updateKeyword"]),
     reset() {
-      this.$store.dispatch(this.resetAction);
+      this.resetSearchData(this.module);
     },
     submit() {
       this.keyword = [];
@@ -79,19 +77,22 @@ export default {
       this.$refs.modal.hidden();
     },
     async handleSubmit() {
-      await this.$store.dispatch(this.submitAction, this.keyword);
+      await this.updateKeyword({
+        module: this.module,
+        keyword: this.keyword
+      });
       this.$emit("get-data");
     }
   },
   computed: {
     hasSearch() {
-      return this.$store.state[this.moduleKey].keyword.length;
+      return this.$store.state[this.module].keyword.length;
     },
     formData() {
-      return this.$store.state[this.moduleKey].searchData;
+      return this.$store.state[this.module].searchData;
     },
     formItem() {
-      return this.$formData[this.moduleKey].searchformItem;
+      return this.$formData[this.module].search.item;
     }
   }
 };

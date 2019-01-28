@@ -1,12 +1,12 @@
 import book from "./modules/book";
 import english from "./modules/english";
-import adminLogin from "./modules/adminLogin";
-import userSubmit from "./modules/userSubmit";
-import updatePassword from "./modules/updatePassword";
+import login from "./modules/login";
+import submit from "./modules/submit";
+import password from "./modules/password";
 import rank from "./modules/rank";
 import feedback from "./modules/feedback";
 import log from "./modules/log";
-import partialSpell from "./modules/partialSpell";
+import review from "./modules/review";
 
 export default {
     install(Vue) {
@@ -14,13 +14,13 @@ export default {
         Vue.prototype.$formData = {
             book,
             english,
-            adminLogin,
-            userSubmit,
-            updatePassword,
+            login,
+            submit,
+            password,
             rank,
             feedback,
             log,
-            partialSpell,
+            review,
         };
     }
 }

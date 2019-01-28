@@ -4,40 +4,27 @@
     :useBack="false"
   >
     <div class="app-content">
-      <c-form
-        :formItem="$formData.adminLogin.formItem"
-        :formData="formData"
+      <BaseForm
+        btn="登录"
+        :useBtn="true"
+        :formItem="$formData.login.base.item"
+        :getFormData="$formData.login.base.data"
+        @submit="submit"
       />
-      <el-button
-        type="primary"
-        @click="submit"
-      >登 录</el-button>
     </div>
   </pop-wrap>
 </template>
 <script>
-import cForm from "@/common/components/Form";
-import { async } from "q";
+import BaseForm from "@/common/components/BaseForm";
 import { mapActions } from "vuex";
-
 export default {
   components: {
-    cForm
+    BaseForm
   },
-  data: () => ({
-    formData: {
-      username: "",
-      password: ""
-    }
-  }),
   methods: {
     ...mapActions(["login"]),
-
-    async submit() {
-      if (this.$util.checkEmptyForm(this.formData)) {
-        return this.$util.msg.warning("请填写完整！");
-      }
-      await this.login(this.formData);
+    async submit(formData) {
+      await this.login(formData);
       this.$router.push("/index");
     }
   }

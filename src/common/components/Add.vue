@@ -12,46 +12,42 @@
       />
     </template>
     <template slot="body">
-      <c-form
-        :formItem="$formData[moduleKey].formItem"
-        :formData="formData"
+      <baseForm
+        ref="baseForm"
+        :formItem="formItem"
+        :getFormData="getFormData"
+        @submit="handleSubmit"
       />
     </template>
   </modal>
 </template>
 <script>
 import modal from "@/common/components/Modal";
-import cForm from "@/common/components/Form";
+import BaseForm from "@/common/components/BaseForm";
 export default {
   components: {
     modal,
-    cForm
+    BaseForm
   },
   props: {
+    formItem: Array,
+    getFormData: Function,
     title: String,
-    moduleKey: String,
-    action: String
-  },
-  data: () => ({
-    formData: null
-  }),
-  mounted() {
-    this.resetData();
+    action: String,
   },
   methods: {
-    resetData() {
-      this.formData = this.$formData[this.moduleKey].formData();
+    submit() {
+      this.$refs.baseForm.submit();
     },
-    async submit() {
-      if (this.$util.checkEmptyForm(this.formData)) {
-        return this.$util.msg.warning("请填写正确！");
+    async handleSubmit(formData) {
+      if (!this.action) {
+        return this.$emit("submit", formData);
       }
-      const id = await this.$store.dispatch(this.action, this.formData);
+      const id = await this.$store.dispatch(this.action, formData);
       if (id) {
         this.$util.msg.success("添加成功！");
-        this.resetData();
+        this.$refs.baseForm.reset();
         this.$emit("get-data");
-        this.$refs.modal.hidden();
       }
     }
   }

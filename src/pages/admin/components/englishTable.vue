@@ -4,7 +4,8 @@
       <div>
         <add
           title="添加单词"
-          moduleKey="english"
+         :formItem="$formData.english.admin.item"
+          :getFormData="$formData.english.admin.data"
           action="addEnglish"
           @get-data="getData"
         />
@@ -18,9 +19,7 @@
       </div>
       <search
         title="单词本筛选框"
-        moduleKey="english"
-        submitAction="englishKeyword"
-        resetAction="resetEnglishSearchData"
+        module="english"
         @get-data="getData"
       />
     </div>
@@ -52,10 +51,10 @@
         <template slot-scope="scope">
           <edit
             title="编辑单词"
-            moduleKey="english"
+           :formItem="$formData.english.admin.item"
+            :current="scope.row"
             action="updateEnglish"
             @get-data="getData"
-            :current="scope.row"
             :noMargin="true"
           />
           <el-button

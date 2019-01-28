@@ -10,13 +10,16 @@
       </el-radio-group>
       <c-form
         :showLabel="false"
-        :formItem="$formData.feedback.formItem"
+        :formItem="$formData.feedback.base.item"
         :formData="formData"
       />
       <el-button
         type="primary"
         @click="submit"
       >提 交</el-button>
+      <p class="message">
+        注：出于安全考虑，反馈功能一分钟只能提交一次。
+      </p>
     </div>
   </pop-wrap>
 </template>
@@ -39,25 +42,24 @@ export default {
         text: "新功能建议"
       }
     ],
-    formData: {
-      message: "",
-      contact: ""
-    }
+    formData: {}
   }),
+  mounted() {
+    this.formData = this.$formData.feedback.base.data();
+  },
   methods: {
     ...mapActions(["feedback"]),
     async submit() {
       const { message } = this.formData;
       if (!message || message.length < 15) {
-        return this.$util.msg.warning("请填写完整！");
+        return this.$util.msg.warning("描述不得少于15字");
       }
-      await this.feedback({
+      const res = await this.feedback({
         type: this.type,
         ...this.formData
       });
-      this.$util.msg.success('提交成功').then(()=>{
-        this.$router.back();
-      });
+      this.$util.msg.success("提交成功");
+      this.$router.back();
     }
   }
 };
@@ -71,5 +73,10 @@ export default {
 }
 button {
   width: 100%;
+}
+.message{
+  margin-top: 3vh;
+  font-size: 0.8rem;
+  opacity: 0.7;
 }
 </style>

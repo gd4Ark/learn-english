@@ -4,7 +4,8 @@
       <div>
         <add
           title="添加单词本"
-          moduleKey="book"
+          :formItem="$formData.book.admin.item"
+          :getFormData="$formData.book.admin.data"
           action="addBook"
           @get-data="getData"
         />
@@ -18,9 +19,7 @@
       </div>
       <search
         title="单词本筛选框"
-        moduleKey="book"
-        submitAction="bookKeyword"
-        resetAction="resetBookSearchData"
+        module="book"
         @get-data="getData"
       />
     </div>
@@ -56,10 +55,10 @@
           />
           <edit
             title="编辑单词本"
-            moduleKey="book"
+            :formItem="$formData.book.admin.item"
+            :current="scope.row"
             action="updateBook"
             @get-data="getData"
-            :current="scope.row"
           />
           <el-button
             size="mini"

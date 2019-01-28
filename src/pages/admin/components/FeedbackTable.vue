@@ -11,9 +11,7 @@
       </div>
       <search
         title="反馈筛选框"
-        moduleKey="feedback"
-        submitAction="feedbackKeyword"
-        resetAction="resetFeedbackSearchData"
+        module="feedback"
         @get-data="getData"
       />
     </div>

@@ -26,57 +26,38 @@
           </p>
         </div>
       </div>
-      <c-form
-        :formItem="$formData.userSubmit.formItem"
-        :formData="formData"
-      >
-        <el-col :offset="9">
-          <el-button
-            type="primary"
-            @click="handleSubmit"
-          >提 交</el-button>
-        </el-col>
-      </c-form>
+      <BaseForm
+        btn="提交"
+        :useBtn="true"
+        :formItem="$formData.submit.base.item"
+        :getFormData="$formData.submit.base.data"
+        @submit="handleSubmit"
+      />
     </div>
   </pop-wrap>
 </template>
 <script>
-import cForm from "@/common/components/Form";
-import { async } from "q";
+import BaseForm from "@/common/components/BaseForm";
 import { mapActions, mapState } from "vuex";
 
 export default {
   components: {
-    cForm
-  },
-  data: () => ({
-    formData: {
-      username: ""
-    }
-  }),
-  mounted() {
-    if (this.submitInfo.username) {
-      this.formData.username = this.submitInfo.username;
-    }
+    BaseForm
   },
   methods: {
     ...mapActions(["submit"]),
 
-    async handleSubmit() {
-      if (this.$util.checkEmptyForm(this.formData)) {
-        return this.$util.msg.warning("请填写完整！");
-      }
-      const { username } = this.formData;
+    async handleSubmit(formData) {
+      const { username } = formData;
       if (username.length > 6) {
         return this.$util.msg.warning("名字长度不可超过6位数！");
       }
       await this.submit({
         ...this.submitInfo,
-        ...this.formData
+        ...formData
       });
-      this.$util.msg.success("提交成功！").then(() => {
-        this.$router.push("/rank");
-      });
+      await this.$util.msg.success("提交成功！");
+      this.$router.push("/rank");
     }
   },
   computed: {

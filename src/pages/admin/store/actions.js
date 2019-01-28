@@ -61,35 +61,5 @@ export default {
     async delLog(context, data) {
         return await this._vm.$axios.delete('/log', data);
     },
-    async feedbackKeyword(context, keyword = []) {
-        context.commit('updateFeedback', {
-            keyword,
-        });
-    },
-    async resetFeedbackSearchData(context) {
-        context.commit('updateFeedback', {
-            searchData: this._vm.$formData.feedback.searchData(),
-        });
-    },
-    async logKeyword(context, keyword = []) {
-        context.commit('updateLog', {
-            keyword,
-        });
-    },
-    async resetLogSearchData(context) {
-        context.commit('updateLog', {
-            searchData: this._vm.$formData.log.searchData(),
-        });
-    },
-    async bookKeyword(context, keyword = []) {
-        context.commit('updateBook', {
-            keyword,
-        });
-    },
-    async resetBookSearchData(context) {
-        context.commit('updateBook', {
-            searchData: this._vm.$formData.book.searchData(),
-        });
-    },
     ...actions,
 }
