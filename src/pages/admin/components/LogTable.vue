@@ -18,9 +18,7 @@
       </div>
        <search
         title="日志筛选框"
-        moduleKey="log"
-        submitAction="logKeyword"
-        resetAction="resetLogSearchData"
+        module="log"
         @get-data="getData"
       />
     </div>

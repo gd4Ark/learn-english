@@ -18,9 +18,7 @@
       </div>
       <search
         title="单词本筛选框"
-        moduleKey="english"
-        submitAction="englishKeyword"
-        resetAction="resetEnglishSearchData"
+        module="english"
         @get-data="getData"
       />
     </div>

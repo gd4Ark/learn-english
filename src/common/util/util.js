@@ -100,6 +100,10 @@ export default {
             }
         };
 
+        o.firstUpperCase = (str) => (
+            str.toLowerCase().replace(/( |^)[a-z]/g, (L) => L.toUpperCase())
+        )
+
         o.timer = (() => {
 
             const timers = [];

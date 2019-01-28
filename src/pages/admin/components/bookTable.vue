@@ -18,9 +18,7 @@
       </div>
       <search
         title="单词本筛选框"
-        moduleKey="book"
-        submitAction="bookKeyword"
-        resetAction="resetBookSearchData"
+        module="book"
         @get-data="getData"
       />
     </div>
