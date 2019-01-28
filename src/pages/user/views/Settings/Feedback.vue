@@ -17,6 +17,9 @@
         type="primary"
         @click="submit"
       >提 交</el-button>
+      <p class="message">
+        注：出于安全考虑，反馈功能一分钟只能提交一次。
+      </p>
     </div>
   </pop-wrap>
 </template>
@@ -51,7 +54,7 @@ export default {
       if (!message || message.length < 15) {
         return this.$util.msg.warning("描述不得少于15字");
       }
-      await this.feedback({
+      const res = await this.feedback({
         type: this.type,
         ...this.formData
       });
@@ -70,5 +73,10 @@ export default {
 }
 button {
   width: 100%;
+}
+.message{
+  margin-top: 3vh;
+  font-size: 0.8rem;
+  opacity: 0.7;
 }
 </style>

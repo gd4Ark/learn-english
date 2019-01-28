@@ -103,7 +103,7 @@ class ThrottleRequests
 //        return new ThrottleRequestsException(
 //            'Too Many Attempts.', null, $headers
 //        );
-        return new ThrottleException('Too Many Attempts.', 429);
+        return new ThrottleException('请求过快，稍后再试！', 429);
     }
     /**
      * Get the number of seconds until the next retry.

@@ -27,7 +27,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
     $router->get('log','UserController@getLog');
 
-    $router->group(['middleware' => ['throttle:10,2']],function () use ($router){
+    $router->group(['middleware' => ['throttle:1,1']],function () use ($router){
 
         $router->put('feedback','UserController@addFeedback');
 
