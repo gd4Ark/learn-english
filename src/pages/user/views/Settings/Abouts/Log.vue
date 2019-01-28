@@ -1,51 +1,57 @@
 <template>
   <pop-wrap>
     <div class="app-content">
-      <el-card
-        shadow="never"
-        v-for="(item,index) in log.list"
-        :key="index"
-      >
-        <div
-          class="header"
-          slot="header"
+      <template v-if="done">
+        <el-card
+          shadow="never"
+          v-for="(item,index) in log.list"
+          :key="index"
         >
-          <span>版本：V{{ item.version }}</span>
-          <time style="float: right;">{{ dateToYmd(item.created_at) }}</time>
-        </div>
-        <div
-          v-if="item.fix !== '无'"
-          class="text"
-        >
-          <h3>修复：</h3>
-          <p>
-            {{ item.fix }}
-          </p>
-        </div>
-        <div
-          v-if="item.feat !== '无'"
-          class="text"
-        >
-          <h3>添加功能：</h3>
-          <p>
-            {{ item.feat }}
-          </p>
-        </div>
-      </el-card>
+          <div
+            class="header"
+            slot="header"
+          >
+            <span>版本：V{{ item.version }}</span>
+            <time style="float: right;">{{ dateToYmd(item.created_at) }}</time>
+          </div>
+          <div
+            v-if="item.fix !== '无'"
+            class="text"
+          >
+            <h3>修复：</h3>
+            <p>
+              {{ item.fix }}
+            </p>
+          </div>
+          <div
+            v-if="item.feat !== '无'"
+            class="text"
+          >
+            <h3>添加功能：</h3>
+            <p>
+              {{ item.feat }}
+            </p>
+          </div>
+        </el-card>
+      </template>
     </div>
   </pop-wrap>
 </template>
 <script>
 import { mapActions, mapState } from "vuex";
 export default {
+  data: () => ({
+    done: false
+  }),
   methods: {
     ...mapActions(["getLog"]),
     dateToYmd(d) {
       return d.split(" ")[0];
     }
   },
-  mounted() {
-    this.getLog();
+  async created() {
+    await this.getLog();
+    this.done = true;
   },
   computed: {
     ...mapState(["log"])
