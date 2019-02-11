@@ -1,26 +1,42 @@
 # 清技背单词
 
-![](https://ws1.sinaimg.cn/thumbnail/9892fa7fgy1fwntybdlcij20mp0mpk2i.jpg)
+<p align="center">
+   <img src="https://ws1.sinaimg.cn/thumbnail/9892fa7fgy1fwntybdlcij20mp0mpk2i.jpg"> 
+</p>
 
 ## 前言
 
 清技背单词是一款复习单词的 Web 应用，主要由教师提供单词，学生进行多项模块复习，并以完成每个单词的平均时间作为成绩进行排名，致力于提高学生的学习兴趣、课外复习的自主性。
 
-本项目为多页应用，即分为用户界面和管理界面，具有不同的入口文件，每个页面皆为一个单页应用。
+本项目为多页应用，分为用户界面和管理界面两个入口文件。
 
 >  此项目是我入门 Vue 的第一个练手项目，目前功能尚少，并且存在很多不足，后续会继续进行更新迭代。
+
+## 预览
+
+### 管理界面
+
+![](https://ws1.sinaimg.cn/large/006mS5wEgy1g02kvr1h2dj30p00duq4p.jpg)
+
+### 用户界面
+
+![](https://ws1.sinaimg.cn/large/006mS5wEgy1g02kw6gm80j30p00dujsg.jpg)
+
+### 复习界面
+
+![](https://ws1.sinaimg.cn/large/006mS5wEgy1g02kwd1mfdj30p00duq4u.jpg)
 
 ## 技术栈
 
 ### 前端
 
-Vue2 + Vuex + Vue-router + Element UI + Axios + Scss 
+Vue2 + Vuex + Vue-router + Element UI + Axios + SCSS
 
 ### 后端
 
-Lumen (PHP) + Mysql
+Lumen (PHP) + MySQL
 
-## 功能
+## 实现功能
 
 ### 用户
 
@@ -52,29 +68,7 @@ Lumen (PHP) + Mysql
     - 更新日志表
   - 退出
 
-## 部分运行截图
-
-![](http://ww1.sinaimg.cn/mw690/9892fa7fgy1fzcvhtr28jj20ku11275i.jpg)
-
-![](http://ww1.sinaimg.cn/mw690/9892fa7fgy1fzcvik07vtj20ku112q47.jpg)
-
-![](http://ww1.sinaimg.cn/mw690/9892fa7fgy1fzcviru305j20ku1123zc.jpg)
-
-![](http://ww1.sinaimg.cn/mw690/9892fa7fgy1fzcvivdsj4j20ku112wfs.jpg)
-
-![](http://ww1.sinaimg.cn/mw690/9892fa7fgy1fzcviyr6qcj20ku112abg.jpg)
-
-![](http://ww1.sinaimg.cn/mw690/9892fa7fgy1fzcvj6pdayj20ku112gms.jpg)
-
-![](http://ww1.sinaimg.cn/mw690/9892fa7fgy1fzcvjgecq9j20ku11275t.jpg)
-
-![](http://ww1.sinaimg.cn/mw690/9892fa7fgy1fzcvjk79c8j20ku1120u8.jpg)
-
-![](http://ww1.sinaimg.cn/mw690/9892fa7fgy1fzcvjpqe4aj20ku112jsx.jpg)
-
-![](http://ww1.sinaimg.cn/mw690/9892fa7fgy1fzcvjvbooij20ku1123zp.jpg)
-
-## 使用
+## 安装与使用
 
 ### 初始化
 
@@ -83,7 +77,7 @@ Lumen (PHP) + Mysql
 git clone https://github.com/gd4Ark/learn_english.git
 // 安装依赖
 npm install
-// 服务端代码安装依赖
+// 安装服务端依赖
 cd server
 composer install
 ```
@@ -103,10 +97,4 @@ npm run serve
 npm run build
 ```
 
-**注：**
-
-1. **在开发模式中，只能调试一个页面，需在`vue.config.js`里面修改`current`变量的值**
-
-如果你有任何疑问或不解，欢迎发送邮件（邮箱地址在我主页）。
-
-最后，感谢您的观看！
+**注：**在开发模式中，只能调试一个页面，需在`vue.config.js`里面修改`current`变量的值。
