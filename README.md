@@ -107,4 +107,4 @@ npm run build
 
 ## 最后
 
-如果觉得我的项目还不错的话 ![clap](https://github.githubassets.com/images/icons/emoji/unicode/1f44f.png)，就给个 star ![star](https://github.githubassets.com/images/icons/emoji/unicode/2b50.png) 鼓励一下吧~
+如果觉得我的项目还不错的话 ，就给个 star 鼓励一下吧~
