@@ -10,6 +10,8 @@
 
 ## 预览
 
+> 长得丑别吐槽啊哈哈~
+
 ### 管理界面
 
 ![](https://ws1.sinaimg.cn/large/006mS5wEgy1g02kvr1h2dj30p00duq4p.jpg)
@@ -99,7 +101,7 @@ npm run build
 
 **清技背单词** © 4ark，根据许可证 [MIT](https://github.com/gd4Ark/learn-english/blob/master/LICENSE) 发布。
 
-> [blog](https://4ark.me/) · GitHub [@gd4Ark](https://github.com/gd4Ark)
+> [Blog](https://4ark.me/) · GitHub [@gd4Ark](https://github.com/gd4Ark)
 
 ## 最后
 
