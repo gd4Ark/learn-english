@@ -4,7 +4,7 @@
    <img src="https://ws1.sinaimg.cn/thumbnail/9892fa7fgy1fwntybdlcij20mp0mpk2i.jpg"> 
 </p>
 
-## 前言
+## 介绍
 
 清技背单词是一款复习单词的 Web 应用，主要由教师提供单词，学生进行多项模块复习，并以完成每个单词的平均时间作为成绩进行排名，致力于提高学生的学习兴趣、课外复习的自主性。
 
@@ -97,4 +97,14 @@ npm run serve
 npm run build
 ```
 
-**注：**在开发模式中，只能调试一个页面，需在`vue.config.js`里面修改`current`变量的值。
+**注：** 在开发模式中，只能调试一个页面，需在`vue.config.js`里面修改`current`变量的值。
+
+## 作者
+
+**清技背单词** © 4ark，根据许可证 [MIT](https://github.com/gd4Ark/learn-english/blob/master/LICENSE) 发布。
+
+> [blog](https://4ark.me/) · GitHub [@gd4Ark](https://github.com/gd4Ark)
+
+## 最后
+
+如果觉得我的项目还不错的话 ![clap](https://github.githubassets.com/images/icons/emoji/unicode/1f44f.png)，就给个 star ![star](https://github.githubassets.com/images/icons/emoji/unicode/2b50.png) 鼓励一下吧~
