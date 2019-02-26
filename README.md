@@ -95,7 +95,10 @@ npm run serve
 npm run build
 ```
 
-**注：** 在开发模式中，只能调试一个页面，需在`vue.config.js`里面修改`current`变量的值。
+**注：** 
+
+1. 在开发模式中，只能调试一个页面，需在`vue.config.js`里面修改`current`变量的值。
+2. 后台账号和密码都是`admin`。
 
 ## 作者
 
