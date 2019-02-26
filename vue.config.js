@@ -23,7 +23,7 @@ const pages = [
   }
 ];
 const config = {
-  baseUrl: isDev ? '/' : './',
+  publicPath: isDev ? '/' : './',
   pages: pages[isDev ? 0 : 1],
   lintOnSave: false,
   css: {

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- 主机： 127.0.0.1
--- 生成日期： 2019-01-28 11:55:50
+-- 生成日期： 2019-02-26 19:47:10
 -- 服务器版本： 10.1.37-MariaDB
--- PHP 版本： 7.3.0
+-- PHP 版本： 7.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -154,7 +154,8 @@ CREATE TABLE `log` (
 INSERT INTO `log` (`id`, `version`, `feat`, `fix`, `created_at`, `updated_at`) VALUES
 (5, '1.0.0', '完成主体功能', '无', '2019-01-19 02:00:07', '2019-01-19 02:00:07'),
 (6, '1.1.0', '增加复习模块-单词全部拼写', '无', '2019-01-21 00:02:20', '2019-01-21 00:02:20'),
-(7, '1.1.2', '优化代码', '修复更新日志列表首次访问报错的BUG', '2019-01-28 02:53:54', '2019-01-28 02:54:52');
+(7, '1.1.2', '优化代码', '修复更新日志列表首次访问报错的BUG', '2019-01-28 02:53:54', '2019-01-28 02:54:52'),
+(8, '1.1.3', '无', '修复运行时报错的BUG', '2019-02-26 03:42:03', '2019-02-26 03:42:03');
 
 -- --------------------------------------------------------
 
@@ -295,7 +296,7 @@ ALTER TABLE `feedback`
 -- 使用表AUTO_INCREMENT `log`
 --
 ALTER TABLE `log`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- 使用表AUTO_INCREMENT `score`
