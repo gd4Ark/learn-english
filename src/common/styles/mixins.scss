@@ -1,0 +1,131 @@
+@mixin flex {
+  display: flex;
+}
+
+@mixin flex-column {
+  @include flex;
+  flex-direction: column;
+}
+
+@mixin sub-center {
+  @include flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin center {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+@mixin po-abs {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+@mixin padding {
+  @include padding-x;
+  @include padding-y;
+}
+
+@mixin padding-x($padding: $app-padding) {
+  padding-left: $padding;
+  padding-right: $padding;
+}
+@mixin padding-y($padding: $app-padding) {
+  padding-top: $padding;
+  padding-bottom: $padding;
+}
+
+@mixin size($width, $height: false) {
+  width: $width;
+  @if $height {
+    height: $height;
+  } @else {
+    height: $width;
+  }
+}
+
+@mixin nav {
+  @include flex;
+  justify-content: space-around;
+  align-items: center;
+  .nav-item a {
+    display: block;
+    @include size(100%);
+    color: $secondary-font-color;
+    &.router-link-active {
+      color: $highlight-color;
+    }
+  }
+}
+
+@mixin center {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+@mixin app-header {
+  @include padding-x;
+  @include size(100%, 50px);
+  @include flex;
+  align-items: center;
+  justify-content: space-between;
+  // background: $principal-color;
+  border-bottom: 1px solid #e5e6e8;
+  // border-bottom: 1px solid $line-color;
+  .title {
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+  .left{
+    flex: 1; 
+    @include flex;
+    align-items: center;
+  }
+}
+
+@mixin no-scrollbar {
+  &::-webkit-scrollbar{
+    width: 0;
+    height: 0;
+  }
+}
+
+@mixin btn {
+  border: none;
+  outline: none;
+  white-space: nowrap;
+  transition: opacity 0.5s ease;
+  &[disabled] {
+    opacity: 0.5;
+  }
+}
+
+ @mixin btn-3d(
+  $bg-color: $secondary-color,
+  $shadow-height: 2px,
+  $active-down: 0.1rem
+) {
+  @include btn;
+  position: relative;
+  display: block;
+  border-radius: 5px;
+  background: $bg-color;
+  text-align: center;
+  transition: top 0.1s;
+  padding-bottom: $shadow-height;
+  box-shadow: inset 0px 0px -$shadow-height 0px rgba(0, 0, 0, 0.2);
+  &:active {
+    box-shadow: inset 0px 0px - ($shadow-height - 1) 0px rgba(0, 0, 0, 0.2);
+    top: $active-down;
+  }
+}
