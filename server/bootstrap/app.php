@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 require_once __DIR__.'/../app/Helpers/functions.php';
 
@@ -61,13 +61,13 @@ $app->singleton(
 |
 */
 
-$app->middleware([
-    \App\Http\Middleware\CorsMiddleware::class,
-]);
+ $app->middleware([
+//     App\Http\Middleware\ExampleMiddleware::class,
+     \App\Http\Middleware\CorsMiddleware::class,
+ ]);
 
 $app->routeMiddleware([
-     'auth' => App\Http\Middleware\Authenticate::class,
-     'throttle' => App\Http\Middleware\ThrottleRequests::class,
+    'auth' => App\Http\Middleware\Authenticate::class,
 ]);
 
 /*
@@ -81,15 +81,10 @@ $app->routeMiddleware([
 |
 */
 
- $app->register(App\Providers\AppServiceProvider::class);
- $app->register(App\Providers\AuthServiceProvider::class);
- $app->register(App\Providers\EventServiceProvider::class);
-
- $app->register(Overtrue\LaravelWeChat\ServiceProvider::class);
-
- $app->register(Ixudra\Curl\CurlServiceProvider::class);
-
- $app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
+$app->register(App\Providers\AppServiceProvider::class);
+$app->register(App\Providers\AuthServiceProvider::class);
+$app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
+// $app->register(App\Providers\EventServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
@@ -105,9 +100,7 @@ $app->routeMiddleware([
 $app->router->group([
     'namespace' => 'App\Http\Controllers',
 ], function ($router) {
-    require __DIR__.'/../routes/web.php';
+    require __DIR__ . '/../routes/web.php';
 });
-
-$app->configure('app');
 
 return $app;

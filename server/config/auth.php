@@ -14,7 +14,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => env('AUTH_GUARD', 'api'),
+        'guard' => 'api',
+        'passwords' => 'users',
     ],
 
     /*
@@ -36,14 +37,14 @@ return [
 
     'guards' => [
         'api' => [
-            'driver' => 'jwt',                           #### 更改为JWT驱动
+            'driver' => 'jwt',
             'provider' => 'users',
         ],
     ],
 
     /*
     |--------------------------------------------------------------------------
-    | Product Providers
+    | User Providers
     |--------------------------------------------------------------------------
     |
     | All authentication drivers have a user provider. This defines how the
@@ -61,7 +62,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model'  => \App\Admin::class,        #### 指定用于token验证的模型类
+            'model' => \App\Admin::class,
         ],
     ],
 

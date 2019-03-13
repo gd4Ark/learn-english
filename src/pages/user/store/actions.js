@@ -7,16 +7,16 @@ export default {
         context.commit('updateReview', await this._vm.$axios.get('/english', context.getters.requestReivewListData));
     },
     async getRank(context) {
-        context.commit('updateRank', await this._vm.$axios.get('/rank', context.getters.requestRankData));
+        context.commit('updateRank', await this._vm.$axios.get('/score', context.getters.requestRankData));
     },
     async submit(context, data) {
-        return await this._vm.$axios.post('/submit', {
+        return await this._vm.$axios.post('/score', {
             ...context.getters.submitData,
             ...data,
         });
     },
     async feedback(context, data) {
-        return await this._vm.$axios.put('/feedback', data);
+        return await this._vm.$axios.post('/feedback', data);
     },
     async getLog(context) {
         context.commit('updateLog', await this._vm.$axios.get('/log', {

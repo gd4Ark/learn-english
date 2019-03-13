@@ -41,16 +41,10 @@ class Handler extends ExceptionHandler
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Exception  $exception
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|\Illuminate\Http\JsonResponse
      */
     public function render($request, Exception $exception)
     {
-        if ($exception instanceof ThrottleException) {
-            return response([
-                'code' => $exception->getCode(),
-                'message' => $exception->getMessage()
-            ], 429);
-        }
         return parent::render($request, $exception);
     }
 }

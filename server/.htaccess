@@ -1,6 +1,0 @@
-<Files ~ ".env">
-    Require all denied
-</Files>
-<Files *>
-Options -Indexes
-</Files>

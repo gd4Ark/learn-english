@@ -13,7 +13,7 @@ export default {
 
         const useToekn = options.useToekn;
 
-        axios.defaults.baseURL = config.server_url + 'api';
+        axios.defaults.baseURL = config.server_url;
 
 
         // 请求拦截器

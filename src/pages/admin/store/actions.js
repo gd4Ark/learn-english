@@ -14,31 +14,31 @@ export default {
         return await this._vm.$axios.post('/logout');
     },
     async updatePassword(context, data) {
-        return await this._vm.$axios.post('/password', data);
+        return await this._vm.$axios.put('/password', data);
     },
     async updateSetting(context, data) {
-        return await this._vm.$axios.post('/setting', data);
+        return await this._vm.$axios.put(`/setting/1`, data);
     },
     async getBook({commit,state,getters}) {
         commit('updateBook', await this._vm.$axios.get('/book', getters.requestData(state.book)));
     },
     async addBook(context, data) {
-        return await this._vm.$axios.put('/book', data);
+        return await this._vm.$axios.post('/book', data);
     },
     async updateBook(context, data) {
-        return await this._vm.$axios.post('/book', data);
+        return await this._vm.$axios.put(`/book/${data.id}`, data);
     },
     async delBook(context, data) {
         return await this._vm.$axios.delete('/book', data);
     },
     async addEnglish(context, data) {
-        return await this._vm.$axios.put('/english', {
+        return await this._vm.$axios.post('/english', {
             ...data,
             book_id: context.state.english.book_id
         });
     },
     async updateEnglish(context, data) {
-        return await this._vm.$axios.post('/english', data);
+        return await this._vm.$axios.put(`/english/${data.id}`, data);
     },
     async delEnglish(context, data) {
         return await this._vm.$axios.delete('/english', data);
@@ -53,10 +53,10 @@ export default {
         commit('updateLog', await this._vm.$axios.get('/log', getters.requestData(state.log)));
     },
     async addLog(context, data) {
-        return await this._vm.$axios.put('/log', data);
+        return await this._vm.$axios.post('/log', data);
     },
     async updateLog(context, data) {
-        return await this._vm.$axios.post('/log', data);
+        return await this._vm.$axios.put(`/log/${data.id}`, data);
     },
     async delLog(context, data) {
         return await this._vm.$axios.delete('/log', data);

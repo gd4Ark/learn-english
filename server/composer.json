@@ -6,12 +6,9 @@
     "type": "project",
     "require": {
         "php": ">=7.1.3",
-        "ixudra/curl": "^6.16",
         "laravel/lumen-framework": "5.7.*",
-        "overtrue/laravel-wechat": "~4.0",
-        "tymon/jwt-auth": "^1.0.0-rc",
-        "vlucas/phpdotenv": "~2.2",
-        "yansongda/pay": "^2.5"
+        "tymon/jwt-auth": "1.0.0-rc.3",
+        "vlucas/phpdotenv": "~2.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

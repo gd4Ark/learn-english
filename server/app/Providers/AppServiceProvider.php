@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\Router;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,11 +14,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->register(\Tymon\JWTAuth\Providers\LumenServiceProvider::class);
-
-        $this->app['auth']->viaRequest('api', function ($request)
-        {
-            return app('auth')->setRequest($request)->user();
-        });
+        $this->app->router = new Router($this->app);
     }
 }

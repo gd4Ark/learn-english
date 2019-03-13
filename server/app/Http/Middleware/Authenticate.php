@@ -17,7 +17,7 @@ class Authenticate
     /**
      * Create a new middleware instance.
      *
-     * @param  \Illuminate\Contracts\Auth\Factory  $auth
+     * @param  \Illuminate\Contracts\Auth\Factory $auth
      * @return void
      */
     public function __construct(Auth $auth)
@@ -26,21 +26,20 @@ class Authenticate
     }
 
     /**
-     * Handle an incoming request.
+     * 在进入控制器之前，判断并处理请求体
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @param  string|null  $guard
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Closure $next
+     * @param  string|null $guard
      * @return mixed
      */
     public function handle($request, Closure $next, $guard = null)
     {
         if ($this->auth->guard($guard)->guest()) {
-//            abort(401,'');
-//            return response('无效令牌，需要重新获取',401);
-            return response()->json(['message' => '未授权，请登录！'],401);
-
-
+            return response()->json([
+                'status' => false,
+                'msg' => 'Unauthorized'
+            ])->setStatusCode(401);
         }
 
         return $next($request);

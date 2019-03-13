@@ -1,5 +1,6 @@
 <?php
 
+use App\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -11,6 +12,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call('UsersTableSeeder');
+        User::query()->truncate();
+        User::query()->create([
+            'username' => 'admin',
+            'password' => password_hash('spider', PASSWORD_DEFAULT)
+        ]);
     }
 }

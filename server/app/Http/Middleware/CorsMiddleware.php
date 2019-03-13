@@ -2,19 +2,19 @@
 /**
  * CORS route Middleware.
  */
- 
+
 namespace App\Http\Middleware;
- 
+
 use Closure;
 use Illuminate\Http\Response;
- 
+
 class CORSMiddleware
 {
- 
+
     private $headers;
     private $allow_origin;
- 
- 
+
+
     /**
      * Handle an incoming request.
      *
@@ -34,17 +34,17 @@ class CORSMiddleware
             'Cache-Control' => 'no-cache, must-revalidate',
             'Pragma' => 'no-cache',
         ];
- 
+
         $this->allow_origin = [
             'http://localhost',
         ];
- 
+
         $origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
- 
+
 //        //如果origin不在允许列表内，直接返回403
 //        if (!in_array($origin, $this->allow_origin) && !empty($origin))
 //            return new Response('Forbidden', 403);
- 
+
         if($request->getMethod() == "OPTIONS") {
             //return Response::make('OK', 200, $this->headers);
             $response = new Response('OK', 200);
@@ -53,11 +53,11 @@ class CORSMiddleware
             }
             return $response;
         }
- 
+
         $response = $next($request);
         foreach($this->headers as $key => $value)
             $response->header($key, $value);
         return $response;
     }
- 
+
 }

@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Laravel\Lumen\Routing\Controller as BaseController;
 
-class Controller extends BaseController
-{
+class Controller extends BaseController{
+
     private $default_page_size = 30;
     private $default_page_index = 1;
 
@@ -20,7 +20,7 @@ class Controller extends BaseController
         $has_keyword = $request->has('keyword');
         if ($has_keyword){
             $keyword = [];
-            foreach ($request->input('keyword') as $value){
+            foreach ($request->get('keyword') as $value){
                 $value = json_decode($value);
                 if ($value[0] === 'sort'){
 
@@ -39,8 +39,8 @@ class Controller extends BaseController
         if ($total === null){
             $total = $list->count();
         }
-        $pageSize = $request->input('pageSize',$this->default_page_size);
-        $pageIndex = $request->input('pageIndex',$this->default_page_index);
+        $pageSize = $request->get('pageSize',$this->default_page_size);
+        $pageIndex = $request->get('pageIndex',$this->default_page_index);
         $offset = $pageSize * ($pageIndex-1);
         $list = $list
             ->offset($offset)
@@ -51,23 +51,4 @@ class Controller extends BaseController
         ];
     }
 
-    public function sortRank($data){
-        $position = 0;
-        foreach($data as $key=>$value){
-            $time = $data[$key]['time'];
-            $data[$key]['time'] = timeFormat($time);
-            if ($key === 0){
-                $data[$key]['position'] = ++$position;
-            }else{
-                $before = $data[$key - 1];
-                if ($before['time'] === $data[$key]['time']){
-                    $data[$key]['position'] = $position;
-                }else{
-                    $data[$key]['position'] = ++$position;
-                }
-            }
-            $data[$key]['position'] = numberFormat($data[$key]['position']);
-        }
-        return $data;
-    }
 }
