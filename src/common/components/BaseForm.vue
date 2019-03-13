@@ -1,14 +1,10 @@
 <template>
-  <c-form
-    :formItem="formItem"
-    :formData="s_formData"
-  >
+  <c-form :formItem="formItem"
+          :formData="s_formData">
     <el-form-item v-if="useBtn">
-      <el-button
-        size="small"
-        type="primary"
-        @click="submit"
-      >{{btn}}</el-button>
+      <el-button size="small"
+                 type="primary"
+                 @click="submit">{{btn}}</el-button>
     </el-form-item>
   </c-form>
 </template>
@@ -29,9 +25,9 @@ export default {
       type: Boolean,
       default: false
     },
-    btn : {
-      type : String,
-      default : "提交"
+    btn: {
+      type: String,
+      default: "提交"
     }
   },
   data: () => ({
@@ -45,10 +41,18 @@ export default {
       this.s_formData = { ...this.formData } || this.getFormData();
     },
     submit() {
-      if (this.$util.checkEmptyForm(this.s_formData)) {
-        return this.$util.msg.warning("请填写完整！");
+      for (const index in this.requiredItems) {
+        const key = this.requiredItems[index];
+        if (!this.s_formData[key].length) {
+          return this.$util.msg.warning("请填写完整！");
+        }
       }
       this.$emit("submit", this.s_formData);
+    }
+  },
+  computed: {
+    requiredItems() {
+      return this.formItem.filter(el => !el.blank).map(el => el.key);
     }
   }
 };

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 
 import config from "@/common/config/config";
-Vue.prototype.$config = config;
+Vue.use(config);
 
 import ElementUI from 'element-ui';
 
@@ -18,9 +18,8 @@ import store from './store/index'
 import util from "@/common/util/util";
 Vue.use(util);
 
-import formData from "@/common/formData/index";
-
-Vue.use(formData);
+import vData from "@/common/data/index";
+Vue.use(vData);
 
 import axios from "@/common/util/axios";
 

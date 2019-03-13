@@ -8,7 +8,7 @@
           </slot>
           <h1 class="title">
             <template v-if="showSiteTitle">
-              {{$config.title}} -
+              {{ $config.app_title }} -
             </template>
             <template v-if="showTitle">
               {{$route.meta.title}}
@@ -20,10 +20,8 @@
         </slot>
       </div>
     </slot>
-    <div
-      id="content"
-      :style="contentStyle"
-    >
+    <div id="content"
+         :style="contentStyle">
       <transition name="el-fade-in">
         <template>
           <slot v-if="load"></slot>

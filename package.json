@@ -1,6 +1,7 @@
 {
-  "name": "learn_english",
-  "version": "1.1.3",
+  "name": "learn-english",
+  "title": "清技背单词",
+  "version": "1.2.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",

@@ -11,7 +11,7 @@
       <base-form
         v-if="done"
         ref="baseForm"
-        :formItem="$formData.review.partialSpell.item"
+        :formItem="$vData.review.partialSpell.item"
         :formData="formData"
         @submit="handleSubmit"
       >

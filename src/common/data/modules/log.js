@@ -10,11 +10,13 @@ export default {
             key: "fix",
             type: "textarea",
             row: 4,
+            blank : true,
         }, {
             label: "更新",
             key: "feat",
             type: "textarea",
             row: 4,
+            blank : true,
         }, ],
         data: () => ({
             version: "",

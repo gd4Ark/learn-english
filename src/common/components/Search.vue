@@ -92,7 +92,7 @@ export default {
       return this.$store.state[this.module].searchData;
     },
     formItem() {
-      return this.$formData[this.module].search.item;
+      return this.$vData[this.module].search.item;
     }
   }
 };

@@ -4,8 +4,8 @@
       <div>
         <add
           title="添加单词"
-         :formItem="$formData.english.admin.item"
-          :getFormData="$formData.english.admin.data"
+         :formItem="$vData.english.admin.item"
+          :getFormData="$vData.english.admin.data"
           action="addEnglish"
           @get-data="getData"
         />
@@ -51,7 +51,7 @@
         <template slot-scope="scope">
           <edit
             title="编辑单词"
-           :formItem="$formData.english.admin.item"
+           :formItem="$vData.english.admin.item"
             :current="scope.row"
             action="updateEnglish"
             @get-data="getData"

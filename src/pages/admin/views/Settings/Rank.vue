@@ -11,7 +11,7 @@
       <base-form
         v-if="done"
         ref="baseForm"
-        :formItem="$formData.rank.update.item"
+        :formItem="$vData.rank.update.item"
         :formData="formData"
         @submit="handleSubmit"
       >

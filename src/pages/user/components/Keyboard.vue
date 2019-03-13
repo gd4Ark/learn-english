@@ -76,11 +76,11 @@ export default {
 
  <style lang="scss" scoped>
 .keyboard {
-  padding: 3% 1.8%;
+  padding: 3% 3%;
   display: flex;
   align-content: space-around;
   flex-wrap: wrap;
-  background: $keyboard-color;
+  // background: $keyboard-color;
   .row {
     box-sizing: border-box;
     width: 100%;
@@ -108,12 +108,10 @@ export default {
     }
     &.fn {
       flex: 1;
-      background: #c1bbb4;
-      color: #716d65;
     }
     i {
       pointer-events: none;
-      font-size: 1.25rem;
+      font-size: 1rem;
       &.capslock.isUpper {
         color: $global-font-color;
       }

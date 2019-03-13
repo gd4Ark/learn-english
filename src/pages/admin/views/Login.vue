@@ -7,8 +7,8 @@
       <BaseForm
         btn="登录"
         :useBtn="true"
-        :formItem="$formData.login.base.item"
-        :getFormData="$formData.login.base.data"
+        :formItem="$vData.login.base.item"
+        :getFormData="$vData.login.base.data"
         @submit="submit"
       />
     </div>

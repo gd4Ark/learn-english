@@ -10,14 +10,14 @@
           :src="logo"
           alt="logo"
         >
-        <h1>{{ $config.title }}</h1>
-        <p>V {{ $config.version }}</p>
+        <h1>{{ $config.app_title }}</h1>
+        <p>V{{ $config.app_version }}</p>
       </div>
       <div class="content">
         <Menu :optionsGroups="optionsGroups" />
       </div>
       <div class="footer">
-        Copyright &copy; 2019 4Ark. All Rights Reserved.
+        <p>{{ $config.app_copyright }}</p>
       </div>
     </div>
   </pop-wrap>
@@ -79,9 +79,10 @@ export default {
   }
   .footer {
     @include sub-center;
-
-    font-size: 0.8rem;
     height: 30px;
+    p{
+    font-size: 0.7rem;
+    }
   }
 }
 </style>

@@ -4,8 +4,8 @@
       <div>
         <add
           title="添加日志"
-          :formItem="$formData.log.base.item"
-          :getFormData="$formData.log.base.data"
+          :formItem="$vData.log.base.item"
+          :getFormData="$vData.log.base.data"
           action="addLog"
           @get-data="getData"
         />
@@ -38,22 +38,18 @@
       <el-table-column type="expand">
         <template slot-scope="props">
           <div
-            v-if="props.row.fix !== '无'"
+            v-if="props.row.fix"
             class="text"
           >
             <h3>修复：</h3>
-            <p>
-              {{props.row.fix}}
-            </p>
+            <pre>{{props.row.fix}}</pre>
           </div>
           <div
-            v-if="props.row.feat !== '无'"
+            v-if="props.row.feat"
             class="text"
           >
             <h3>更新：</h3>
-            <p>
-              {{props.row.feat}}
-            </p>
+            <pre>{{props.row.feat}}</pre>
           </div>
           <div class="text">
             <time>创建时间：<span>{{props.row.created_at}}</span></time>
@@ -76,7 +72,7 @@
         <template slot-scope="scope">
           <edit
             title="编辑日志"
-            :formItem="$formData.log.base.item"
+            :formItem="$vData.log.base.item"
             :current="scope.row"
             action="updateLog"
             @get-data="getData"
@@ -144,9 +140,13 @@ export default {
     font-weight: normal;
     margin-bottom: 2vh;
   }
-  p {
-    text-indent: 2rem;
+  pre {
+    margin-left: 1rem;
+    font-family: $font-family;
     font-size: 0.8rem;
+  }
+  time{
+    display: block;
   }
 }
 </style>

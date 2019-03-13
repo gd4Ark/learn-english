@@ -4,8 +4,8 @@
       <div>
         <add
           title="添加单词本"
-          :formItem="$formData.book.admin.item"
-          :getFormData="$formData.book.admin.data"
+          :formItem="$vData.book.admin.item"
+          :getFormData="$vData.book.admin.data"
           action="addBook"
           @get-data="getData"
         />
@@ -55,7 +55,7 @@
           />
           <edit
             title="编辑单词本"
-            :formItem="$formData.book.admin.item"
+            :formItem="$vData.book.admin.item"
             :current="scope.row"
             action="updateBook"
             @get-data="getData"

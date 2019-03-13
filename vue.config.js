@@ -1,6 +1,6 @@
 const CompressionPlugin = require("compression-webpack-plugin");
 const isDev = process.env.NODE_ENV == 'development';
-const current = 'admin'; // admin or user
+const current = 'user'; // admin or user
 const pages = [
   // development
   // 只能调试一个
@@ -46,5 +46,13 @@ const config = {
       }
     }
   },
+  chainWebpack: (config) => {
+    config.plugin('define').tap((definitions) => {
+      definitions[0]['process.env']['APP_NAME'] = JSON.stringify(require('./package.json').name);
+      definitions[0]['process.env']['APP_TITLE'] = JSON.stringify(require('./package.json').title);
+      definitions[0]['process.env']['APP_VERSION'] = JSON.stringify(require('./package.json').version);
+      return definitions;
+    });
+  }
 };
 module.exports = config;

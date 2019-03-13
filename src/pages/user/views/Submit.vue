@@ -29,8 +29,8 @@
       <BaseForm
         btn="提交"
         :useBtn="true"
-        :formItem="$formData.submit.base.item"
-        :getFormData="$formData.submit.base.data"
+        :formItem="$vData.submit.base.item"
+        :getFormData="$vData.submit.base.data"
         @submit="handleSubmit"
       />
     </div>

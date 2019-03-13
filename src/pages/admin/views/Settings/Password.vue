@@ -10,8 +10,8 @@
     <div class="app-content">
       <base-form
         ref="baseForm"
-        :formItem="$formData.password.update.item"
-        :getFormData="$formData.password.update.data"
+        :formItem="$vData.password.update.item"
+        :getFormData="$vData.password.update.data"
         @submit="handleSubmit"
       >
       </base-form>

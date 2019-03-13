@@ -11,7 +11,7 @@ import review from "./modules/review";
 export default {
     install(Vue) {
 
-        Vue.prototype.$formData = {
+        Vue.prototype.$vData = {
             book,
             english,
             login,
