@@ -5,7 +5,7 @@ export default {
             app_title: process.env.APP_TITLE,
             app_version: process.env.APP_VERSION,
             app_copyright: "© 2019 4Ark. 版权所有",
-            server_url: 'http://10.10.34.199/learn-english/server/public/api/',
+            server_url: 'http://127.0.0.1/learn-english/server/public/api/',
         }
     }
 }
