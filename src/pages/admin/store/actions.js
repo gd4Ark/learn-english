@@ -1,11 +1,11 @@
 import actions from "@/common/store/actions";
 export default {
-    async login(context, data) {
-        const response = await this._vm.$axios.post('/login', data);
-        this._vm.$localStore.set('user', {
-            token: response.data.token
+    async login(ctx, data) {
+        const res = await this._vm.$axios.post('/login', data);
+        this._vm.$localStore.set('login', {
+            access_token: res.access_token
         });
-        return response;
+        return res;
     },
     async checkLogin() {
         return await this._vm.$axios.post('/checkLogin');
@@ -13,52 +13,52 @@ export default {
     async logout() {
         return await this._vm.$axios.post('/logout');
     },
-    async updatePassword(context, data) {
+    async updatePassword(ctx, data) {
         return await this._vm.$axios.put('/password', data);
     },
-    async updateSetting(context, data) {
+    async updateSetting(ctx, data) {
         return await this._vm.$axios.put(`/setting/1`, data);
     },
     async getBook({commit,state,getters}) {
-        commit('updateBook', await this._vm.$axios.get('/book', getters.requestData(state.book)));
+        commit('book', await this._vm.$axios.get('/book', getters.requestData(state.book)));
     },
-    async addBook(context, data) {
+    async addBook(ctx, data) {
         return await this._vm.$axios.post('/book', data);
     },
-    async updateBook(context, data) {
+    async updateBook(ctx, data) {
         return await this._vm.$axios.put(`/book/${data.id}`, data);
     },
-    async delBook(context, data) {
+    async delBook(ctx, data) {
         return await this._vm.$axios.delete('/book', data);
     },
-    async addEnglish(context, data) {
+    async addEnglish(ctx, data) {
         return await this._vm.$axios.post('/english', {
             ...data,
-            book_id: context.state.english.book_id
+            book_id: ctx.state.english.book_id
         });
     },
-    async updateEnglish(context, data) {
+    async updateEnglish(ctx, data) {
         return await this._vm.$axios.put(`/english/${data.id}`, data);
     },
-    async delEnglish(context, data) {
+    async delEnglish(ctx, data) {
         return await this._vm.$axios.delete('/english', data);
     },
     async getFeedback({commit,state,getters}) {
-        commit('updateFeedback', await this._vm.$axios.get('/feedback', getters.requestData(state.feedback)));
+        commit('feedback', await this._vm.$axios.get('/feedback', getters.requestData(state.feedback)));
     },
-    async delFeedback(context, data) {
+    async delFeedback(ctx, data) {
         return await this._vm.$axios.delete('/feedback', data);
     },
     async getLog({commit,state,getters}) {
-        commit('updateLog', await this._vm.$axios.get('/log', getters.requestData(state.log)));
+        commit('log', await this._vm.$axios.get('/log', getters.requestData(state.log)));
     },
-    async addLog(context, data) {
+    async addLog(ctx, data) {
         return await this._vm.$axios.post('/log', data);
     },
-    async updateLog(context, data) {
+    async updateLog(ctx, data) {
         return await this._vm.$axios.put(`/log/${data.id}`, data);
     },
-    async delLog(context, data) {
+    async delLog(ctx, data) {
         return await this._vm.$axios.delete('/log', data);
     },
     ...actions,

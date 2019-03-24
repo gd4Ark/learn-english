@@ -1,6 +1,6 @@
 <template>
   <el-table
-    :data="rank.list"
+    :data="rank.data"
     height="100%"
   >
     <el-table-column

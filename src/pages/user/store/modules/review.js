@@ -1,4 +1,4 @@
 export default {
-    list: [],
+    data: [],
     total: 0,
 }

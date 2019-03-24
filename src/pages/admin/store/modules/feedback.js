@@ -1,9 +1,9 @@
 export default {
-    list: [],
+    data: [],
     total: 0,
-    pageIndex: 1,
-    pageSize: 10,
-    pageSizes: [10, 20, 30, 40, 50, 60],
-    keyword: [],
-    searchData: {},
+    current_page: 1,
+    per_page: 10,
+    page_sizes: [10, 20, 30, 40, 50, 60],
+    search_keyword: [],
+    search_data: {},
 }

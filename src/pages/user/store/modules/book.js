@@ -1,5 +1,5 @@
 export default {
-    list: [],
+    data: [],
     total: 0,
     current_id: null,
 }

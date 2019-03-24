@@ -4,8 +4,8 @@
       <div>
         <add
           title="添加单词本"
-          :formItem="$vData.book.admin.item"
-          :getFormData="$vData.book.admin.data"
+          :formItem="$v_data.book.admin.item"
+          :getFormData="$v_data.book.admin.data"
           action="addBook"
           @get-data="getData"
         />
@@ -25,7 +25,7 @@
     </div>
 
     <el-table
-      :data="book.list"
+      :data="book.data"
       class="table"
       height="100%"
       @selection-change="handleSelectionChange"
@@ -55,7 +55,7 @@
           />
           <edit
             title="编辑单词本"
-            :formItem="$vData.book.admin.item"
+            :formItem="$v_data.book.admin.item"
             :current="scope.row"
             action="updateBook"
             @get-data="getData"

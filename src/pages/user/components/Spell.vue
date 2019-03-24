@@ -46,7 +46,7 @@ export default {
   },
   watch: {
     index(val) {
-      if (val < this.review.list.length) {
+      if (val < this.review.data.length) {
         this.initProblem();
       }
     }
@@ -57,7 +57,7 @@ export default {
   methods: {
     initProblem() {
       const index = this.index;
-      this.origin = this.review.list[index];
+      this.origin = this.review.data[index];
       this.problem = {
         ...this.origin,
         english: this.origin.english.split("")

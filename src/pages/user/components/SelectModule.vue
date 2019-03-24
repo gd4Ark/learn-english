@@ -38,7 +38,7 @@ export default {
   }),
   methods: {
     ...mapMutations({
-      updateModule: "updateRank",
+      updateModule: "rank",
     }),
     open() {
       this.value = this.rank.review_module;

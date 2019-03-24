@@ -1,27 +1,29 @@
 import actions from "@/common/store/actions";
 export default {
-    async getBook(context) {
-        context.commit('updateBook', await this._vm.$axios.get('/book'));
+    async getBook(ctx) {
+        ctx.commit('book', await this._vm.$axios.get('/book'));
     },
-    async getReview(context) {
-        context.commit('updateReview', await this._vm.$axios.get('/english', context.getters.requestReivewListData));
+    async getReview(ctx) {
+        ctx.commit('review', await this._vm.$axios.get('/english', ctx.getters.requestReivewListData));
     },
-    async getRank(context) {
-        context.commit('updateRank', await this._vm.$axios.get('/score', context.getters.requestRankData));
+    async getRank(ctx) {
+        ctx.commit('rank', {
+            data : await this._vm.$axios.get('/score', ctx.getters.requestRankData)
+        });
     },
-    async submit(context, data) {
+    async getLog(ctx) {
+        ctx.commit('log', await this._vm.$axios.get('/log', {
+            all: true,
+        }));
+    },
+    async submit(ctx, data) {
         return await this._vm.$axios.post('/score', {
-            ...context.getters.submitData,
+            ...ctx.getters.submitData,
             ...data,
         });
     },
-    async feedback(context, data) {
+    async feedback(ctx, data) {
         return await this._vm.$axios.post('/feedback', data);
-    },
-    async getLog(context) {
-        context.commit('updateLog', await this._vm.$axios.get('/log', {
-            all: true,
-        }));
     },
     ...actions,
 }

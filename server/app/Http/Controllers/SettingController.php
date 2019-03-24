@@ -8,12 +8,19 @@ use Illuminate\Http\Request;
 class SettingController extends Controller{
 
     public function index(Request $request){
-        return Setting::all()->first();
+        return $this->json(Setting::query()->first());
     }
 
     public function update(Request $request,$id){
-        $data = Setting::all()->first();
-        $data->update($request->all());
+        $item = Setting::query()->first();
+        try {
+            $input = $request->all();
+            // Todo: Validate
+            $item->update($input);
+            return $this->json($item);
+        } catch (\Exception $e) {
+            return $this->error($e->getMessage());
+        }
     }
 
 }

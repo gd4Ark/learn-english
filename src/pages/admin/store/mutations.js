@@ -1,10 +1,7 @@
 import mutations from "@/common/store/mutations";
 export default {
     ...mutations,
-    updateFeedback(state, data) {
-        state.feedback = {
-            ...state.feedback,
-            ...data,
-        }
+    feedback(state, data) {
+        state.feedback = this._vm.$util.cover(state.feedback, data)
     }
 }

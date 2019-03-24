@@ -59,7 +59,7 @@ export default {
       getData: "getReview",
       getSetting: "getSetting"
     }),
-    ...mapMutations(["updateSubmit"]),
+    ...mapMutations(["submit"]),
     exit(msg) {
       this.$util.msg.error(msg).then(() => {
         this.$router.push('/review');
@@ -79,7 +79,7 @@ export default {
       }
     },
     success() {
-      this.updateSubmit({
+      this.submit({
         time: Math.floor(this.time / this.review.total),
         total: this.review.total,
         review_module: this.$route.meta.title

@@ -8,6 +8,7 @@ import english from "@/common/store/modules/english";
 import review from "./modules/review";
 import rank from "./modules/rank";
 import submit from "./modules/submit";
+import log from "@/common/store/modules/log";
 
 import mutations from "./mutations";
 import actions from "./actions";
@@ -22,6 +23,7 @@ export default new vuex.Store({
         review,
         rank,
         submit,
+        log,
     },
     mutations: {
         ...mutations,

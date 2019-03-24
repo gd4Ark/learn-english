@@ -1,22 +1,22 @@
 export default {
-    async getEnglish(context) {
-        context.commit('updateEnglish', await this._vm.$axios.get('/english', context.getters.requestEnglishListData));
+    async getEnglish(ctx) {
+        ctx.commit('english', await this._vm.$axios.get('/english', ctx.getters.requestEnglishData));
     },
-    async getSetting(context) {
-        context.commit('updateSetting', await this._vm.$axios.get('/setting'));;
+    async getSetting(ctx) {
+        ctx.commit('setting', await this._vm.$axios.get('/setting'));
     },
 
-    async resetSearchData(context, module) {
-        context.commit(`update${this._vm.$util.firstUpperCase(module)}`, {
-            searchData: this._vm.$vData[module].search.data(),
+    async resetSearchData(ctx, module) {
+        ctx.commit(module, {
+            search_data: this._vm.$v_data[module].search.data(),
         });
     },
-    async updateKeyword(context, {
+    async updateSearchKeyword(ctx, {
         module,
-        keyword = []
+        search_keyword = []
     }) {
-        context.commit(`update${this._vm.$util.firstUpperCase(module)}`, {
-            keyword,
+        ctx.commit(module, {
+            search_keyword,
         });
     }
 }

@@ -144,7 +144,7 @@ const router = new VueRouter(
     routerConfig,
 );
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
     if (to.meta.title) {
         document.title = to.meta.title;
     }
@@ -154,11 +154,10 @@ router.beforeEach((to, from, next) => {
     }
     const store = router.app.$options.store;
     const localStore = router.app.$localStore;
-    const user = localStore.get('user');
-    if (user && user.token) {
-        store.dispatch('checkLogin').then(() => {
-            next();
-        })
+    const login = localStore.get('login');
+    if (login && login.access_token) {
+        await store.dispatch('checkLogin')
+        next();
     } else {
         next({
             path: '/login',

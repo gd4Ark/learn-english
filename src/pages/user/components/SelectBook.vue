@@ -14,7 +14,7 @@
         placeholder="请选择单词本"
       >
         <el-option
-          v-for="item in book.list"
+          v-for="item in book.data"
           :key="item.id"
           :label="item.name"
           :value="item.id"
@@ -40,8 +40,8 @@ export default {
   }),
   methods: {
     ...mapMutations({
-      updateCurrent: "updateBook",
-      updatebook_id: "updateEnglish"
+      updateCurrent: "book",
+      updatebook_id: "english"
     }),
     open() {
       this.value = this.book.current_id;

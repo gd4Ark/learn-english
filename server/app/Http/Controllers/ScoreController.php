@@ -10,9 +10,9 @@ class ScoreController extends Controller{
 
     public function index(Request $request){
         $setting = Setting::query()->first();
-        $data = Score::where([
-            'book_id' => $request->input('book_id'),
-            'review_module' => $request->input('review_module'),
+        $data = Score::query()->where([
+            'book_id' => $request->get('book_id'),
+            'review_module' => $request->get('review_module'),
         ])
             ->orderBy('time')
             ->orderBy('updated_at','DESC')
@@ -21,26 +21,27 @@ class ScoreController extends Controller{
         foreach($data as $key=>$value){
             $data[$key]['position'] = $key + 1;
         }
-        return [
-            'list' => sortRank($data),
-        ];
+        return $this->json($this->sortRank($data));
     }
 
     public function create(Request $request){
-        $all = $request->all();
-        $data = Score::where([
-            'book_id' => $all['book_id'],
-            'review_module' => $all['review_module'],
-            'username' => $all['username'],
-        ])->first();
-        if (!$data){
-            Score::create($request->all());
-            return;
-        }
-        if ($all['time'] < $data->time){
-            $data->time = $all['time'];
-            $data->save();
-            return;
+        try{
+            $input = $request->all();
+            $item = Score::query()->where([
+                'book_id' => $input['book_id'],
+                'review_module' => $input['review_module'],
+                'username' => $input['username'],
+            ])->first();
+            if (!$item){
+                $item = Score::query()->create($input);
+            }
+            else if ($input['time'] < $item->time){
+                $item->time = $input['time'];
+                $item->save();
+            }
+            return $this->json($item);
+        }catch (\Exception $e) {
+            return $this->error($e->getMessage());
         }
     }
 
