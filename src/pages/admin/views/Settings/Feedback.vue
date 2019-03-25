@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import FeedbackTable from "@/pages/admin/components/FeedbackTable";
+import FeedbackTable from "@/pages/admin/tables/FeedbackTable";
 import { mapActions } from "vuex";
 export default {
   components: {

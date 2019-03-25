@@ -3,10 +3,10 @@
     <div class="toolbar">
       <div>
         <add
-          title="添加单词"
-         :formItem="$vData.english.admin.item"
-          :getFormData="$vData.english.admin.data"
-          action="addEnglish"
+          title="添加日志"
+          :formItem="$v_data.log.base.item"
+          :getFormData="$v_data.log.base.data"
+          action="addLog"
           @get-data="getData"
         />
         <el-button
@@ -18,14 +18,14 @@
         />
       </div>
       <search
-        title="单词本筛选框"
-        module="english"
+        title="日志筛选框"
+        module="log"
         @get-data="getData"
       />
     </div>
 
     <el-table
-      :data="english.list"
+      :data="log.data"
       class="table"
       height="100%"
       @selection-change="handleSelectionChange"
@@ -34,7 +34,28 @@
         type="selection"
         width="40"
         align="center"
-      >
+      />
+      <el-table-column type="expand">
+        <template slot-scope="props">
+          <div
+            v-if="props.row.fix"
+            class="text"
+          >
+            <h3>修复：</h3>
+            <pre>{{props.row.fix}}</pre>
+          </div>
+          <div
+            v-if="props.row.feat"
+            class="text"
+          >
+            <h3>更新：</h3>
+            <pre>{{props.row.feat}}</pre>
+          </div>
+          <div class="text">
+            <time>创建时间：<span>{{props.row.created_at}}</span></time>
+            <time>更新时间：<span>{{props.row.updated_at}}</span></time>
+          </div>
+        </template>
       </el-table-column>
       <el-table-column
         v-for="(item,index) in tableColumns"
@@ -45,17 +66,16 @@
       />
       <el-table-column
         label="操作"
-        width="110"
+        width="145"
         align="center"
       >
         <template slot-scope="scope">
           <edit
-            title="编辑单词"
-           :formItem="$vData.english.admin.item"
+            title="编辑日志"
+            :formItem="$v_data.log.base.item"
             :current="scope.row"
-            action="updateEnglish"
+            action="updateLog"
             @get-data="getData"
-            :noMargin="true"
           />
           <el-button
             style="margin: 0 10px"
@@ -68,7 +88,7 @@
       </el-table-column>
     </el-table>
     <Pagination
-      :module="english"
+      :module="log"
       @get-data="getData"
     />
   </div>
@@ -91,12 +111,8 @@ export default {
   data: () => ({
     tableColumns: [
       {
-        label: "中文",
-        prop: "chinese"
-      },
-      {
-        label: "英文",
-        prop: "english"
+        label: "版本",
+        prop: "version"
       }
     ],
     multipleSelection: []
@@ -106,11 +122,31 @@ export default {
   },
   methods: {
     ...mapActions({
-      delData: "delEnglish"
+      delData: "delLog"
     })
   },
   computed: {
-    ...mapState(["english"])
+    ...mapState(["log"])
   }
 };
 </script>
+<style lang="scss" scoped>
+.text + .text {
+  margin-top: 3vh;
+}
+.text {
+  h3 {
+    font-size: 0.9rem;
+    font-weight: normal;
+    margin-bottom: 2vh;
+  }
+  pre {
+    margin-left: 1rem;
+    font-family: $font-family;
+    font-size: 0.8rem;
+  }
+  time{
+    display: block;
+  }
+}
+</style>

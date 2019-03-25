@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import BookTable from "@/pages/admin/components/BookTable";
+import BookTable from "@/pages/admin/tables/BookTable";
 import { mapActions } from "vuex";
 export default {
   components: {

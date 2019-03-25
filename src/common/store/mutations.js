@@ -1,26 +1,14 @@
 export default {
-    updateBook(state, data) {
-        state.book = {
-            ...state.book,
-            ...data,
-        }
+    book(state, data) {
+        state.book = this._vm.$util.cover(state.book, data)
     },
-    updateEnglish(state, data) {
-        state.english = {
-            ...state.english,
-            ...data,
-        }
+    english(state, data) {
+        state.english = this._vm.$util.cover(state.english, data)
     },
-    updateSetting(state, data) {
-        state.setting = {
-            ...state.setting,
-            ...data,
-        }
+    setting(state, data) {
+        state.setting = data;
     },
-    updateLog(state, data) {
-        state.log = {
-            ...state.log,
-            ...data,
-        }
+    log(state, data) {
+        state.log = this._vm.$util.cover(state.log, data)
     }
 }

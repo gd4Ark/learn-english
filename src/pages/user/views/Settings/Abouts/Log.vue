@@ -4,7 +4,7 @@
       <template v-if="done">
         <el-card
           shadow="never"
-          v-for="(item,index) in log.list"
+          v-for="(item,index) in log.data"
           :key="index"
         >
           <div

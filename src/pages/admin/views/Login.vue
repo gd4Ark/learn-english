@@ -7,8 +7,8 @@
       <BaseForm
         btn="登录"
         :useBtn="true"
-        :formItem="$vData.login.base.item"
-        :getFormData="$vData.login.base.data"
+        :formItem="$v_data.login.base.item"
+        :getFormData="$v_data.login.base.data"
         @submit="submit"
       />
     </div>
@@ -23,8 +23,8 @@ export default {
   },
   methods: {
     ...mapActions(["login"]),
-    async submit(formData) {
-      await this.login(formData);
+    async submit(data) {
+      await this.login(data);
       this.$router.push("/index");
     }
   }

@@ -31,9 +31,52 @@ export default {
             return JSON.stringify(obj) === "{}";
         }
 
+        o.cover = (obj1, obj2) => {
+            const _obj1 = Object.assign({}, obj1);
+            const _obj2 = Object.assign({}, obj2);
+            for (const key in _obj1) {
+                if (_obj2[key]) {
+                    _obj1[key] = _obj2[key];
+                }
+            }
+            return _obj1;
+        }
+
+        o.retainKeys = (obj, keys) => {
+            const new_obj = {};
+            keys.forEach(key => {
+                new_obj[key] = obj[key];
+            });
+            return new_obj;
+        }
+
         o.numberToW = (num) => {
             return num / 10000 + 'w';
         }
+
+        o.firstUpperCase = (str) => (
+            str.toLowerCase().replace(/( |^)[a-z]/g, (L) => L.toUpperCase())
+        )
+
+        o.flatProperty = (key, obj) => {
+            for (const k in obj[key]) {
+                obj[`${key}_${k}`] = obj[key][k];
+            }
+            delete obj[key];
+            return obj;
+        };
+
+        o.mergerProperty = (prefix, key, obj) => {
+            obj[key] = {};
+            for (const k in obj) {
+                if (k.indexOf(prefix) === 0) {
+                    const nk = k.substring(prefix.length);
+                    obj[key][nk] = obj[k];
+                    delete obj[k];
+                }
+            }
+            return obj;
+        };
 
         o.msg = (() => {
 
@@ -93,15 +136,12 @@ export default {
 
         o.checkEmptyForm = (formData) => {
             for (let v of Object.values(formData)) {
+                v = ("" + v).trim();
                 if (v !== 0 && !v) {
                     return true;
                 }
             }
         };
-
-        o.firstUpperCase = (str) => (
-            str.toLowerCase().replace(/( |^)[a-z]/g, (L) => L.toUpperCase())
-        )
 
         o.timer = (() => {
 
@@ -156,7 +196,7 @@ export default {
             const s = time % 60;
             return `${o.numFormat(m)}:${o.numFormat(s)}`;
         };
-        
+
         Vue.prototype.$util = o;
     }
 }

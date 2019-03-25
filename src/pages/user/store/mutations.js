@@ -1,22 +1,13 @@
 import mutations from "@/common/store/mutations";
 export default {
-    updateReview(state, data) {
-        state.review = {
-            ...state.review,
-            ...data,
-        }
+    review(state, data) {
+        state.review = this._vm.$util.cover(state.review, data)
     },
-    updateRank(state, data) {
-        state.rank = {
-            ...state.rank,
-            ...data,
-        }
+    rank(state, data) {
+        state.rank = this._vm.$util.cover(state.rank, data)
     },
-    updateSubmit(state, data) {
-        state.submit = {
-            ...state.submit,
-            ...data,
-        }
+    submit(state, data) {
+        state.submit = this._vm.$util.cover(state.submit, data)
     },
     ...mutations,
 }

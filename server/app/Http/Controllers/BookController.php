@@ -9,39 +9,55 @@ use Illuminate\Http\Request;
 class BookController extends Controller{
 
     public function index(Request $request){
-        $list = Book::withCount('english');
-        $list = $this->search($request,$list);
-        return $this->pagination($request,$list);
+        $query = $this->search(Book::query()->withCount('english'));
+        return $this->paginate($query);
     }
 
     public function show($id){
-        return Book::findOrFail($id);
+        $item = Book::query()->findOrFail($id);
+        return $this->json($item);
     }
 
 
     public function create(Request $request){
-        $data = Book::create($request->all());
-        return $data->id;
+        try {
+            $input = $request->all();
+            // Todo: Validate
+            $item = Book::query()->create($input);
+            return $this->json($item);
+        } catch (\Exception $e) {
+            return $this->error($e->getMessage());
+        }
     }
 
     public function update(Request $request,$id){
-        $data = Book::findOrFail($id);
-        $data->update($request->all());
-        return $data->id;
+        $item = Book::query()->findOrFail($id);
+        try {
+            $input = $request->all();
+            // Todo: Validate
+            $item->update($input);
+            return $this->json($item);
+        } catch (\Exception $e) {
+            return $this->error($e->getMessage());
+        }
     }
 
     public function delete(Request $request){
-        $ids = $request->get('ids',array());
-        foreach ($ids as $id){
-            /*
-            * 检查是否存在单词
-            * */
-            $data = English::where('book_id',$id)->first();
-            if ($data){
-                return $this->responseErr('存在单词，无法删除！',403);
+        $ids = (array)$request->get('ids');
+        try {
+            foreach ($ids as $id){
+                /*
+                * 检查是否存在单词
+                * */
+                $data = English::where('book_id',$id)->first();
+                if ($data){
+                    return $this->error('存在单词，无法删除！',403);
+                }
             }
+            Book::query()->whereIn('id', $ids)->delete();
+        } catch (\Exception $e) {
+            return $this->error('Delete failed');
         }
-        Book::destroy($ids);
     }
 
 }

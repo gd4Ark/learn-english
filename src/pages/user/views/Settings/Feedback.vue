@@ -10,7 +10,7 @@
       </el-radio-group>
       <c-form
         :showLabel="false"
-        :formItem="$vData.feedback.base.item"
+        :formItem="$v_data.feedback.base.item"
         :formData="formData"
       />
       <el-button
@@ -45,7 +45,7 @@ export default {
     formData: {}
   }),
   mounted() {
-    this.formData = this.$vData.feedback.base.data();
+    this.formData = this.$v_data.feedback.base.data();
   },
   methods: {
     ...mapActions(["feedback"]),

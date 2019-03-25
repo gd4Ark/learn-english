@@ -48,6 +48,7 @@ export default {
         this.$util.msg.success("添加成功！");
         this.$refs.baseForm.reset();
         this.$emit("get-data");
+        this.$refs.modal.hidden();
       }
     }
   }

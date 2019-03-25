@@ -9,31 +9,52 @@ class LogController extends Controller{
 
     public function index(Request $request){
         if ($request->has('all')){
-            $list = Log::orderBy('version','DESC')->get();
-            return [
-                'list' => $list,
-                'total' => $list->count(),
-            ];
+            $query = Log::query()->orderBy('version','DESC')->get();
+            return $this->json( [
+                'data' => $query,
+                'total' => $query->count(),
+            ]);
         };
-        $list = Log::orderBy('version','DESC');
-        $list = $this->search($request,$list);
-        return $this->pagination($request,$list);
+        $query = $this->search(Log::query()->orderBy('version','DESC'));
+        return $this->paginate($query);
+    }
+
+    public function show($id){
+        $item = Log::query()->findOrFail($id);
+        return $this->json($item);
     }
 
     public function create(Request $request){
-        $data = Log::create($request->all());
-        return $data->id;
+        try {
+            $input = $request->all();
+            // Todo: Validate
+            $item = Log::query()->create($input);
+            return $this->json($item);
+        } catch (\Exception $e) {
+            return $this->error($e->getMessage());
+        }
     }
 
     public function update(Request $request,$id){
-        $data = Log::findOrFail($id);
-        $data->update($request->all());
-        return $data->id;
+        $item = Log::query()->findOrFail($id);
+        try {
+            $input = $request->all();
+            // Todo: Validate
+            $item->update($input);
+            return $this->json($item);
+        } catch (\Exception $e) {
+            return $this->error($e->getMessage());
+        }
     }
 
     public function delete(Request $request){
-        $ids = $request->get('ids',array());
-        Log::destroy($ids);
+        $ids = (array)$request->get('ids');
+        try {
+            Log::query()->whereIn('id', $ids)->delete();
+            return $this->json();
+        } catch (\Exception $e) {
+            return $this->error('删除失败！');
+        }
     }
 
 }

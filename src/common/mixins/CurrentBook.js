@@ -1,7 +1,7 @@
 export default {
     computed: {
         currentBook() {
-            return this.$store.state.book.list.find(
+            return this.$store.state.book.data.find(
                 item => item.id === this.current_id
             );
         },

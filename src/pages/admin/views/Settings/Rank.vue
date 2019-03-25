@@ -1,20 +1,16 @@
 <template>
   <pop-wrap>
     <template slot="header-right">
-      <el-button
-        size="small"
-        type="primary"
-        @click="submit"
-      >完 成</el-button>
+      <el-button size="small"
+                 type="primary"
+                 @click="submit">完 成</el-button>
     </template>
     <div class="app-content">
-      <base-form
-        v-if="done"
-        ref="baseForm"
-        :formItem="$vData.rank.update.item"
-        :formData="formData"
-        @submit="handleSubmit"
-      >
+      <base-form v-if="done"
+                 ref="baseForm"
+                 :formItem="$v_data.rank.update.item"
+                 :formData="formData"
+                 @submit="handleSubmit">
       </base-form>
     </div>
   </pop-wrap>
@@ -51,7 +47,7 @@ export default {
   },
   computed: {
     ...mapState(["setting"]),
-    done(){
+    done() {
       return this.formData.rank_limit_quantity !== null;
     }
   }

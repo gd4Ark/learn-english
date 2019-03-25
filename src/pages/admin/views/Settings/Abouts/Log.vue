@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import LogTable from "@/pages/admin/components/LogTable";
+import LogTable from "@/pages/admin/tables/LogTable";
 import { mapActions,mapMutations } from "vuex";
 export default {
   components: {

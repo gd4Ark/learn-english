@@ -1,20 +1,16 @@
 <template>
   <pop-wrap>
     <template slot="header-right">
-      <el-button
-        size="small"
-        type="primary"
-        @click="submit"
-      >完 成</el-button>
+      <el-button size="small"
+                 type="primary"
+                 @click="submit">完 成</el-button>
     </template>
     <div class="app-content">
-      <base-form
-        v-if="done"
-        ref="baseForm"
-        :formItem="$vData.review.partialSpell.item"
-        :formData="formData"
-        @submit="handleSubmit"
-      >
+      <base-form v-if="done"
+                 ref="baseForm"
+                 :formItem="$v_data.review.partialSpell.item"
+                 :formData="formData"
+                 @submit="handleSubmit">
       </base-form>
     </div>
   </pop-wrap>
@@ -29,7 +25,7 @@ export default {
   },
   data: () => ({
     formData: {
-      partial_spell_proportion : null
+      partial_spell_proportion: null
     }
   }),
   methods: {
@@ -44,15 +40,15 @@ export default {
   },
   async mounted() {
     await this.getSetting();
-    const { partial_spell_proportion  } = this.setting;
+    const { partial_spell_proportion } = this.setting;
     this.formData = {
-      partial_spell_proportion 
+      partial_spell_proportion
     };
   },
   computed: {
     ...mapState(["setting"]),
-    done(){
-      return this.formData.partial_spell_proportion  !== null;
+    done() {
+      return this.formData.partial_spell_proportion !== null;
     }
   }
 };

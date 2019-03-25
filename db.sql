@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： 127.0.0.1:3306
--- 生成日期： 2019-03-13 13:04:36
+-- 生成日期： 2019-03-24 05:58:13
 -- 服务器版本： 5.7.24
 -- PHP 版本： 7.2.14
 
@@ -35,6 +35,8 @@ CREATE TABLE IF NOT EXISTS `admins` (
   `id` int(6) NOT NULL AUTO_INCREMENT,
   `username` varchar(16) NOT NULL,
   `password` varchar(32) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
@@ -43,8 +45,8 @@ CREATE TABLE IF NOT EXISTS `admins` (
 -- 转存表中的数据 `admins`
 --
 
-INSERT INTO `admins` (`id`, `username`, `password`) VALUES
-(1, 'admin', 'e292f6af4d8995560729cac5b0ffdbf9');
+INSERT INTO `admins` (`id`, `username`, `password`, `created_at`, `updated_at`) VALUES
+(1, 'admin', 'e292f6af4d8995560729cac5b0ffdbf9', NULL, '2019-03-24 05:32:01');
 
 -- --------------------------------------------------------
 
@@ -59,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `books` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `books`
@@ -85,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `englishes` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `book_id` (`book_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `englishes`
@@ -115,16 +117,13 @@ CREATE TABLE IF NOT EXISTS `feedback` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `feedback`
 --
 
 INSERT INTO `feedback` (`id`, `type`, `message`, `contact`, `created_at`, `updated_at`) VALUES
-(6, 1, '希望增加几个复习模块，比如全部拼写、英文选意这些。', '', '2019-01-19 01:55:40', '2019-01-19 01:55:40'),
-(7, 0, '部分拼写完成时有点卡顿。。。。。。', '', '2019-01-19 01:58:31', '2019-01-19 01:58:31'),
-(8, 0, '123123123123123123', '', '2019-01-28 02:23:17', '2019-01-28 02:23:17'),
 (9, 0, '213123123123123123123', '', '2019-01-28 02:23:24', '2019-01-28 02:23:24'),
 (10, 0, '21312321312312312312123123', '', '2019-01-28 02:23:28', '2019-01-28 02:23:28'),
 (11, 0, '1231233333333333333333333', '', '2019-01-28 02:23:34', '2019-01-28 02:23:34'),
@@ -140,8 +139,7 @@ INSERT INTO `feedback` (`id`, `type`, `message`, `contact`, `created_at`, `updat
 (21, 0, '123123123123123123213', '', '2019-01-28 02:27:08', '2019-01-28 02:27:08'),
 (22, 0, '123123123123123123213', '', '2019-01-28 02:27:08', '2019-01-28 02:27:08'),
 (23, 0, '123123123123123123213', '', '2019-01-28 02:30:23', '2019-01-28 02:30:23'),
-(24, 0, '123123123123123123123', '', '2019-01-28 02:34:48', '2019-01-28 02:34:48'),
-(25, 0, '123123123123123123', '', '2019-03-13 12:06:03', '2019-03-13 12:06:03');
+(26, 0, 'submitsubmitsubmitsubmitsubmitsubmitsubmitsubmit', '123', '2019-03-24 05:57:28', '2019-03-24 05:57:28');
 
 -- --------------------------------------------------------
 
@@ -159,7 +157,7 @@ CREATE TABLE IF NOT EXISTS `logs` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `version` (`version`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `logs`
@@ -189,7 +187,7 @@ CREATE TABLE IF NOT EXISTS `scores` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `book_id` (`book_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `scores`
@@ -212,7 +210,8 @@ INSERT INTO `scores` (`id`, `book_id`, `review_module`, `username`, `time`, `cre
 (14, 6, '单词部分拼写', '蔡红辉', 2, '2019-01-28 02:50:00', '2019-01-28 02:50:00'),
 (15, 6, '单词部分拼写', '哈哈哈', 1, '2019-03-13 08:39:10', '2019-03-13 08:39:10'),
 (16, 6, '单词部分拼写', '123', 3, '2019-03-13 12:07:30', '2019-03-13 12:07:30'),
-(17, 7, '单词部分拼写', '111', 8, '2019-03-13 12:27:20', '2019-03-13 12:27:20');
+(17, 7, '单词部分拼写', '111', 8, '2019-03-13 12:27:20', '2019-03-13 12:27:20'),
+(18, 6, '单词部分拼写', 'aaa123', 2, '2019-03-24 05:57:10', '2019-03-24 05:57:10');
 
 -- --------------------------------------------------------
 
@@ -235,7 +234,7 @@ CREATE TABLE IF NOT EXISTS `settings` (
 --
 
 INSERT INTO `settings` (`id`, `rank_limit_quantity`, `partial_spell_proportion`, `created_at`, `updated_at`) VALUES
-(1, 30, 0.5, '2019-01-18 05:30:03', '2019-03-13 11:42:00');
+(1, 30, 0.5, '2019-01-18 05:30:03', '2019-03-24 05:24:55');
 
 --
 -- 限制导出的表

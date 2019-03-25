@@ -1,7 +1,7 @@
 <template>
   <wrap padding="0 2% 2%">
     <template slot="header">
-      <select-module @get-data="getData"/>
+      <select-module @get-data="getData" />
     </template>
     <div class="app-content">
       <rank-table @get-data="getData" />
@@ -12,11 +12,11 @@
 <script>
 import { mapActions } from "vuex";
 import SelectModule from "@/pages/user/components/SelectModule";
-import RankTable from "@/pages/user/components/RankTable";
+import RankTable from "@/pages/user/tables/RankTable";
 export default {
   components: {
     SelectModule,
-    RankTable,
+    RankTable
   },
   methods: {
     ...mapActions({

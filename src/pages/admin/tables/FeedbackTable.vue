@@ -17,7 +17,7 @@
     </div>
 
     <el-table
-      :data="feedback.list"
+      :data="feedback.data"
       class="table"
       height="100%"
       @selection-change="handleSelectionChange"

@@ -50,7 +50,7 @@ export default {
     this.reset();
   },
   methods: {
-    ...mapActions(["resetSearchData", "updateKeyword"]),
+    ...mapActions(["resetSearchData", "updateSearchKeyword"]),
     reset() {
       this.resetSearchData(this.module);
     },
@@ -77,22 +77,22 @@ export default {
       this.$refs.modal.hidden();
     },
     async handleSubmit() {
-      await this.updateKeyword({
+      await this.updateSearchKeyword({
         module: this.module,
-        keyword: this.keyword
+        search_keyword: this.keyword
       });
       this.$emit("get-data");
     }
   },
   computed: {
     hasSearch() {
-      return this.$store.state[this.module].keyword.length;
+      return this.$store.state[this.module].search_keyword.length;
     },
     formData() {
-      return this.$store.state[this.module].searchData;
+      return this.$store.state[this.module].search_data;
     },
     formItem() {
-      return this.$vData[this.module].search.item;
+      return this.$v_data[this.module].search.item;
     }
   }
 };

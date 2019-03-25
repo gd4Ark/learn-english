@@ -11,33 +11,35 @@ export default {
 
         let router = options.router;
 
+        let store = options.store;
+
         const useToekn = options.useToekn;
 
         axios.defaults.baseURL = config.server_url;
-
 
         // 请求拦截器
 
         axios.interceptors.request.use(config => {
             // Add Token
             if (useToekn) {
-                const user = vm.$localStore.get('user');
-                if (user && user.token) {
+                const login = vm.$localStore.get('login');
+                if (login && login.access_token) {
+                    const token = login.access_token;
                     const stringifyStatus = ['get', 'delete'].includes(config.method);
                     let data = config[stringifyStatus ? 'params' : 'data'];
                     switch (true) {
                         // FormData
                         case data instanceof FormData:
-                            data.append('token', user.token);
+                            data.append('token', token);
                             break;
                             // Params   
                         case stringifyStatus:
-                            data.token = user.token;
+                            data.token = token;
                             break;
                             // Data    
                         default:
                             data = qs.parse(data);
-                            data.token = user.token;
+                            data.token = token;
                             data = qs.stringify(data);
                             break;
                     }
@@ -52,21 +54,24 @@ export default {
 
         // 响应拦截器
         axios.interceptors.response.use(data => {
-            return data.data;
+            return data.data.data || data.data;
         }, err => {
             const status = err.response.status;
-            const message = err.response.data.message;
-            switch (true) {
-                case (status === 401):
+            const message = err.response.data.msg;
+            switch (status) {
+                case 401:
                     vm.$util.msg.error(message).then(() => {
                         router.push('/login');
                     });
                     break;
-                case (status >= 400 && status < 500):
-                    vm.$util.msg.error(message || '操作失败！');
+                case 403:
+                case 404:
+                case 405:
+                    vm.$util.msg.error(message || '请求服务器失败！');
                     break;
-                case (status >= 500 && status < 600):
-                    vm.$util.msg.error('服务器发生错误！');
+                case 500:
+                    console.log(message);
+                    vm.$util.msg.error(message || '服务器发生错误！');
                     break;
             }
             return Promise.reject(err);

@@ -12,7 +12,7 @@
     </div>
 
     <el-table
-      :data="english.list"
+      :data="english.data"
       class="table"
       height="100%"
     >
