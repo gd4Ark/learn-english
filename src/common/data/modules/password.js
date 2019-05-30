@@ -1,22 +1,43 @@
 export default {
-    update: {
-        item: [{
-            label: "旧密码",
-            key: "old_password",
-            type: "password",
-        }, {
-            label: "新密码",
-            key: "new_password",
-            type: "password",
-        }, {
-            label: "新密码",
-            key: "new_password2",
-            type: "password",
-        }, ],
-        data: () => ({
-            old_password: "",
-            new_password: "",
-            new_password2: "",
-        })
-    }
+    item: [
+        {
+            label: '旧密码',
+            key: 'password_current',
+            type: 'password',
+            rules: [
+                {
+                    required: true,
+                    trigger: 'blur'
+                }
+            ]
+        },
+        {
+            label: '新密码',
+            key: 'password',
+            type: 'password',
+            rules: [
+                {
+                    required: true,
+                    trigger: 'blur'
+                }
+            ]
+        },
+        {
+            label: '新密码',
+            key: 'password_confirm',
+            type: 'password',
+            rules: [
+                {
+                    required: true,
+                    trigger: 'blur'
+                }
+            ]
+        }
+    ],
+
+    data: () => ({
+        password_current: '',
+        password: '',
+        password_confirm: ''
+    })
 }

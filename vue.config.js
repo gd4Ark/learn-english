@@ -1,58 +1,84 @@
-const CompressionPlugin = require("compression-webpack-plugin");
-const isDev = process.env.NODE_ENV == 'development';
-const current = 'user'; // admin or user
+const CompressionPlugin = require('compression-webpack-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+    .BundleAnalyzerPlugin
+const pkg = require('./package.json')
+const isPord = process.env.NODE_ENV === 'production'
+const current = 'admin'
 const pages = [
-  // development
-  // 只能调试一个
-  {
-    index: {
-      entry: `src/pages/${current}/main.js`,
-      filename: 'index.html',
+    // development
+    // can only debug one
+    {
+        index: {
+            entry: `src/pages/${current}/main.js`,
+            template: `src/pages/${current}/tpl.html`,
+            title: pkg.title,
+            filename: 'index.html'
+        }
     },
-  },
-  // production
-  {
-    index: {
-      entry: 'src/pages/user/main.js',
-      filename: 'index.html',
-    },
-    admin: {
-      entry: 'src/pages/admin/main.js',
-      filename: 'index.html',
-    },
-  }
-];
-const config = {
-  publicPath: isDev ? '/' : './',
-  pages: pages[isDev ? 0 : 1],
-  lintOnSave: false,
-  css: {
-    loaderOptions: {
-      sass: {
-        data: `@import "@/common/styles/app.scss";`
-      }
+    // production
+    {
+        index: {
+            entry: 'src/pages/admin/main.js',
+            template: 'src/pages/admin/tpl.html',
+            title: pkg.title,
+            filename: 'admin/index.html'
+        },
+        query: {
+            entry: 'src/pages/query/main.js',
+            template: 'src/pages/user/tpl.html',
+            title: pkg.title,
+            filename: 'query/index.html'
+        }
     }
-  },
-  configureWebpack: () => {
-    if (!isDev) {
-      return {
-        plugins: [
-          new CompressionPlugin({
-            test: /\.js$|\.html$|.\css/,
-            threshold: 10240,
-            deleteOriginalAssets: false
-          })
+]
+module.exports = {
+    publicPath: isPord ? '../' : '/',
+    pages: pages[isPord ? 1 : 0],
+    lintOnSave: !isPord,
+    productionSourceMap: false,
+    css: {
+        extract: true,
+        sourceMap: false,
+        loaderOptions: {
+            sass: {
+                data: `@import "@/common/styles/app.scss";`
+            }
+        }
+    },
+    devServer: {
+        host: '0.0.0.0',
+        port: 8080,
+        https: false,
+        hotOnly: true
+    },
+    configureWebpack: config => {
+        const pluginsPro = [
+            new CompressionPlugin({
+                test: /\.js$|\.html$|.\css/,
+                threshold: 10240,
+                deleteOriginalAssets: false
+            })
         ]
-      }
+        if (process.env.npm_config_report) {
+            pluginsPro.push(new BundleAnalyzerPlugin())
+        }
+        const pluginsDev = []
+        if (isPord) {
+            config.plugins = [...config.plugins, ...pluginsPro]
+        } else {
+            config.plugins = [...config.plugins, ...pluginsDev]
+        }
+    },
+    chainWebpack: config => {
+        config.plugin('define').tap(definitions => {
+            definitions[0]['process.env']['APP_NAME'] = JSON.stringify(pkg.name)
+            definitions[0]['process.env']['APP_TITLE'] = JSON.stringify(
+                pkg.title
+            )
+            definitions[0]['process.env']['APP_VERSION'] = JSON.stringify(
+                pkg.version
+            )
+            return definitions
+        })
     }
-  },
-  chainWebpack: (config) => {
-    config.plugin('define').tap((definitions) => {
-      definitions[0]['process.env']['APP_NAME'] = JSON.stringify(require('./package.json').name);
-      definitions[0]['process.env']['APP_TITLE'] = JSON.stringify(require('./package.json').title);
-      definitions[0]['process.env']['APP_VERSION'] = JSON.stringify(require('./package.json').version);
-      return definitions;
-    });
-  }
-};
-module.exports = config;
+}

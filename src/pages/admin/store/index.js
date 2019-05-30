@@ -1,33 +1,28 @@
 import Vue from 'vue'
 import vuex from 'vuex'
 
-import book from "./modules/book";
-import english from "@/common/store/modules/english";
-import setting from "@/common/store/modules/setting";
-import feedback from "./modules/feedback";
-import log from "@/common/store/modules/log";
+import { fileListToObject } from '@/common/utils/readFile'
 
-import mutations from "./mutations";
-import actions from "./actions";
-import getters from "./getters";
+import createPersist from 'vuex-localstorage'
 
-Vue.use(vuex);
+const modulesFiles = require.context('./modules', false, /\.js$/)
+const modules = fileListToObject(modulesFiles)
+
+import actions from './actions'
+import getters from './getters'
+
+Vue.use(vuex)
 
 export default new vuex.Store({
-    state: {
-        book,
-        english,
-        setting,
-        feedback,
-        log,
-    },
-    mutations: {
-        ...mutations,
-    },
-    actions: {
-        ...actions,
-    },
-    getters: {
-        ...getters,
-    }
+    modules,
+    actions,
+    getters,
+    plugins: [
+        createPersist({
+            namespace: process.env.APP_NAME + '-admin',
+            initialState: {},
+            // one week
+            expires: 7 * 24 * 60 * 60 * 1e3
+        })
+    ]
 })

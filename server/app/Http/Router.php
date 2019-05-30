@@ -20,12 +20,14 @@ class Router extends BaseRouter
         $this->addRoute(array_map('strtoupper', (array)$methods), $uri, $action);
     }
 
-    public function resource($uri, $controller){
+    public function resource($uri, $controller)
+    {
         $this->addRoute('GET', $uri, $controller . '@index');
         $this->addRoute('POST', $uri, $controller . '@create');
-        $this->addRoute('GET', $uri . '/{id}', $controller . '@show');
-        $this->match(['PUT', 'PATCH'], $uri . '/{id}', $controller . '@update');
-        $this->addRoute('DELETE', $uri, $controller . '@delete');
+        $this->match(['PUT', 'PATCH'], $uri, $controller . '@updateBatch');
+        $this->addRoute('DELETE', $uri, $controller . '@deleteBatch');
+        $this->addRoute('GET', $uri . '/{id:[\d]+}', $controller . '@show');
+        $this->match(['PUT', 'PATCH'], $uri . '/{id:[\d]+}', $controller . '@update');
+        $this->addRoute('DELETE', $uri . '/{id:[\d]+}', $controller . '@delete');
     }
-
 }

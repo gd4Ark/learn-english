@@ -1,67 +1,111 @@
 <template>
-  <c-form :form-item="formItem"
-          :form-data="s_formData">
+  <c-form v-if="loaded"
+          ref="form"
+          :form-item="formItem"
+          :form-data="sformData"
+          :show-label="showLabel"
+          @submit="handleSubmit">
     <el-form-item>
-      <slot></slot>
-      <el-button v-if="useBtn"
-                 size="small"
+      <slot />
+      <slot name="custom-area"
+            :custom-submit="submit"
+            :custom-reset="reset" />
+      <el-button v-if="needBtn"
+                 :size="btnSize || respBtnSize"
+                 :style="btnStyle"
+                 :disabled="btnDisabled"
                  type="primary"
-                 @click="submit">{{
+                 @click="submit">
+        {{
         btnText
-        }}</el-button>
+        }}
+      </el-button>
     </el-form-item>
   </c-form>
 </template>
 <script>
-import cForm from "@/common/components/Form";
+import cForm from '@/common/components/Form'
+import { clone, retainKeys } from '@/common/utils'
+import ResponsiveSize from '@/common/mixins/ResponsiveSize'
 export default {
-  components: {
-    cForm
-  },
-  props: {
-    formItem: Array,
-    formData: {
-      type: Object,
-      default: null
+    name: 'BaseForm',
+    components: {
+        cForm
     },
-    getFormData: Function,
-    useBtn: {
-      type: Boolean,
-      default: false
-    },
-    btnText: {
-      type: String,
-      default: "提交"
-    }
-  },
-  data: () => ({
-    s_formData: null
-  }),
-  mounted() {
-    this.reset();
-  },
-  methods: {
-    reset() {
-      this.s_formData = { ...this.formData } || this.getFormData();
-    },
-    submit() {
-      for (const index in this.requiredItems) {
-        const key = this.requiredItems[index];
-        if (this.s_formData[key] === "") {
-          return this.$util.msg.warning("请填写完整！");
+    mixins: [ResponsiveSize],
+    props: {
+        formItem: {
+            type: Array,
+            required: true
+        },
+        formData: {
+            type: Object,
+            default: null
+        },
+        getFormData: {
+            type: Function,
+            default: () => {}
+        },
+        showLabel: {
+            type: Boolean,
+            default: true
+        },
+        needBtn: {
+            type: Boolean,
+            default: true
+        },
+        btnDisabled: {
+            type: Boolean,
+            default: false
+        },
+        btnSize: {
+            type: String,
+            default: ''
+        },
+        btnText: {
+            type: String,
+            default: '提交'
+        },
+        btnStyle: {
+            type: Object,
+            default: Object
         }
-      }
-      const data = this.$util.retainKeys(
-        this.s_formData,
-        this.formItem.map(el => el.key)
-      );
-      this.$emit("submit", data);
+    },
+    data: () => ({
+        sformData: null
+    }),
+    computed: {
+        loaded() {
+            return this.sformData !== null
+        }
+    },
+    mounted() {
+        this.reset()
+    },
+    methods: {
+        reset() {
+            this.sformData = this.formData
+                ? clone(this.formData)
+                : this.getFormData()
+        },
+        submit() {
+            this.$refs.form.submit()
+        },
+        handleSubmit() {
+            const data = retainKeys(this.sformData, this.getKeys(this.formItem))
+            this.$emit('submit', data)
+        },
+        getKeys(array) {
+            let keys = []
+            array.forEach(item => {
+                if (item.items) {
+                    keys = keys.concat(this.getKeys(item.items))
+                    return
+                }
+                keys.push(item.key)
+            })
+            return keys
+        }
     }
-  },
-  computed: {
-    requiredItems() {
-      return this.formItem.filter(el => !el.empty).map(el => el.key);
-    }
-  }
-};
+}
 </script>

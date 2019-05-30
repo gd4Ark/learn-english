@@ -1,69 +1,87 @@
 <template>
-  <el-form
-    v-if="formData"
-    ref="form"
-    :label-width="showLabel ? '70px' : '0'"
-    autocomplete="off"
-  >
-
-    <el-form-item
-      v-for="(item,index) in formItem"
-      :key="index"
-      :label="showLabel ? item.label : null"
-    >
-
-      <!-- 一行多个 -->
-      <template v-if="item.items">
-        <template v-for="(it,index) in item.items">
-          <el-col
-            v-if="index>0"
-            :key="index"
-            class="line"
-            :span="2"
-          >-</el-col>
-          <el-col :span="11" :key="index">
-            <form-item
-              :item="item"
-              :key="index"
-              :model.sync="formData[item.key][index]"
-            />
-          </el-col>
-        </template>
-      </template>
-
-      <!-- 一行一个 -->
-      <template v-else>
-        <form-item
-          :item="item"
-          :model.sync="formData[item.key]"
-        />
-      </template>
-
-    </el-form-item>
-
-    <slot></slot>
-
+  <el-form v-if="loaded"
+           ref="form"
+           :model="formData"
+           :show-message="false"
+           :inline="inline"
+           :rules="rules"
+           :label-width="showLabel ? labelWidth : '0'"
+           autocomplete="off"
+           @submit.native.prevent>
+    <form-item v-for="(item) in formItem"
+               :key="item.key"
+               :item="item"
+               :form-item="formItem"
+               :form-data="formData"
+               :rules="rules"
+               :splice-key="item.key"
+               @submit="submit" />
+    <slot />
   </el-form>
 </template>
 <script>
-import FormItem from "@/common/components/FormItem";
+import { mapGetters } from 'vuex'
+import FormItem from '@/common/components/FormItem'
+import { warning } from '@/common/utils/message'
 export default {
-  props: {
-    formData: Object,
-    formItem: Array,
-    showLabel : {
-      type : Boolean,
-      default : true
+    name: 'Form',
+    components: {
+        FormItem
+    },
+    props: {
+        formData: {
+            type: Object,
+            required: true
+        },
+        formItem: {
+            type: Array,
+            required: true
+        },
+        showLabel: {
+            type: Boolean,
+            default: true
+        },
+        inline: {
+            type: Boolean,
+            default: false
+        }
+    },
+    data: () => ({
+        rules: {},
+        loaded: false
+    }),
+    computed: {
+        ...mapGetters(['isMobile']),
+        labelWidth() {
+            return this.isMobile ? '60px' : '80px'
+        }
+    },
+    mounted() {
+        this.initRules(this.formItem)
+        this.loaded = true
+    },
+    methods: {
+        submit() {
+            this.$refs.form.validate(valid => {
+                if (valid) {
+                    this.$emit('submit')
+                } else {
+                    warning('请填写正确！')
+                }
+            })
+        },
+        initRules(formItem, key = '') {
+            formItem.forEach(el => {
+                const k = key ? key + '.' + el.key : el.key
+                if (el.rules) {
+                    this.rules[k] = el.rules
+                } else if (el.isGroup) {
+                    this.initRules(el.group, k)
+                } else if (el.items) {
+                    this.initRules(el.items, key)
+                }
+            })
+        }
     }
-  },
-  components: {
-    FormItem
-  }
-};
-</script>
-<style lang="scss" scoped>
-.line {
-  display: block;
-  text-align: center;
 }
-</style>
+</script>

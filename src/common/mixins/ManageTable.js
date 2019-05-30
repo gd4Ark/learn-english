@@ -1,32 +1,68 @@
+import loading from './loading'
+import getData from './getData'
+import ResponsiveSize from './ResponsiveSize'
+import { mapActions } from 'vuex'
+import { warning, success } from '@/common/utils/message'
+import confirm from '@/common/utils/confirm'
 export default {
+    mixins: [ResponsiveSize, loading, getData],
+    data: () => ({
+        multipleSelection: [],
+        loaded: false
+    }),
     methods: {
-        getData() {
-            this.$emit("get-data");
+        ...mapActions({
+            delData: 'delete'
+        }),
+        beforeChange() {
+            this.makeLoading()
+        },
+        afterChange() {
+            this.$nextTick(() => {
+                this.$refs.table.$el.querySelector(
+                    '.el-table__body-wrapper'
+                ).scrollTop = 0
+                this.makeLoaded()
+            })
         },
         handleDelete(ids) {
             if (ids.length === 0) {
-                return this.$util.msg.warning("没有选中项！");
+                return warning('没有选中项！')
             }
-            this.$util
-                .confirm({
-                    content: "确认删除？"
-                })
+            confirm({
+                content: '确认删除？'
+            })
                 .then(() => {
-                    this.delete(ids);
+                    this.delete(ids)
                 })
-                .catch(() => {
-
-                });
+                .catch(() => {})
         },
         async delete(ids) {
             await this.delData({
+                module: this.module,
                 ids
-            });
-            this.getData();
-            this.$util.msg.success("删除成功!");
+            })
+            await this.getData()
+            success('删除成功!')
         },
         handleSelectionChange(val) {
-            this.multipleSelection = val.map(el => el.id);
+            this.multipleSelection = val.map(el => el.id)
+        },
+        async handleSortChange(val) {
+            const desc = val.order === 'descending' ? 1 : 0
+            const prop = val.prop || ''
+            this.setOrder({
+                order_by: prop,
+                desc
+            })
+            this.beforeChange()
+            await this.getData()
+            this.afterChange()
+        },
+        renderHeader: (h, { column }) => {
+            return h('i', {
+                class: 'table-header-icon ' + column.label
+            })
         }
     }
 }

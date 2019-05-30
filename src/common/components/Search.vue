@@ -1,117 +1,113 @@
 <template>
-  <modal
-    ref="modal"
-    :title="title"
-  >
-    <template slot="btn">
-      <el-button
-        size="small"
-        type="primary"
-        icon="el-icon-search"
-        :class="{'has-search':hasSearch}"
-      >{{title}}</el-button>
-    </template>
-    <template slot="body">
-      <c-form
-        :formData="formData"
-        :formItem="formItem"
-      />
-    </template>
-    <template slot="footer">
-      <el-button @click="reset">重 置</el-button>
-      <el-button
-        type="primary"
-        @click="submit"
-      >确 定</el-button>
-
-    </template>
-  </modal>
+    <v-card :title="title"
+            class="search">
+        <div slot="toolbar"
+             class="toolbar">
+            <el-button :size="respBtnSize"
+                       type="primary"
+                       @click="submit">
+                搜索
+            </el-button>
+            <el-button :size="respBtnSize"
+                       type="info"
+                       @click="handleReset">
+                重置
+            </el-button>
+        </div>
+        <c-form :inline="true"
+                :form-item="formItem"
+                :form-data="formData"
+                @submit="submit" />
+    </v-card>
 </template>
 <script>
-import Modal from "@/common/components/Modal";
-import cForm from "@/common/components/Form";
-import { mapActions } from "vuex";
+import cForm from '@/common/components/Form'
+import { mapActions } from 'vuex'
+import { firstUpperCase } from '@/common/utils'
+import { isEmptyObject } from '@/common/utils/validate'
+import getData from '@/common/mixins/getData'
+import submitChange from '@/common/mixins/submitChange'
+import ResponsiveSize from '@/common/mixins/ResponsiveSize'
 export default {
-  components: {
-    Modal,
-    cForm
-  },
-  props: {
-    title: {
-      type: String,
-      default: "筛选框"
+    name: 'Search',
+    components: {
+        cForm
     },
-    module: String
-  },
-  data: () => ({
-    keyword: []
-  }),
-  mounted() {
-    this.reset();
-  },
-  methods: {
-    ...mapActions(["resetSearchData", "updateSearchKeyword"]),
-    reset() {
-      this.resetSearchData(this.module);
-    },
-    submit() {
-      this.keyword = [];
-      this.formItem.forEach(el => {
-        const key = el.key;
-        let item = this.formData[key];
-        if (el.items) {
-          el.items.forEach((el, index) => {
-            if (item[index] !== 0 && !item[index]) return;
-            this.keyword.push([key, el.operation, item[index]]);
-          });
-        } else {
-          if (item !== 0 && !item) return;
-          const operation = el.operation;
-          if (operation === "like") {
-            item = `%${item}%`;
-          }
-          this.keyword.push([key, operation, item]);
+    mixins: [ResponsiveSize, getData, submitChange],
+    props: {
+        title: {
+            type: String,
+            default: '搜索'
+        },
+        module: {
+            type: String,
+            required: true
         }
-      });
-      this.handleSubmit();
-      this.$refs.modal.hidden();
     },
-    async handleSubmit() {
-      await this.updateSearchKeyword({
-        module: this.module,
-        search_keyword: this.keyword
-      });
-      this.$emit("get-data");
+    data: () => ({
+        search_keyword: []
+    }),
+    computed: {
+        submitAction() {
+            return `${this.module}search_keyword`
+        },
+        formItem() {
+            return this.$v_data[this.module].search.item
+        },
+        formData() {
+            const state = this.$store.state[this.module]
+            if (isEmptyObject(state.search_data)) {
+                state.search_data = this.$v_data[this.module].search.data()
+            }
+            return state.search_data
+        },
+        s_module() {
+            return firstUpperCase(this.module)
+        }
+    },
+    methods: {
+        ...mapActions(['resetSearchData', 'updateSearchKeyword']),
+        reset() {
+            this.resetSearchData(this.module)
+        },
+        handleReset() {
+            this.reset()
+            this.submit()
+        },
+        submit() {
+            this.search_keyword = []
+            this.formItem.forEach(el => {
+                const key = el.key
+                let item = this.formData[key]
+                if (el.items) {
+                    el.items.forEach((el, index) => {
+                        if (item[index] !== 0 && !item[index]) return
+                        this.search_keyword.push([
+                            key,
+                            el.operation,
+                            item[index]
+                        ])
+                    })
+                } else {
+                    if (item !== 0 && !item) return
+                    const operation = el.operation
+                    if (operation === 'like') {
+                        item = `%${item}%`
+                    }
+                    this.search_keyword.push([key, operation, item])
+                }
+            })
+            this.handleSubmit()
+        },
+        async handleSubmit() {
+            await this.updateSearchKeyword({
+                module: this.module,
+                search_keyword: this.search_keyword
+            })
+            this.beforeChange()
+            await this.getData()
+            this.afterChange()
+        }
     }
-  },
-  computed: {
-    hasSearch() {
-      return this.$store.state[this.module].search_keyword.length;
-    },
-    formData() {
-      return this.$store.state[this.module].search_data;
-    },
-    formItem() {
-      return this.$v_data[this.module].search.item;
-    }
-  }
-};
+}
 </script>
-<style lang="scss" scoped>
-.input-group {
-  width: 80%;
-}
-.has-search {
-  position: relative;
-  &::after {
-    content: "\2022";
-    position: absolute;
-    right: 3px;
-    top: 0;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    font-size: 1.5rem;
-  }
-}
-</style>
