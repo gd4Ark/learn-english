@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Word;
+
+use App\Http\Requests\Request;
 
 class WordUpdateRequest extends Request
 {

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AdminLoginRequest;
-use App\Http\Requests\AdminResetPasswordRequest;
+use App\Http\Requests\Admin\AdminLoginRequest;
+use App\Http\Requests\Admin\AdminResetPasswordRequest;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,9 +22,9 @@ class AuthController extends Controller
                     return $this->respondWithToken($token);
                 }
             }
-            return error('无效用户名或密码');
+            return $this->failed('无效用户名或密码');
         } catch (\Exception $e) {
-            return error($e->getMessage());
+            return $this->failed($e->getMessage());
         }
     }
 
@@ -34,7 +34,7 @@ class AuthController extends Controller
     public function logout()
     {
         Auth::logout();
-        return msg('成功登出');
+        return $this->message('成功登出');
     }
 
     /**
@@ -56,9 +56,9 @@ class AuthController extends Controller
             }
             $user['password'] = password_hash($request->get('password'), PASSWORD_DEFAULT);
             $user->save();
-            return msg('重置成功');
+            return $this->message('重置成功');
         } catch (\Exception $e) {
-            return error($e->getMessage());
+            return $this->failed($e->getMessage());
         }
     }
 
@@ -81,7 +81,7 @@ class AuthController extends Controller
      */
     protected function respondWithToken($token)
     {
-        return json([
+        return $this->success([
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => Auth::factory()->getTTL() * 60

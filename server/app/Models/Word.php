@@ -10,6 +10,12 @@ class Word extends Model
         'book_id',
     ];
 
+    protected $hidden = [
+        'book_id',
+        'created_at',
+        'updated_at',
+    ];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */

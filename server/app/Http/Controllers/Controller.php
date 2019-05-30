@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ApiResponse;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 
 class Controller extends BaseController
 {
+
+    use ApiResponse;
 
     protected $req;
 
@@ -22,7 +25,7 @@ class Controller extends BaseController
     protected function getOptions($query)
     {
         $query->select('id as value', 'name as label');
-        return json($query->get());
+        return $this->success($query->get());
     }
 
     /**
@@ -41,7 +44,7 @@ class Controller extends BaseController
      */
     protected function paginateToJson($query)
     {
-        return json($this->paginate($query));
+        return $this->success($this->paginate($query));
     }
 
     /**

@@ -2,11 +2,14 @@
 
 namespace App\Http\Requests;
 
+use App\Helpers\ApiResponse;
 use Urameshibr\Requests\FormRequest;
 
 
 class Request extends FormRequest
 {
+    use ApiResponse;
+
     protected $status_code = 422;
     /**
      * Determine if the user is authorized to make this request.
@@ -42,7 +45,7 @@ class Request extends FormRequest
      */
     public function response(array $errors)
     {
-        return error(array_values($errors)[0][0], $this->status_code);
+        return $this->failed(array_values($errors)[0][0], $this->status_code);
     }
 
     /**

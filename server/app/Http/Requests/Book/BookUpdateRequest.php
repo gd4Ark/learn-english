@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Book;
+
+use App\Http\Requests\Request;
 
 class BookUpdateRequest extends Request
 {
@@ -19,7 +21,7 @@ class BookUpdateRequest extends Request
     {
         $id = $this->routeParam('id');
         return [
-            'name' => 'required|string|unique:books,name,' . $id,
+            'name' => 'required|string|max:64|unique:books,name,' . $id,
         ];
     }
 
@@ -29,7 +31,9 @@ class BookUpdateRequest extends Request
     public function messages()
     {
         return [
-
+            'name.required' => '名称字段为必填',
+            'name.unique' => '该名称已占用！',
+            'name.max' => '名称长度不可超过64个字符',
         ];
     }
 }

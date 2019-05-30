@@ -1,5 +1,7 @@
 <?php
-namespace App\Http\Requests;
+namespace App\Http\Requests\Admin;
+
+use App\Http\Requests\Request;
 
 class AdminResetPasswordRequest extends Request
 {

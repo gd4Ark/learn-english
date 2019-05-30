@@ -26,6 +26,10 @@ class BookController extends Controller
         }
     }
 
+    /**
+     * @param $query \Illuminate\Database\Eloquent\Builder
+     * @return mixed
+     */
     private function getRelationCount($query){
         return $query->withCount([
             'words',
@@ -33,10 +37,10 @@ class BookController extends Controller
     }
 
 
-    public function show(Request $request, $id)
+    public function show($id)
     {
         $item = Book::query()->findOrFail($id);
-        return json($item);
+        return $this->success($item);
     }
 
     public function create(BookCreateRequest $request)
@@ -44,40 +48,43 @@ class BookController extends Controller
         try {
             $input = $request->all();
             $item = Book::query()->create($input);
-            return json($item->id);
+            return $this->success($item->id);
         } catch (\Exception $e) {
-            return error($e->getMessage());
+            return $this->failed($e->getMessage());
         }
     }
+
     public function update(BookUpdateRequest $request, $id)
     {
         $item = Book::query()->findOrFail($id);
         try {
             $input = $request->all();
             $item->update($input);
-            return json($item);
+            return $this->success($item);
         } catch (\Exception $e) {
-            return error($e->getMessage());
+            return $this->failed($e->getMessage());
         }
     }
+
     public function delete($id)
     {
         $item = Book::query()->findOrFail($id);
         try {
             $item->delete();
-            return json();
+            return $this->success();
         } catch (\Exception $e) {
-            return error('删除失败');
+            return $this->failed('删除失败');
         }
     }
+
     public function deleteBatch(Request $request)
     {
         $ids = (array)$request->get('ids');
         try {
             Book::query()->whereIn('id', $ids)->delete();
-            return json();
+            return $this->success();
         } catch (\Exception $e) {
-            return error('删除失败');
+            return $this->failed('删除失败');
         }
     }
 }

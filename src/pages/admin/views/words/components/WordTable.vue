@@ -7,6 +7,7 @@
                  :form-item="$v_data[module].add.item"
                  :get-form-data="$v_data[module].add.data"
                  :before-submit="beforeSubmit"
+                 :success-message="successMessage"
                  :module="module"
                  title="添加单词"
                  @get-data="getData" />
@@ -57,6 +58,7 @@ import Pagination from '@/common/components/Pagination'
 import ModalEdit from '@/common/components/ModalEdit'
 import ModalAdd from '@/common/components/ModalAdd'
 import ManageTable from '@/common/mixins/ManageTable'
+import successMessage from '@/common/mixins/successMessage'
 import { mapState, mapMutations } from 'vuex'
 export default {
     components: {
@@ -65,7 +67,7 @@ export default {
         ModalEdit,
         ModalAdd
     },
-    mixins: [ManageTable],
+    mixins: [ManageTable, successMessage],
     props: {
         title: {
             type: String,
@@ -111,6 +113,19 @@ export default {
             })
         },
         beforeSubmit(data) {
+            data.word_list = data.word_list
+                .split('\n')
+                .filter(line => line)
+                .map(line => {
+                    const res = line.split(':').map(s => s.trim())
+                    return res[0] && res[1]
+                        ? {
+                            english: res[0],
+                            chinese: res[1]
+                        }
+                        : null
+                })
+                .filter(s => s)
             data.book_id = this.$route.params.id
             return data
         }

@@ -1,11 +1,13 @@
 <?php
+
 namespace App\Http\Controllers;
-use App\Http\Requests\WordCreateRequest;
-use App\Http\Requests\WordUpdateRequest;
+
+use App\Http\Requests\Word\WordGetRequest;
+use App\Http\Requests\Word\WordCreateRequest;
+use App\Http\Requests\Word\WordUpdateRequest;
 use App\Models\Book;
 use App\Models\Word;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class WordController extends Controller
 {
@@ -17,53 +19,43 @@ class WordController extends Controller
         ]);
     }
 
-    public function index(Request $request)
+    public function index(WordGetRequest $request)
     {
-        $query = $this->queryFilter(Word::query());
+        $book_id = $request->get('book_id');
+        $query = Word::query()->where('book_id',$book_id);
+        $query = $this->queryFilter($query);
         return $this->paginateToJson($query);
     }
 
 
-    public function show(Request $request, $id)
+    public function show($id)
     {
         $item = Book::query()->findOrFail($id);
-        return json($item);
+        return $this->success($item);
     }
 
     public function create(WordCreateRequest $request)
     {
-        $word_list = $this->formatWordList($request->get('word_list'));
-        Log::info('----------' . $word_list);
-//        try {
-//            $input = $request->all();
-//            $item = Word::query()->create($input);
-//            return json($item->id);
-//        } catch (\Exception $e) {
-//            return error($e->getMessage());
-//        }
-    }
-
-    /**
-     * @param string $word_list
-     * @return array
-     */
-    private function formatWordList(string $word_list){
-        $res = split(removeBlank($word_list));
-        $res = array_map(function($item){
-            $item = split($item,':');
-            if ($item[0] && $item[1]){
-                return [
-                    'english' => $item[0],
-                    'chinese' => $item[1],
-                ];
-            }else{
-                return [];
+        $new_count = 0;
+        $word_list = $request->get('word_list');
+        $book_id = $request->get('book_id');
+        try {
+            foreach ($word_list as $word){
+                $word = array_merge([
+                    'book_id' => $book_id,
+                ],$word);
+                $item = Word::query()->firstOrCreate($word);
+                if ($item->wasRecentlyCreated){
+                    $new_count++;
+                }
             }
-        },$res);
-        $res = array_filter($res,function($item){
-            return count($item);
-        });
-        return $res;
+            return $this->success([
+                'new_count' =>  $new_count,
+                'fail_count' => count($word_list) - $new_count,
+            ]);
+        } catch (\Exception $e) {
+            return $this->failed($e->getMessage());
+        }
     }
 
     public function update(WordUpdateRequest $request, $id)
@@ -72,9 +64,9 @@ class WordController extends Controller
         try {
             $input = $request->all();
             $item->update($input);
-            return json($item);
+            return $this->success($item);
         } catch (\Exception $e) {
-            return error($e->getMessage());
+            return $this->failed($e->getMessage());
         }
     }
     public function delete($id)
@@ -82,9 +74,9 @@ class WordController extends Controller
         $item = Word::query()->findOrFail($id);
         try {
             $item->delete();
-            return json();
+            return $this->success();
         } catch (\Exception $e) {
-            return error('删除失败');
+            return $this->failed('删除失败');
         }
     }
     public function deleteBatch(Request $request)
@@ -92,9 +84,9 @@ class WordController extends Controller
         $ids = (array)$request->get('ids');
         try {
             Word::query()->whereIn('id', $ids)->delete();
-            return json();
+            return $this->success();
         } catch (\Exception $e) {
-            return error('删除失败');
+            return $this->failed('删除失败');
         }
     }
 }
