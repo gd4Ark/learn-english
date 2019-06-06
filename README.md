@@ -71,11 +71,11 @@ Lumen (PHP) + MySQL
 ### 初始化
 
 ```shell
-// 下载
+# 下载
 git clone https://github.com/gd4Ark/learn_english.git
-// 安装依赖
+# 安装依赖
 npm install
-// 安装服务端依赖
+# 安装服务端依赖
 cd server
 composer install
 ```
@@ -88,10 +88,10 @@ composer install
 
 ### 开始运行
 
-```shell
-// 开发模式
+```bash
+# 开发模式
 npm run serve
-// 构建模式
+# 构建模式
 npm run build
 ```
 
