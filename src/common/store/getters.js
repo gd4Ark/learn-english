@@ -1,26 +1,25 @@
 export default {
     requestData() {
-        return (origin) => {
+        return origin => {
             const {
                 current_page,
-                pre_page,
+                per_page,
                 search_keyword,
-            } = origin;
+                order_by,
+                desc
+            } = origin
             const data = {
                 page: current_page,
-                pre_page,
-            };
-            if (search_keyword.length) {
-                data.where = search_keyword;
+                per_page
             }
-            return data;
+            if (search_keyword.length) {
+                data.where = search_keyword
+            }
+            if (order_by) {
+                data.order_by = order_by
+                data.desc = desc
+            }
+            return data
         }
-    },
-    requestEnglishData(state, getters) {
-        const data = {
-            book_id: state.english.book_id,
-            ...getters.requestData(state.english),
-        };
-        return data;
-    },
+    }
 }

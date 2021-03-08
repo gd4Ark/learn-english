@@ -1,26 +1,8 @@
-import book from "./modules/book";
-import english from "./modules/english";
-import login from "./modules/login";
-import submit from "./modules/submit";
-import password from "./modules/password";
-import rank from "./modules/rank";
-import feedback from "./modules/feedback";
-import log from "./modules/log";
-import review from "./modules/review";
+import {
+    fileListToObject
+} from '@/common/utils/readFile'
 
-export default {
-    install(Vue) {
+const modulesFiles = require.context('./modules', false, /\.js$/)
+const modules = fileListToObject(modulesFiles)
 
-        Vue.prototype.$v_data = {
-            book,
-            english,
-            login,
-            submit,
-            password,
-            rank,
-            feedback,
-            log,
-            review,
-        };
-    }
-}
+export default modules

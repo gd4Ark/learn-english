@@ -1,63 +1,90 @@
 <?php
-
 namespace App\Http\Controllers;
-
-use App\Book;
-use App\English;
+use App\Http\Requests\BookCreateRequest;
+use App\Http\Requests\BookUpdateRequest;
+use App\Models\Book;
 use Illuminate\Http\Request;
 
-class BookController extends Controller{
-
-    public function index(Request $request){
-        $query = $this->search(Book::query()->withCount('english'));
-        return $this->paginate($query);
+class BookController extends Controller
+{
+    public function __construct(Request $request)
+    {
+        parent::__construct($request);
+        $this->middleware('auth:api', [
+            'except' => ['index', 'show','update']
+        ]);
     }
 
-    public function show($id){
+    public function index(Request $request)
+    {
+        $query = $this->getRelationCount(Book::query());
+        $query = $this->queryFilter($query);
+        if ($request->get('getOptions') == 1) {
+            return $this->getOptions($query);
+        } else {
+            return $this->paginateToJson($query);
+        }
+    }
+
+    /**
+     * @param $query \Illuminate\Database\Eloquent\Builder
+     * @return mixed
+     */
+    private function getRelationCount($query){
+        return $query->withCount([
+            'words',
+        ]);
+    }
+
+
+    public function show($id)
+    {
         $item = Book::query()->findOrFail($id);
-        return $this->json($item);
+        return $this->success($item);
     }
 
-
-    public function create(Request $request){
+    public function create(BookCreateRequest $request)
+    {
         try {
             $input = $request->all();
-            // Todo: Validate
             $item = Book::query()->create($input);
-            return $this->json($item);
+            return $this->success($item->id);
         } catch (\Exception $e) {
-            return $this->error($e->getMessage());
+            return $this->failed($e->getMessage());
         }
     }
 
-    public function update(Request $request,$id){
+    public function update(BookUpdateRequest $request, $id)
+    {
         $item = Book::query()->findOrFail($id);
         try {
             $input = $request->all();
-            // Todo: Validate
             $item->update($input);
-            return $this->json($item);
+            return $this->success($item);
         } catch (\Exception $e) {
-            return $this->error($e->getMessage());
+            return $this->failed($e->getMessage());
         }
     }
 
-    public function delete(Request $request){
+    public function delete($id)
+    {
+        $item = Book::query()->findOrFail($id);
+        try {
+            $item->delete();
+            return $this->success();
+        } catch (\Exception $e) {
+            return $this->failed('删除失败');
+        }
+    }
+
+    public function deleteBatch(Request $request)
+    {
         $ids = (array)$request->get('ids');
         try {
-            foreach ($ids as $id){
-                /*
-                * 检查是否存在单词
-                * */
-                $data = English::where('book_id',$id)->first();
-                if ($data){
-                    return $this->error('存在单词，无法删除！',403);
-                }
-            }
             Book::query()->whereIn('id', $ids)->delete();
+            return $this->success();
         } catch (\Exception $e) {
-            return $this->error('Delete failed');
+            return $this->failed('删除失败');
         }
     }
-
 }

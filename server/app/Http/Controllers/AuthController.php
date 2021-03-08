@@ -2,73 +2,89 @@
 
 namespace App\Http\Controllers;
 
-use App\Admin;
-use Illuminate\Http\Request;
+use App\Http\Requests\Admin\AdminLoginRequest;
+use App\Http\Requests\Admin\AdminResetPasswordRequest;
+use App\Models\Admin;
 use Illuminate\Support\Facades\Auth;
 
-class AuthController extends Controller{
-
-    public function login(Request $request){
-        $username = $request->get('username');
-        $password = $request->get('password');
-        $password = $this->getEncrypt($username,$password);
+class AuthController extends Controller
+{
+    /**
+     * @param AdminLoginRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function login(AdminLoginRequest $request)
+    {
         try {
-            $where = [['username', $username],['password', $password]];
-            if ($user = Admin::query()->where($where)->first()) {
-                $token = Auth::login($user);
-                return $this->respondWithToken($token);
-            }
-            return $this->error('用户名或密码错误！',403);
-        } catch (\Exception $e) {
-            return $this->error($e->getMessage());
-        }
-    }
-
-    public function updatePassword(Request $request){
-        $user = Auth::user();
-        $username = $user->username;
-        $old_password = $this->getEncrypt($username,$request->get('old_password'));
-        try{
-            if ($user->password === $old_password){
-                $user->password = $this->getEncrypt($username,$request->get('new_password'));;
-                if ($user->save()){
-                    return $this->msg('修改成功！');
+            if ($user = Admin::query()->where('username', $request->get('username'))->first()) {
+                if (password_verify($request->get('password'), $user['password'])) {
+                    $token = Auth::login($user);
+                    return $this->respondWithToken($token);
                 }
-                return $this->error('修改失败！',403);
             }
-            return $this->error('旧密码错误！',403);
-        }catch (\Exception $e) {
-            return $this->error($e->getMessage());
+            return $this->failed('无效用户名或密码');
+        } catch (\Exception $e) {
+            return $this->failed($e->getMessage());
         }
     }
 
-    public function logout(){
+    /**
+     * @return \Illuminate\Http\JsonResponse;
+     */
+    public function logout()
+    {
         Auth::logout();
-        return $this->msg('成功登出！');
+        return $this->message('成功登出');
     }
 
-    public function checkLogin(){
-        return $this->msg('Token 有效！');
+    /**
+     * @param AdminResetPasswordRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function resetPassword(AdminResetPasswordRequest $request)
+    {
+        try {
+            /**
+             * @var $user Admin
+             */
+            $user = Auth::user();
+            if (!password_verify($request->get('password_current'), $user['password'])) {
+                throw new \Exception('Current password wrong');
+            }
+            if ($request->get('password') !== $request->get('password_confirm')) {
+                throw new \Exception('Password & confirm are not equal');
+            }
+            $user['password'] = password_hash($request->get('password'), PASSWORD_DEFAULT);
+            $user->save();
+            return $this->message('重置成功');
+        } catch (\Exception $e) {
+            return $this->failed($e->getMessage());
+        }
     }
 
-    public function refresh(){
+    /**
+     * Refresh a token.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function refresh()
+    {
         return $this->respondWithToken(Auth::refresh());
     }
 
-    protected function respondWithToken($token){
-        return $this->json([
+    /**
+     * Get the token array structure.
+     *
+     * @param  string $token
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function respondWithToken($token)
+    {
+        return $this->success([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => Auth::factory()->getTTL() * 60,
+            'expires_in' => Auth::factory()->getTTL() * 60
         ]);
     }
-
-    protected function getEncrypt($username,$password){
-        $salt = env('PASS_SALT',null);
-        if (!$salt){
-            return $this->error('PASS_SALT 丢失！');
-        }
-        return md5($username.$password.$salt);
-    }
-
 }

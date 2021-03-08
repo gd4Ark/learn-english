@@ -1,168 +1,82 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router';
+import VueRouter from 'vue-router'
 
-import Book from '@/pages/admin/views/Book';
-import English from '@/pages/admin/views/English';
+import { fileListToArray } from '@/common/utils/readFile'
 
-import Setting from '@/pages/admin/views/Setting';
+import navList from './navList'
 
-// Setting options 
-import Password from '@/pages/admin/views/Settings/Password';
-import Rank from '@/pages/admin/views/Settings/Rank';
-import Review from '@/pages/admin/views/Settings/Review';
-import About from '@/common/layouts/About';
-import Feedback from '@/pages/admin/views/Settings/Feedback';
-import Logout from '@/pages/admin/views/Settings/Logout';
-
-// Abouts option
-import Log from '@/pages/admin/views/Settings/Abouts/Log';
-import App from '@/common/layouts/Abouts/App';
-import We from '@/common/layouts/Abouts/We';
-
-// Reviews option
-import PartialSpell from '@/pages/admin/views/Settings/Reviews/PartialSpell';
-
-import Login from '@/pages/admin/views/Login';
+const modulesFiles = require.context('./routers', false, /\.js$/)
+const routers = fileListToArray(modulesFiles)
 
 const routerConfig = {
-    mode: process.env.NODE_ENV == 'development' ? 'history' : 'hash',
-    routes: [{
-            path: "/",
-            redirect: "/book",
+    // mode: process.env.NODE_ENV === 'development' ? 'history' : 'hash',
+    base: '/admin',
+    mode: 'history',
+    navList,
+    routes: [
+        {
+            path: '/',
+            redirect: '/index'
         },
         {
-            path: "/index",
-            redirect: "/book",
+            path: '/index',
+            redirect: '/books'
         },
         {
-            path: "/book",
-            component: Book,
-            meta: {
-                title: '单词本管理',
-                icon: "el-icon-tickets",
-                inNav: true,
-            }
-        },
-        {
-            path: "/english",
-            component: English,
-            meta: {
-                title: '单词管理',
-            }
-        },
-        {
-            path: "/setting",
-            component: Setting,
-            name: 'setting',
-            meta: {
-                title: '设置',
-                icon: "el-icon-ali-settings",
-                inNav: true,
-            },
-            children: [{
-                    path: "password",
-                    component: Password,
-                    meta: {
-                        title: '修改密码',
-                    }
-                }, {
-                    path: "rank",
-                    component: Rank,
-                    meta: {
-                        title: '排行榜设置',
-                    }
-                }, {
-                    path: "review",
-                    component: Review,
-                    name: 'setting/review',
-                    meta: {
-                        title: '复习模块设置',
-                    },
-                    children: [{
-                        path: "partialSpell",
-                        component: PartialSpell,
-                        meta: {
-                            title: '单词部分拼写',
-                        }
-                    }, ]
-                }, {
-                    path: "about",
-                    component: About,
-                    name: 'setting/about',
-                    meta: {
-                        title: '关于',
-                    },
-                    children: [{
-                        path: "log",
-                        component: Log,
-                        meta: {
-                            title: '更新日志',
-                        }
-                    }, {
-                        path: "app",
-                        component: App,
-                        meta: {
-                            title: '关于清技背单词',
-                        }
-                    }, {
-                        path: "we",
-                        component: We,
-                        meta: {
-                            title: '关于开发者',
-                        }
-                    }, ]
-                },
+            path: '/',
+            component: () => import('@/common/layouts/Home'),
+            children: [
+                ...routers,
                 {
-                    path: "feedback",
-                    component: Feedback,
+                    path: '/password',
+                    component: () => import('../views/password'),
+                    name: 'password',
                     meta: {
-                        title: '反馈管理',
+                        title: '修改密码'
                     }
                 },
                 {
-                    path: "logout",
-                    component: Logout,
+                    path: '/404',
+                    component: () => import('@/common/layouts/404'),
                     meta: {
-                        title: '退出',
+                        title: '404'
                     }
                 }
             ]
         },
         {
-            path: "/login",
-            component: Login,
+            path: '/login',
+            component: () => import('../views/login'),
             meta: {
-                title: '登录',
+                title: '后台登录'
             }
         },
+        {
+            path: '*',
+            redirect: '404'
+        }
     ]
 }
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
-const router = new VueRouter(
-    routerConfig,
-);
+const router = new VueRouter(routerConfig)
 
-router.beforeEach(async (to, from, next) => {
+router.beforeEach(async(to, from, next) => {
     if (to.meta.title) {
-        document.title = to.meta.title;
+        document.title = to.meta.title
     }
     if (to.path === '/login') {
-        next();
-        return;
+        return next()
     }
-    const store = router.app.$options.store;
-    const localStore = router.app.$localStore;
-    const login = localStore.get('login');
-    if (login && login.access_token) {
-        await store.dispatch('checkLogin')
-        next();
-    } else {
+    const store = router.app.$options.store
+    const user = store.state.user
+    if (!user || !user.access_token) {
         next({
-            path: '/login',
-        });
+            path: '/login'
+        })
     }
-});
+    return next()
+})
 
-export default router;
+export default router

@@ -1,14 +1,14 @@
+import { cover } from '@/common/utils'
 export default {
-    book(state, data) {
-        state.book = this._vm.$util.cover(state.book, data)
+    update: (state, data) => {
+        cover(state, data, (key, val) => {
+            state[key] = val
+        })
     },
-    english(state, data) {
-        state.english = this._vm.$util.cover(state.english, data)
+    currentPage(state, page) {
+        state.current_page = page
     },
-    setting(state, data) {
-        state.setting = data;
-    },
-    log(state, data) {
-        state.log = this._vm.$util.cover(state.log, data)
+    sizeChange(state, size) {
+        state.per_page = size
     }
 }

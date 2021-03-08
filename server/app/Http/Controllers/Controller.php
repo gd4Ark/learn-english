@@ -2,73 +2,76 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ApiResponse;
+use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 
-use Laravel\Lumen\Routing\Controller as BaseController;
+class Controller extends BaseController
+{
 
-class Controller extends BaseController{
+    use ApiResponse;
 
     protected $req;
 
-    public function __construct(Request $request){
+    public function __construct(Request $request)
+    {
         $this->req = $request;
     }
 
-    public function json($data = [], $status = true, $msg = '', $statusCode = 200){
-        return response()->json([
-            'status' => $status,
-            'msg' => $msg,
-            'data' => $data
-        ])->setStatusCode($statusCode);
+    /**
+     * @param $query \Illuminate\Database\Eloquent\Builder
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function getOptions($query)
+    {
+        $query->select('id as value', 'name as label');
+        return $this->success($query->get());
     }
 
-    public function msg($msg){
-        return $this->json([], true, $msg);
-    }
-
-    public function error($msg, $statusCode = 500){
-        return $this->json([], true, $msg, $statusCode);
-    }
-
-
-    protected function search($data){
-        if ($this->req->has('where')){
-            $where = [];
-            foreach ($this->req->get('where') as $value){
-                $value = json_decode($value);
-                if ($value[0] === 'sort'){
-                    $data = $data->orderBy($value[2],'DESC');
-                }else{
-                    $where[] = $value;
-                }
-            }
-            $data =  $data->where($where);
-        }
-        return $data;
-    }
-
-    protected function paginate($query){
+    /**
+     * @param $query \Illuminate\Database\Eloquent\Builder
+     * @return mixed
+     */
+    protected function paginate($query)
+    {
         $per = (int)$this->req->get('per_page') ?: 15;
-        return $this->json($query->paginate($per));
+        return $query->paginate($per);
     }
 
-    protected function sortRank($data){
-        $position = 0;
-        foreach($data as $key=>$value){
-            $time = $data[$key]['time'];
-            $data[$key]['time'] = timeFormat($time);
-            if ($key === 0){
-                $data[$key]['position'] = ++$position;
-            }else{
-                $before = $data[$key - 1];
-                if ($before['time'] === $data[$key]['time']){
-                    $data[$key]['position'] = $position;
-                }else{
-                    $data[$key]['position'] = ++$position;
+    /**
+     * @param $query \Illuminate\Database\Eloquent\Builder
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function paginateToJson($query)
+    {
+        return $this->success($this->paginate($query));
+    }
+
+    /**
+     * @param $query \Illuminate\Database\Eloquent\Builder
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    protected function queryFilter($query)
+    {
+        $wheres = $this->req->get('where');
+        if (is_array($wheres)) {
+            foreach ($wheres as $where) {
+                $where = json_decode($where);
+                if (($field = array_get($where, 0)) && ($op = array_get($where, 1))) {
+                    if (!$value = array_get($where, 2)) {
+                        $value = $op;
+                        $op = '=';
+                    }
+                    $query->where($field, $op, $value);
                 }
             }
-            $data[$key]['position'] = numberFormat($data[$key]['position']);
         }
-        return $data;
+        $orderBy = $this->req->get('order_by');
+        $desc = $this->req->get('desc', 0);
+        if ($orderBy) {
+            $direction = (int)$desc === 1 ? 'desc' : 'asc';
+            $query->orderBy($orderBy, $direction);
+        }
+        return $query;
     }
 }
